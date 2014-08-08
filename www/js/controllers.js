@@ -1,4 +1,7 @@
-var actionCenterControllers = angular.module('starter.controllers', []);
+/**
+ * Top level file, referencing all of our controllers
+ */
 
-// TODO(leah): Set this up to import the relevant controllers
-actionCenterControllers.controller('WelcomeCarouselCtrl', welcomeCarouselController);
+var actionCenterControllers = angular.module('acm.controllers', []);
+
+actionCenterControllers.controller('WelcomeCarouselCtrl', require('./controllers/welcome_carousel'));

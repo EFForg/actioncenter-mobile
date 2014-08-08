@@ -1,3 +1,9 @@
-var actionCenterServices = angular.module('starter.services', []);
+/**
+ * Top level file referencing all of our services.
+ */
 
-actionCenterServices.service('ActionCenterAPI', actionCenterAPI);
+var actionCenterServices = angular.module('acm.services', []);
+
+actionCenterServices.service('PushNotificationService', require('./services/push'));
+
+// TODO(leah): Figure out what the appropriate exports target is here.
