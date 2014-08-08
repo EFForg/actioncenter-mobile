@@ -1,0 +1,7 @@
+{
+  "name": "ActionCenter-Mobile",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.0.0-beta.11"
+  }
+}
