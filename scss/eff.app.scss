@@ -1,3 +1,7 @@
+/**
+ * Top level SCSS file for all ActionCenter Mobile styles.
+ */
+
 $ionicons-font-path: "/fonts" !default;
 @import "./fonts";
 
@@ -9,10 +13,9 @@ $green: #689f38;
 $font-family-sans-serif: "Open Sans";
 $font-family-light-sans-serif: "Open Sans";
 
+// TODO(leah): Remove the use of the ionicons files and move to referencing the bower_components files
 // Include all of Ionic
-@import "./ionic/ionic";
-
-
+@import "../bower_components/ionic/scss/ionic";
 
 // Universal styles for reuse
 
