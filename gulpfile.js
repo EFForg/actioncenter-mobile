@@ -34,7 +34,7 @@ gulp.task('serve', function () {
 });
 
 gulp.task('sass', function (done) {
-  gulp.src('./scss/acm.app.scss')
+  gulp.src('./scss/eff.app.scss')
     .pipe(sass())
     .pipe(gulp.dest(targets.js))
     .pipe(minifyCss({
