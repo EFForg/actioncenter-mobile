@@ -9,6 +9,8 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
 var minifyCss = require('gulp-minify-css');
+var minifyHTML = require('gulp-minify-html');
+var ngTemplates = require('gulp-angular-templatecache');
 var path = require('path');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
@@ -17,11 +19,13 @@ var acmUtils = require('./gulp_utils');
 
 var WWW_DIR = path.join(__dirname, 'www');
 var RELEASE_DIR = path.join(WWW_DIR, 'release');
+var COMPONENTS_DIR = path.join(__dirname, 'bower_components');
 
 var paths = {
-  js: ['./www/js/**/*.js'],
-  templates: [],
-  sass: ['./scss/**/*.scss']
+  assets: [path.join(WWW_DIR, 'index.html')],
+  js: [path.join(WWW_DIR, 'js/**/*.js')],
+  sass: ['./scss/**/*.scss'],
+  templates: [path.join(WWW_DIR, 'templates/**/*.html')]
 };
 
 var targets = {
@@ -49,13 +53,31 @@ gulp.task('sass', function (done) {
     .on('end', done);
 });
 
-gulp.task('lint', function() {
-  gulp.src(paths.js)
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+gulp.task('assets', function() {
+  // Copy the index.html file to the root of the release dir, so that express can serve it
+  gulp.src([path.join(WWW_DIR, 'index.html')])
+    .pipe(gulp.dest(RELEASE_DIR));
+
+  // Copy over all of the required fonts
+  var fontsDir = path.join(RELEASE_DIR, 'assets/fonts');
+  var openSansFonts = path.join(COMPONENTS_DIR, 'open-sans-fontface/fonts');
+  gulp.src([path.join(openSansFonts, 'Light/*'), path.join(openSansFonts, 'Regular/*'), path.join(openSansFonts, 'Bold/*')])
+    .pipe(gulp.dest(fontsDir));
+
+  gulp.src([path.join(COMPONENTS_DIR, 'ionic/fonts/*')])
+    .pipe(gulp.dest(fontsDir));
 });
 
 gulp.task('js', function () {
+
+  console.log('Compiling ng templates to a templates file');
+  gulp.src(paths.templates)
+    .pipe(minifyHTML({
+      quotes: true
+    }))
+    .pipe(ngTemplates('templates.js', {'module': 'acm.templates'}))
+    .pipe(gulp.dest(path.join(WWW_DIR, 'js/templates')));
+
   console.log('Compiling ACM JS files');
   gulp.src([path.join(WWW_DIR, 'js/app.js')])
     .on('error', gutil.log)
@@ -68,16 +90,26 @@ gulp.task('js', function () {
     .pipe(gulp.dest(path.join(RELEASE_DIR, 'js')));
 });
 
+gulp.task('lint', function() {
+  gulp.src(paths.js)
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
+
 gulp.task('watch', function () {
   gulp.watch(paths.sass, ['sass']);
   gulp.watch(paths.js, ['lint', 'js']);
+  gulp.watch(paths.templates, ['js']);
+  gulp.watch(paths.assets, ['assets']);
 
   gulp.watch(path.join(WWW_DIR, 'release/*/**'), acmUtils.notifyLiveReload);
 });
 
-gulp.task('install', function () {
+gulp.task('bower', function () {
   return bower.commands.install()
     .on('log', function (data) {
       gutil.log('bower', gutil.colors.cyan(data.id), data.message);
     });
 });
+
+gulp.task('default', ['assets', 'js', 'sass', 'serve']);

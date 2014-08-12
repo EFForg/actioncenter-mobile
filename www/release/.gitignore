@@ -1,6 +1,7 @@
 # Ignore everything in this directory
 *
+
 # Except this file and the structural README files
+!*/ # Ensure that git doesn't ignore subdirs, due to the preceeding * rule
 !.gitignore
-css/README.md
-js/README.md
+!*/README.md

@@ -11,8 +11,9 @@ require('../../bower_components/ionic/js/ionic-angular.js');
 
 require('./controllers');
 require('./services');
+require('./templates/templates');
 
-var actionCenterMobile = angular.module('acm', ['ionic', 'acm.controllers', 'acm.services']);
+var actionCenterMobile = angular.module('acm', ['ionic', 'acm.templates', 'acm.controllers', 'acm.services']);
 
 actionCenterMobile.run(function ($ionicPlatform) {
   $ionicPlatform.ready(function () {
@@ -32,8 +33,12 @@ actionCenterMobile.run(function ($ionicPlatform) {
 
 // TODO(leah): Move the routing to a separate file and update once designs are ready
 actionCenterMobile.config(function ($stateProvider, $urlRouterProvider) {
-  // TODO(leah): Set up the application routing via AngularUI router
-  $stateProvider.state('hat', {});
+
+  $stateProvider.state(
+    'welcome',
+    {url: '/welcome', templateUrl: 'welcome_carousel.html', controller: 'WelcomeCarouselCtrl'}
+  );
+
   // TODO(leah): Define the default page to take the user to if nothing matched
   //  $stateProvider.otherwise('');
 });
