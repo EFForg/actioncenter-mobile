@@ -69,6 +69,9 @@ gulp.task('assets', function() {
 
   gulp.src([path.join(COMPONENTS_DIR, 'ionic/fonts/*')])
     .pipe(gulp.dest(fontsDir));
+
+  gulp.src([path.join(WWW_DIR, 'img/**/*')])
+    .pipe(gulp.dest(path.join(RELEASE_DIR, 'assets/img')));
 });
 
 gulp.task('templates', function() {

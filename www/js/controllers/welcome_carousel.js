@@ -4,10 +4,10 @@
 
 var WelcomeCarouselCtrl = function($scope) {
 
-  $scope.carouselImages = [
-    'hat',
-    'cat',
-    'rat'
+  $scope.slides = [
+    'welcome/get_notified.html',
+    'welcome/contact_congress.html',
+    'welcome/new_projects.html'
   ];
 
 };

@@ -1,0 +1,7 @@
+<div ng-controller="WelcomeCarouselCtrl" class="welcome-carousel">
+  <ion-slide-box show-pager="false">
+    <ion-slide ng-repeat="slideTemplate in slides">
+      <ng-include src="slideTemplate"></ng-include>
+    </ion-slide>
+  </ion-slide-box>
+</div>

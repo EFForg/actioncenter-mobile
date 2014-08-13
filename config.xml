@@ -2,12 +2,12 @@
 <widget id="com.ionicframework.actioncentermobile951898" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>actioncenter-mobile</name>
   <description>
-        An Ionic Framework and Cordova project.
+	EFF ActionCenter mobile app
     </description>
   <author email="hi@ionicframework" href="http://ionicframework.com/">
       Ionic Framework Team
     </author>
-  <content src="index.html"/>
+  <content src="release/index.html"/>
   <access origin="*"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>

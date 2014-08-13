@@ -18,7 +18,7 @@ var actionCenterMobile = angular.module('acm', ['ionic', 'acm.templates', 'acm.c
 // TODO(leah): Move the routing to a separate file and update once designs are ready
 actionCenterMobile.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider.state(
-    {name: 'welcome', url: 'welcome', templateUrl: 'welcome_carousel.html', controller: 'WelcomeCarouselCtrl'}
+    {name: 'welcome', url: 'welcome', templateUrl: 'welcome/welcome_carousel.html', controller: 'WelcomeCarouselCtrl'}
   );
 
   // TODO(leah): Define the default page to take the user to if nothing matched
