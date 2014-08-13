@@ -1,3 +1,7 @@
-<div>
-
+<div ng-controller="WelcomeCarouselCtrl">
+  <ion-slide-box on-slide-changed="slideHasChanged($index)">
+    <ion-slide ng-repeat="slideImage in carouselImages">
+      <div class="box blue">{{slideImage}}</div>
+    </ion-slide>
+  </ion-slide-box>
 </div>

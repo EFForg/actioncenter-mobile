@@ -2,8 +2,14 @@
  * Simple controller wrapping the welcome carousel.
  */
 
-var WelcomeCarouselController = function($scope) {
+var WelcomeCarouselCtrl = function($scope) {
+
+  $scope.carouselImages = [
+    'hat',
+    'cat',
+    'rat'
+  ];
 
 };
 
-module.exports = WelcomeCarouselController;
+module.exports = WelcomeCarouselCtrl;

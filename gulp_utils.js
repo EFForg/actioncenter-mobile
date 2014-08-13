@@ -5,6 +5,7 @@
 var path = require('path');
 
 var LIVERELOAD_PORT = 35729;
+var RELEASE_DIR = path.join(__dirname, 'www/release');
 var WWW_DIR = path.join(__dirname, 'www');
 
 var startExpress = function() {
@@ -13,7 +14,7 @@ var startExpress = function() {
   app.use(require('connect-livereload')({
     port: LIVERELOAD_PORT
   }));
-  app.use(express.static(WWW_DIR));
+  app.use(express.static(RELEASE_DIR));
   app.listen(4000);
 };
 
@@ -24,7 +25,7 @@ var startLiveReload = function startLiveReload() {
 };
 
 var notifyLivereload = function(event) {
-  var fileName = path.relative(WWW_DIR, event.path);
+  var fileName = path.relative(RELEASE_DIR, event.path);
 
   console.log('livereload for file: ' + event.path);
   tinyLR.changed({

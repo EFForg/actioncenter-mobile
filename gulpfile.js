@@ -6,6 +6,8 @@ var bower = require('bower');
 var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
 var gulp = require('gulp');
+var gulpIf = require('gulp-if');
+var gulpInsert = require('gulp-insert');
 var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
 var minifyCss = require('gulp-minify-css');
@@ -45,9 +47,10 @@ gulp.task('sass', function (done) {
     .pipe(concat('eff.css'))
     .pipe(sass())
     .pipe(gulp.dest(targets.css))
-    .pipe(minifyCss({
+    // TODO(leah): Update this to read off an "is prod variable"
+    .pipe(gulpIf(false, minifyCss({
       keepSpecialComments: 0
-    }))
+    })))
     .pipe(rename({extname: '.min.css'}))
     .pipe(gulp.dest(targets.css))
     .on('end', done);
@@ -68,16 +71,21 @@ gulp.task('assets', function() {
     .pipe(gulp.dest(fontsDir));
 });
 
-gulp.task('js', function () {
-
+gulp.task('templates', function() {
   console.log('Compiling ng templates to a templates file');
+  // This is a bit hacky - it sets up required boilerplate to use the templates as a separate module
+  var templatesPrepend = 'require("../../../bower_components/angular/angular.js");\n' +
+    'var acmTemplates = angular.module("acm.templates", []);\n';
   gulp.src(paths.templates)
     .pipe(minifyHTML({
       quotes: true
     }))
     .pipe(ngTemplates('templates.js', {'module': 'acm.templates'}))
+    .pipe(gulpInsert.prepend(templatesPrepend))
     .pipe(gulp.dest(path.join(WWW_DIR, 'js/templates')));
+});
 
+gulp.task('js', function () {
   console.log('Compiling ACM JS files');
   gulp.src([path.join(WWW_DIR, 'js/app.js')])
     .on('error', gutil.log)
@@ -99,7 +107,7 @@ gulp.task('lint', function() {
 gulp.task('watch', function () {
   gulp.watch(paths.sass, ['sass']);
   gulp.watch(paths.js, ['lint', 'js']);
-  gulp.watch(paths.templates, ['js']);
+  gulp.watch(paths.templates, ['templates']);
   gulp.watch(paths.assets, ['assets']);
 
   gulp.watch(path.join(WWW_DIR, 'release/*/**'), acmUtils.notifyLiveReload);
@@ -112,4 +120,4 @@ gulp.task('bower', function () {
     });
 });
 
-gulp.task('default', ['assets', 'js', 'sass', 'serve']);
+gulp.task('default', ['assets', 'templates', 'js', 'sass', 'serve']);

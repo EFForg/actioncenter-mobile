@@ -15,7 +15,18 @@ require('./templates/templates');
 
 var actionCenterMobile = angular.module('acm', ['ionic', 'acm.templates', 'acm.controllers', 'acm.services']);
 
-actionCenterMobile.run(function ($ionicPlatform) {
+// TODO(leah): Move the routing to a separate file and update once designs are ready
+actionCenterMobile.config(function ($stateProvider, $urlRouterProvider) {
+  $stateProvider.state(
+    {name: 'welcome', url: 'welcome', templateUrl: 'welcome_carousel.html', controller: 'WelcomeCarouselCtrl'}
+  );
+
+  // TODO(leah): Define the default page to take the user to if nothing matched
+  //  $stateProvider.otherwise('');
+});
+
+actionCenterMobile.run(function ($state, $ionicPlatform, $rootScope, $templateCache) {
+
   $ionicPlatform.ready(function () {
 
     // Hide the accessory bar by default
@@ -29,16 +40,7 @@ actionCenterMobile.run(function ($ionicPlatform) {
     }
 
   });
-});
 
-// TODO(leah): Move the routing to a separate file and update once designs are ready
-actionCenterMobile.config(function ($stateProvider, $urlRouterProvider) {
-
-  $stateProvider.state(
-    'welcome',
-    {url: '/welcome', templateUrl: 'welcome_carousel.html', controller: 'WelcomeCarouselCtrl'}
-  );
-
-  // TODO(leah): Define the default page to take the user to if nothing matched
-  //  $stateProvider.otherwise('');
+  // TODO(leah): Update this to make it conditional
+  $state.transitionTo('welcome');
 });

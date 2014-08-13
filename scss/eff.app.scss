@@ -2,7 +2,9 @@
  * Top level SCSS file for all ActionCenter Mobile styles.
  */
 
-$ionicons-font-path: "/fonts" !default;
+$ionicons-font-path: "../assets/fonts" !default;
+
+@import "../bower_components/ionic/scss/ionic";
 @import "./fonts";
 
 $red: #cc0000;
