@@ -17,15 +17,19 @@ var actionCenterMobile = angular.module('acm', ['ionic', 'acm.templates', 'acm.c
 
 // TODO(leah): Move the routing to a separate file and update once designs are ready
 actionCenterMobile.config(function ($stateProvider, $urlRouterProvider) {
-  $stateProvider.state(
-    {name: 'welcome', url: 'welcome', templateUrl: 'welcome/welcome_carousel.html', controller: 'WelcomeCarouselCtrl'}
-  );
+  var appStates = [
+    {name: 'welcome', url: '/welcome', templateUrl: 'welcome/welcome_carousel.html', controller: 'WelcomeCarouselCtrl'},
+    {name: 'share', url: '/share', templateUrl: 'share_app.html', controller: 'ShareAppCtrl'}
+  ];
 
-  // TODO(leah): Define the default page to take the user to if nothing matched
-  //  $stateProvider.otherwise('');
+  for (var i = 0, len = appStates.length; i < len; i++) {
+    $stateProvider.state(appStates[i]);
+  }
+
+  $urlRouterProvider.otherwise('/welcome');
 });
 
-actionCenterMobile.run(function ($state, $ionicPlatform, $rootScope, $templateCache) {
+actionCenterMobile.run(function ($state, $ionicPlatform, acmUserDefaults) {
 
   $ionicPlatform.ready(function () {
 
@@ -41,6 +45,9 @@ actionCenterMobile.run(function ($state, $ionicPlatform, $rootScope, $templateCa
 
   });
 
-  // TODO(leah): Update this to make it conditional
-  $state.transitionTo('welcome');
+  if (acmUserDefaults.getUserDefault(acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME)) {
+    $state.transitionTo('share');
+  } else {
+    $state.transitionTo('welcome');
+  }
 });

@@ -13,7 +13,7 @@
 //   * error handler for both APNS and GCM
 //   * decide if this should actually be one service, or if should just have a standard interface but be two.
 
-var PushNotificationService = function (acmDevicePlatformService) {
+var PushNotificationService = function ($ionicPlatform) {
 
   var handleAPNSNotification = function (event) {
     var pushNotification = window.plugins.pushNotification;
@@ -60,16 +60,16 @@ var PushNotificationService = function (acmDevicePlatformService) {
         });
     },
 
-    pushRegistrationSuccess: function (result) {
-      console.info(
-          'Push registration for ' + acmDevicePlatformService.getDevicePlatform() + ' succeeded with: ' + result);
-    },
-
-    pushRegistrationFailed: function (error) {
-      console.error(
-          'Push registration for ' + acmDevicePlatformService.getDevicePlatform() + ' failed with error: ' + error);
-      // TODO(leah): Notify the user that there was an error.
-    }
+//    pushRegistrationSuccess: function (result) {
+//      console.info(
+//          'Push registration for ' + acmDevicePlatformService.getDevicePlatform() + ' succeeded with: ' + result);
+//    },
+//
+//    pushRegistrationFailed: function (error) {
+//      console.error(
+//          'Push registration for ' + acmDevicePlatformService.getDevicePlatform() + ' failed with error: ' + error);
+//      // TODO(leah): Notify the user that there was an error.
+//    }
   };
 };
 
