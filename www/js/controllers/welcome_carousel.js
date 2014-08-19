@@ -11,8 +11,8 @@ var WelcomeCarouselCtrl = function($scope, $state, acmUserDefaults) {
   ];
 
   $scope.openShareAppPage = function() {
-    $state.transitionTo('share');
     acmUserDefaults.setUserDefault(acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME, true);
+    $state.transitionTo('share');
   };
 
 };

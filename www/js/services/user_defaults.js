@@ -8,19 +8,27 @@ var UserDefaultsService = function () {
   var localStorage = window.localStorage;
 
   var serviceImplementation = {
+
     keys: Object.freeze({
-      USER_HAS_COMPLETED_WELCOME: 'userHasCompletedWelcome'
+      USER_HAS_COMPLETED_WELCOME: 'userHasCompletedWelcome',
+      DEVICE_LANGUAGE_CODE: 'deviceLanguageCode',
+      DEVICE_LANGUAGE_LAST_CHECKED_TIMESTAMP: 'deviceLanguageLastCheckedTimestamp'
     }),
+
     keyLookup: undefined,
+
     setUserDefault: function(key, val) {
       if (this.keyLookup[key] !== undefined) {
-        localStorage.setItem([userDefaultsPrefix, key].join('.'), val);
+        localStorage.setItem([userDefaultsPrefix, key].join('.'), JSON.stringify(val));
       }
     },
+
     getUserDefault: function(key) {
       var userDefaultsKey = [userDefaultsPrefix, key].join('.');
-      return JSON.parse(localStorage.getItem(userDefaultsKey));
+      var localValue = localStorage.getItem(userDefaultsKey);
+      return localValue === null ? localValue : JSON.parse(localValue);
     }
+
   };
 
   var keyLookup = {};

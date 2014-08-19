@@ -8,12 +8,23 @@ require('../../bower_components/angular-sanitize/angular-sanitize.js');
 require('../../bower_components/angular-ui-router/release/angular-ui-router.js');
 require('../../bower_components/ionic/js/ionic.js');
 require('../../bower_components/ionic/js/ionic-angular.js');
+require('../../bower_components/ngCordova/dist/ng-cordova.js');
+require('../../bower_components/sprintf/src/sprintf.js'); // Using /src as /dist doesn't contain unminified code
 
 require('./controllers');
 require('./services');
 require('./templates/templates');
 
-var actionCenterMobile = angular.module('acm', ['ionic', 'acm.templates', 'acm.controllers', 'acm.services']);
+// Registered here so it's in a context that stringByEvaluatingJavaScriptFromString can pick up on.
+pushNotificationEventBus = function(event) {
+  var pushService = angular.element(document.querySelector('body')).injector().get(
+    'acmPushNotification');
+  pushService.handlePushNotification(event);
+};
+
+
+var actionCenterMobile = angular.module(
+  'acm', ['ionic', 'ngCordova', 'acm.templates', 'acm.controllers', 'acm.services']);
 
 // TODO(leah): Move the routing to a separate file and update once designs are ready
 actionCenterMobile.config(function ($stateProvider, $urlRouterProvider) {
@@ -29,7 +40,7 @@ actionCenterMobile.config(function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/welcome');
 });
 
-actionCenterMobile.run(function ($state, $ionicPlatform, acmUserDefaults) {
+actionCenterMobile.run(function ($state, $ionicPlatform, acmPushNotification, acmUserDefaults) {
 
   $ionicPlatform.ready(function () {
 
@@ -43,6 +54,7 @@ actionCenterMobile.run(function ($state, $ionicPlatform, acmUserDefaults) {
       StatusBar.styleDefault();
     }
 
+    acmPushNotification.register();
   });
 
   if (acmUserDefaults.getUserDefault(acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME)) {

@@ -2,3 +2,8 @@ node_modules
 # Ignore the bower components directories
 bower_components
 components
+
+# Ignore the hooks directory for now, as we don't use any custom hooks
+hooks
+
+*.pyc

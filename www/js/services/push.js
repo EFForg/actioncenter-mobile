@@ -5,15 +5,14 @@
  *   cordova plugin add https://github.com/phonegap-build/PushPlugin.git
  */
 
-// TODOs:
-//   * token handler - callback to notify push server re. the device token
-//   * error handler
-//   * token reaping
-//   * success handler for GCM
-//   * error handler for both APNS and GCM
-//   * decide if this should actually be one service, or if should just have a standard interface but be two.
+var PushNotificationService = function ($cordovaPush, acmAPI) {
 
-var PushNotificationService = function ($ionicPlatform) {
+  var devicePlatform;
+
+  var pushRegistrationFailed = function(err) {
+    // TODO(leah): update this.
+    console.error('Unable to register device with push server');
+  };
 
   var handleAPNSNotification = function (event) {
     var pushNotification = window.plugins.pushNotification;
@@ -21,55 +20,70 @@ var PushNotificationService = function ($ionicPlatform) {
     // TODO(leah): Handle the alert / badge / sound
   };
 
-  var handleGCMNotification = function (event) {
+  var handleGCMNotification = function (e) {
     var eventType = e.event;
+    console.log('GCM push notification for event "' + eventType + '" received');
 
-    if (eventType ==='registered') {
-      // TODO(leah): Notify the server re. the regID for the device.
-      var registrationId = e.regid;
+    if (eventType === 'registered') {
+      // This could be skipped by checking whether or not a locally held copy of the id matches that
+      // returned on registration. However, due to privacy concerns, the app is intended to record
+      // as little information as possible, so just ping the server each time.
+      acmAPI.registerDeviceForNotifications(e.regid, function() {
+        console.info('registered device with push server');
+      }, pushRegistrationFailed);
     } else if (eventType === 'message') {
-      // TODO(leah): Parse the message.
+      if (e.foreground) {
+        console.debug('message received in the foreground');
+      } else {
+        if (e.coldstart) {
+          console.debug('message received in the background as coldstart');
+        } else {
+          console.debug('message received in the background');
+        }
+      }
     } else if (eventType === 'error') {
       console.error('GCM error received: ' + e.msg);
-      // TODO(leah): Decide whether to swallow the error or show a notification.
-    } else {
-      console.error('An unknown GCM event has occurred');
+      // Deliberately left unhandled for now.
+    }
+  };
+
+  var registrationSuccess = function(result) {
+    console.log('Push registration success: ' + result);
+  };
+
+  var registrationError = function(error) {
+    console.log('Push registration failed: ' + error);
+  };
+
+  var config = {
+    'ANDROID': {
+      'senderID': '804999034827',
+      'ecb': 'pushNotificationEventBus'
+    },
+    'IOS': {
+
     }
   };
 
   return {
-    registerForAPNSNotifications: function() {
-      pushNotification.register(
-        function() {}, // Token handler
-        function() {}, // Error handler
-        {
-          "badge": "true",
-          "sound": "true",
-          "alert": "true",
-          "ecb": "" // TODO(leah): configure the event callback, it's a little annoying it needs to be a string
-        });
+
+    register: function() {
+      $cordovaPush.register(this.pushConfig()).then(registrationSuccess, registrationError);
     },
 
-    registerForGCMNotifications: function() {
-      pushNotification.register(
-        function() {}, // Success handler
-        function() {}, // Error handler
-        {
-          "senderID": "TODO",
-          "ecb": "" // TODO(leah): configure the event callback, it's a little annoying it needs to be a string
-        });
+    pushConfig: function() {
+      var devicePlatform = ionic.Platform.platform().toUpperCase();
+      return config[devicePlatform];
     },
 
-//    pushRegistrationSuccess: function (result) {
-//      console.info(
-//          'Push registration for ' + acmDevicePlatformService.getDevicePlatform() + ' succeeded with: ' + result);
-//    },
-//
-//    pushRegistrationFailed: function (error) {
-//      console.error(
-//          'Push registration for ' + acmDevicePlatformService.getDevicePlatform() + ' failed with error: ' + error);
-//      // TODO(leah): Notify the user that there was an error.
-//    }
+    handlePushNotification: function(event) {
+      var devicePlatform = ionic.Platform.platform().toUpperCase();
+      if (devicePlatform === 'ANDROID') {
+        handleGCMNotification(event);
+      } else if (devicePlatform === 'IOS') {
+
+      }
+    }
   };
 };
 

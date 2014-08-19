@@ -6,9 +6,13 @@
     <title></title>
 
     <link href="css/eff.min.css" rel="stylesheet">
-    <!-- cordova script - will be a 404 during development -->
-    <script src="cordova.js"></script>
     <script src="js/acm.min.js"></script>
+    <!-- cordova script, note the following:
+           * will be a 404 during development
+           * must be the last script loaded
+           * requires a ../ due to the index.html being located under /www
+    -->
+    <script src="../cordova.js"></script>
   </head>
 
   <body ng-app="acm" animation="slide-left-right-ios7">
@@ -20,7 +24,7 @@
       </ion-nav-back-button>
     </ion-nav-bar>
 
-    <ion-nav-view></ion-nav-view>
+    <ion-nav-view animation="slide-left-right"></ion-nav-view>
 
   </body>
 

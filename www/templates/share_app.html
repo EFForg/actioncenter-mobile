@@ -2,7 +2,7 @@
   <p><strong>Thanks! You are awesome!</strong></p>
   <h1>We have a request for you ready and lined up: help us spread the word about this app:</h1>
   <div class="buttons">
-    <button class="button transparent">
+    <button class="button transparent" ng-disabled="deviceSupportsShareOption('SMS')" ng-click="shareApp('SMS')">
       <i class="ion-ios7-chatbubble-outline"></i> SMS
     </button>
     <button class="button transparent">
