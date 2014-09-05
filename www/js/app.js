@@ -30,7 +30,8 @@ var actionCenterMobile = angular.module(
 actionCenterMobile.config(function ($stateProvider, $urlRouterProvider) {
   var appStates = [
     {name: 'welcome', url: '/welcome', templateUrl: 'welcome/welcome_carousel.html', controller: 'WelcomeCarouselCtrl'},
-    {name: 'share', url: '/share', templateUrl: 'share_app.html', controller: 'ShareAppCtrl'}
+    {name: 'post_intro', url: '/post_intro', templateUrl: 'post_intro.html', controller: 'ShareAppCtrl'},
+    {name: 'home', url: '/home', templateUrl: 'home.html'}
   ];
 
   for (var i = 0, len = appStates.length; i < len; i++) {
@@ -58,7 +59,7 @@ actionCenterMobile.run(function ($state, $ionicPlatform, acmPushNotification, ac
   });
 
   if (acmUserDefaults.getUserDefault(acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME)) {
-    $state.transitionTo('share');
+    $state.transitionTo('home');
   } else {
     $state.transitionTo('welcome');
   }
