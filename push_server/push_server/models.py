@@ -36,6 +36,8 @@ class Subscriptions(PushServerModel):
   # device token for APNS, registration_id for GCM etc.
   device_id = db.Column(db.Text, nullable=False)
   created_on = db.Column(db.BigInteger, nullable=False, server_default=utcnow.utcnow())
+  updated_on = db.Column(
+    db.BigInteger, nullable=False, server_default=utcnow.utcnow(), onupdate=utcnow.utcnow())
 
 
 class Notifications(PushServerModel):

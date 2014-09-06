@@ -1,25 +1,12 @@
 <div class="home">
   <div class="vertical-center">
-    <p><span class="uppercase">Latest EFF action: </span><br>Demand an End to Secret Copyright Trade Deals</p> 
+    <p><span class="uppercase">Latest EFF action: </span><br>{{latestAction}}</p>
     <div class="buttons">
       <button class="button take-action">
         Take action
       </button>
     </div>
 
-    <h1><span class="uppercase">Share this app: </span></h1> 
-    <div class="buttons">
-      <button class="button transparent" ng-disabled="deviceSupportsShareOption('SMS')" ng-click="shareApp('SMS')">
-        <i class="ion-ios7-chatbubble-outline"></i> SMS
-      </button>
-      <button class="button transparent">
-        <i class="ion-ios7-email-outline"></i> Email
-      </button>
-      <button class="button transparent">
-        <i class="ion-social-twitter-outline"></i> Twitter
-      </button>
-      <button class="button transparent">
-        <i class="ion-social-facebook-outline"></i> Facebook</button>
-    </div>
+    <h1><a href="#share_app"><span class="uppercase">Share this app</span></a></h1>
   </div>
 </div>

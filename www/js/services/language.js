@@ -36,8 +36,6 @@ var DeviceLanguageCodeService = function (acmUserDefaults) {
             // formatted BCP47 codes on either Android or iOS.
 
             var language = languageObj.value;
-            console.log(language);
-            console.log(typeof language);
 
             if (typeof language !== 'string' || !(language instanceof String)) {
               language = DEFAULT_LANGUAGE_CODE;

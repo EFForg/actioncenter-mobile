@@ -5,7 +5,10 @@
  *   cordova plugin add https://github.com/phonegap-build/PushPlugin.git
  */
 
-var PushNotificationService = function ($cordovaPush, acmAPI) {
+var sprintf = require('../../../bower_components/sprintf/src/sprintf.js').sprintf; // Using /src as /dist doesn't contain unminified code
+console.log(sprintf);
+
+var PushNotificationService = function ($state, $cordovaPush, $cordovaLocalNotification, acmUserDefaults, acmAPI) {
 
   var devicePlatform;
 
@@ -32,15 +35,44 @@ var PushNotificationService = function ($cordovaPush, acmAPI) {
         console.info('registered device with push server');
       }, pushRegistrationFailed);
     } else if (eventType === 'message') {
-      if (e.foreground) {
-        console.debug('message received in the foreground');
-      } else {
-        if (e.coldstart) {
-          console.debug('message received in the background as coldstart');
-        } else {
-          console.debug('message received in the background');
+      var payload = e.payload;
+      // Due to the app's simplicity, right now there's no distinction between how messages received
+      // in different states are handled. For now, just pull out the most recent action from the
+      // message params and cache it.
+      // var isColdstart = e.coldstart;
+      var isForeground = e.foreground;
+      acmUserDefaults.setUserDefault(
+        acmUserDefaults.keys.MOST_RECENT_ACTION, payload['action']);
+      acmUserDefaults.setUserDefault(
+        acmUserDefaults.keys.MOST_RECENT_ACTION_URL,
+        sprintf('https://act.eff.org/action/%s', payload['actionURLSuffix']));
+
+      var currentState = $state.current.name;
+      if (!isForeground) {
+        // If the app is backgrounded, any push notification received redirects the user to the action
+        // page, updated for the most recent action, irrespective of whether they've completed the
+        // welcome carousel etc.
+        if (currentState !== 'home') {
+          $state.transitionTo('home');
         }
+      } else {
+        // If the app is foregrounded, there are some slightly more complex rules:
+        // * If the user is looking at the action page, just update the visible action and suppress
+        //   the push notification. This is confusing, but this situation should be very rare.
+        // * If the user is browsing the carousel / at the post intro page, just spawn a notification.
+        // TODO(leah): Figure out how to implement the above logic
+        $cordovaLocalNotification.add({
+          id: 'some_notification_id',
+          title: 'this is a test',
+          message: 'this is a message'
+          // parameter documentation:
+          // https://github.com/katzer/cordova-plugin-local-notifications#further-informations-1
+        }).then(function () {
+          console.log('callback for adding background notification');
+        });
       }
+
+
     } else if (eventType === 'error') {
       console.error('GCM error received: ' + e.msg);
       // Deliberately left unhandled for now.

@@ -1,8 +1,13 @@
 """Simple handler for sending push requests to GCM / APNS and dealing with failures."""
 
 import grequests
+import sys
 
 import Queue
+
+from flask import current_app
+from push_server import models
+from push_server.db import database
 
 
 # class PushRequestHandler(object):
@@ -30,13 +35,29 @@ class GCMHandler(object):
 
 class PushRequestHandler(object):
 
-  def __init__(self, max_concurrent_connections=10):
+  def __init__(self, channels, app_cache, max_concurrent_connections=10):
     self.work_queue = Queue.Queue()
     self.max_concurrent_connections = max_concurrent_connections
-    self.handlers = [
-      APNSHandler(),
-      GCMHandler()
-    ]
+
+    # Set up a handler for each of the specified channels
+    self.handlers = []
+    self.channels = channels
+    for channel in channels:
+      handler_class = getattr(sys.modules[__name__], '%sHandler' % channel)
+      if handler_class:
+        self.handlers.append(handler_class())
+
+    @app_cache.memoize(60 * 5)
+    def get_subscribers(channels=None):
+      channels = channels or self.channels
+      with database.SessionWrapper() as session:
+        subscriptions = session.query(models.Subscriptions).filter(
+          models.Subscriptions.protocol.in_(channels)).all()
+        print list(subscriptions)
+
+      return ''
+
+    self.get_subscribers = get_subscribers
 
   def send_push_notification(self, push_notification):
-    pass
+    print self.get_subscribers()

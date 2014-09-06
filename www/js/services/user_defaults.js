@@ -12,7 +12,9 @@ var UserDefaultsService = function () {
     keys: Object.freeze({
       USER_HAS_COMPLETED_WELCOME: 'userHasCompletedWelcome',
       DEVICE_LANGUAGE_CODE: 'deviceLanguageCode',
-      DEVICE_LANGUAGE_LAST_CHECKED_TIMESTAMP: 'deviceLanguageLastCheckedTimestamp'
+      DEVICE_LANGUAGE_LAST_CHECKED_TIMESTAMP: 'deviceLanguageLastCheckedTimestamp',
+      MOST_RECENT_ACTION: 'mostRecentAction',
+      MOST_RECENT_ACTION_URL: 'mostRecentActionURL'
     }),
 
     keyLookup: undefined,

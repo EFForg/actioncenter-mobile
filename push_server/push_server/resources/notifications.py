@@ -16,6 +16,8 @@ class NotificationHandler(resource.PushServerBaseResource):
     push_request = self.get_validated_json(
       schemas.PUSH_REQUEST, format_validators=schema_validators.FORMAT_VALIDATORS)
 
+    # TODO(leah): post-process this a bunch
+
     with models.SessionWrapper() as session:
       notification = models.Notifications(payload=push_request.payload)
       session.add(notification)

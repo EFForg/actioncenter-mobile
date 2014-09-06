@@ -9,7 +9,6 @@ require('../../bower_components/angular-ui-router/release/angular-ui-router.js')
 require('../../bower_components/ionic/js/ionic.js');
 require('../../bower_components/ionic/js/ionic-angular.js');
 require('../../bower_components/ngCordova/dist/ng-cordova.js');
-require('../../bower_components/sprintf/src/sprintf.js'); // Using /src as /dist doesn't contain unminified code
 
 require('./controllers');
 require('./services');
@@ -22,16 +21,15 @@ pushNotificationEventBus = function(event) {
   pushService.handlePushNotification(event);
 };
 
-
 var actionCenterMobile = angular.module(
   'acm', ['ionic', 'ngCordova', 'acm.templates', 'acm.controllers', 'acm.services']);
 
-// TODO(leah): Move the routing to a separate file and update once designs are ready
 actionCenterMobile.config(function ($stateProvider, $urlRouterProvider) {
   var appStates = [
     {name: 'welcome', url: '/welcome', templateUrl: 'welcome/welcome_carousel.html', controller: 'WelcomeCarouselCtrl'},
     {name: 'post_intro', url: '/post_intro', templateUrl: 'post_intro.html', controller: 'ShareAppCtrl'},
-    {name: 'home', url: '/home', templateUrl: 'home.html'}
+    {name: 'share_app', url: '/share_app', templateUrl: 'post_intro.html', controller: 'ShareAppCtrl'},
+    {name: 'home', url: '/home', templateUrl: 'home.html', controller: 'HomeCtrl'}
   ];
 
   for (var i = 0, len = appStates.length; i < len; i++) {
@@ -58,8 +56,13 @@ actionCenterMobile.run(function ($state, $ionicPlatform, acmPushNotification, ac
     acmPushNotification.register();
   });
 
-  if (acmUserDefaults.getUserDefault(acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME)) {
-    $state.transitionTo('home');
+  var completedWelcome = acmUserDefaults.getUserDefault(
+    acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME);
+  var hasReceivedActionPush = acmUserDefaults.getUserDefault(
+    acmUserDefaults.keys.MOST_RECENT_ACTION) !== null;
+
+  if (completedWelcome) {
+    $state.transitionTo(hasReceivedActionPush ? 'home' : 'post_intro');
   } else {
     $state.transitionTo('welcome');
   }

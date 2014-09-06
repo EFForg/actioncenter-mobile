@@ -32,6 +32,7 @@ import flask
 import os
 
 from flask.ext import restful
+from flask.ext import cache
 
 from push_server import api_exceptions
 from push_server import constants
@@ -55,7 +56,7 @@ class PushServerAPI(restful.Api):
   def register_resources(self):
     # self.add_resource(notifications.NotificationHandler, '/<string:channel>/notification')
     self.add_resource(
-      notifications.NotificationHandler, '/notification', '/notification/<string:notification_id>')
+      notifications.NotificationHandler, '/notifications', '/notifications/<string:notification_id>')
     self.add_resource(
       subscriptions.SubscriptionHandler,
       '/subscriptions', '/subscriptions/<string:subscription_identifier>')
@@ -75,8 +76,11 @@ class PushServerAPI(restful.Api):
 class PushServer(flask.Flask):
   """Simple Flask app for sending and managing push notifications."""
 
-  def setup_services(self):
-    self.push_handler = push_handler.PushRequestHandler(constants.MAX_CONCURRENT_CONNECTIONS)
+  def setup_services(self, channels):
+
+    self.app_cache = cache.Cache(app, config={'CACHE_TYPE': 'simple'})
+    self.push_handler = push_handler.PushRequestHandler(
+      channels, self.app_cache, constants.MAX_CONCURRENT_CONNECTIONS)
     self._setup_db()
     self.api = PushServerAPI(self, prefix=BASE_API_URL)
 
@@ -91,8 +95,22 @@ def get_cmdline_args():
   parser.add_argument(
     '-m', '--mode',
     default='DEBUG', choices=('DEBUG', 'TEST', 'PROD',), help='the mode to run the push server in')
+  parser.add_argument(
+    '-c', '--channels',
+    type=lambda x: [unicode(channel) for channel in x.split(',')],
+    default=constants.SUPPORTED_CHANNELS,
+    required=False,
+    help='the channels the server should broadcast notifications to')
 
-  return parser.parse_args()
+  args = parser.parse_args()
+
+  unsupported_channels = set(args.channels) - set(constants.SUPPORTED_CHANNELS)
+  if unsupported_channels:
+    raise ValueError(
+      'one or more supplied channels (%s) are unsupported. Only %s channels are supported'
+      % (', '.join(unsupported_channels), ', '.join(constants.SUPPORTED_CHANNELS)))
+
+  return args
 
 
 if __name__ == '__main__':
@@ -101,6 +119,6 @@ if __name__ == '__main__':
 
   app = PushServer('push_server')
   app.config.from_object('push_server.constants')
-  app.setup_services()
+  app.setup_services(args.channels)
 
   app.run()

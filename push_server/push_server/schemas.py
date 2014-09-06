@@ -29,14 +29,14 @@ PUSH_REQUEST = {
 #     'content-available': {'type': 'integer'}
 #   }
 # }
-#
+
 # APNS_ALERT_DICT = {
 #   'type': 'object',
 #   'properties': {
 #
 #   }
 # }
-#
+
 # # See http://developer.android.com/google/gcm/server.html#payload for details of the payload.
 # # NOTE: this server only supports sending GCM messages via HTTP, so CCS parameters are not supported
 # GCM_PUSH_REQUEST_PAYLOAD = {
