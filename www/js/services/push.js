@@ -6,7 +6,6 @@
  */
 
 var sprintf = require('../../../bower_components/sprintf/src/sprintf.js').sprintf; // Using /src as /dist doesn't contain unminified code
-console.log(sprintf);
 
 var PushNotificationService = function ($state, $cordovaPush, $cordovaLocalNotification, acmUserDefaults, acmAPI) {
 
@@ -53,7 +52,7 @@ var PushNotificationService = function ($state, $cordovaPush, $cordovaLocalNotif
         // page, updated for the most recent action, irrespective of whether they've completed the
         // welcome carousel etc.
         if (currentState !== 'home') {
-          $state.transitionTo('home');
+          $state.go('home');
         }
       } else {
         // If the app is foregrounded, there are some slightly more complex rules:

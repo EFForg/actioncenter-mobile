@@ -8,7 +8,6 @@ var APIService = function ($http, acmDeviceLanguage) {
 
     registerDeviceForNotifications: function(deviceId, success, error) {
       var languageSuccess = function(language) {
-        console.log(language);
         var params = {
           'protocol': ionic.Platform.platform().toUpperCase() === 'ANDROID' ? 'GCM' : 'APNS',
           'device_id': deviceId,

@@ -12,7 +12,7 @@ var WelcomeCarouselCtrl = function($scope, $state, acmUserDefaults) {
 
   $scope.openShareAppPage = function() {
     acmUserDefaults.setUserDefault(acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME, true);
-    $state.transitionTo('post_intro');
+    $state.go('post_intro', undefined, {location:'replace'});
   };
 
 };

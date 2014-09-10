@@ -2,7 +2,13 @@
  * Controller to manage the share application screen.
  */
 
-var ShareAppCtrl = function($scope, $cordovaAppAvailability, $cordovaSocialSharing) {
+var ShareAppCtrl = function($scope, $ionicViewService, $cordovaAppAvailability, $cordovaSocialSharing) {
+
+  // Clear the history stack when the user first gets here from the welcome carousel, so that they
+  // can't use the back button on Android to return to the carousel.
+  if ($scope.$viewHistory.backView && $scope.$viewHistory.backView.stateName === 'welcome') {
+    $ionicViewService.clearHistory();
+  }
 
   // TODO(leah): Speak to Lillia / Bill re. getting a redirect friendly URL set up
   $scope.shareURL = 'https://www.eff.org/';

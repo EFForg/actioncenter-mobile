@@ -36,7 +36,9 @@ actionCenterMobile.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state(appStates[i]);
   }
 
-  $urlRouterProvider.otherwise('/welcome');
+  // NOTE: no otherwise is specified for routing, because:
+  //  * the user shouldn't be able to get to any non-standard routes
+  //  * it causes a load of the page by default prior to the routing logic in run() kicking in
 });
 
 actionCenterMobile.run(function ($state, $ionicPlatform, acmPushNotification, acmUserDefaults) {
@@ -54,16 +56,18 @@ actionCenterMobile.run(function ($state, $ionicPlatform, acmPushNotification, ac
     }
 
     acmPushNotification.register();
+
+    // NOTE: this is delayed until post-ready as some plugins are not available otherwise (e.g.
+    //       appAvailability) and cause problems if accessed.
+    var completedWelcome = acmUserDefaults.getUserDefault(
+      acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME);
+    var hasReceivedActionPush = acmUserDefaults.getUserDefault(
+      acmUserDefaults.keys.MOST_RECENT_ACTION) !== null;
+
+    if (completedWelcome) {
+      $state.go(hasReceivedActionPush ? 'home' : 'post_intro');
+    } else {
+      $state.go('welcome');
+    }
   });
-
-  var completedWelcome = acmUserDefaults.getUserDefault(
-    acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME);
-  var hasReceivedActionPush = acmUserDefaults.getUserDefault(
-    acmUserDefaults.keys.MOST_RECENT_ACTION) !== null;
-
-  if (completedWelcome) {
-    $state.transitionTo(hasReceivedActionPush ? 'home' : 'post_intro');
-  } else {
-    $state.transitionTo('welcome');
-  }
 });
