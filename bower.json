@@ -3,10 +3,14 @@
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.0.0-beta.11",
-    "open-sans-fontface": "1.1.0"
+    "ngCordova": "v0.1.3-alpha",
+    "open-sans-fontface": "1.1.0",
+    "sprintf": "~1.0.0"
   },
   "dependencies": {
-    "ngCordova": "~0.1.3-alpha",
+    "ionic": "driftyco/ionic-bower#1.0.0-beta.11",
+    "ngCordova": "v0.1.3-alpha",
+    "open-sans-fontface": "1.1.0",
     "sprintf": "~1.0.0"
   }
 }

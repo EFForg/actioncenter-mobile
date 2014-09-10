@@ -3,7 +3,4 @@ node_modules
 bower_components
 components
 
-# Ignore the hooks directory for now, as we don't use any custom hooks
-hooks
-
 *.pyc
