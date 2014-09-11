@@ -10,5 +10,6 @@ actionCenterServices.factory('acmUserDefaults', require('./services/user_default
 actionCenterServices.factory('acmPushNotification', require('./services/push'));
 actionCenterServices.factory('acmAPI', require('./services/api'));
 actionCenterServices.factory('acmDeviceLanguage', require('./services/language'));
+actionCenterServices.factory('acmSharing', require('./services/sharing'));
 
 // TODO(leah): Figure out what the appropriate exports target is here.

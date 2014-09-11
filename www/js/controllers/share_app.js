@@ -2,7 +2,7 @@
  * Controller to manage the share application screen.
  */
 
-var ShareAppCtrl = function($scope, $ionicViewService, $cordovaAppAvailability, $cordovaSocialSharing) {
+var ShareAppCtrl = function($scope, $ionicViewService, $cordovaAppAvailability, acmSharing) {
 
   // Clear the history stack when the user first gets here from the welcome carousel, so that they
   // can't use the back button on Android to return to the carousel.
@@ -10,24 +10,13 @@ var ShareAppCtrl = function($scope, $ionicViewService, $cordovaAppAvailability, 
     $ionicViewService.clearHistory();
   }
 
-  // TODO(leah): Speak to Lillia / Bill re. getting a redirect friendly URL set up
-  $scope.shareURL = 'https://www.eff.org/';
-  $scope.shareTitle = 'this is a share title';
-
-  $scope.shareMessages = {
-    'SMS': 'sms share message',
-    'EMAIL': 'email share message',
-    'TWITTER': 'twitter share message',
-    'FACEBOOK': 'facebook share message',
-    'OTHER': ''
-  };
-
+  // NOTE: we use the default iOS share icon on both platforms, sorry!
   $scope.shareServices = [
     {name: 'EMAIL', displayName: 'Email', cssClass: 'ion-ios7-email-outline'},
     {name: 'SMS', displayName: 'SMS', cssClass: 'ion-ios7-chatbubble-outline'},
     {name: 'TWITTER', displayName: 'Twitter', cssClass: 'ion-social-twitter-outline'},
     {name: 'FACEBOOK', displayName: 'Facebook', cssClass: 'ion-social-facebook-outline'},
-    {name: 'OTHER', displayName: 'Other', cssClass: ''}
+    {name: 'OTHER', displayName: 'Other', cssClass: 'ion-ios7-upload-outline'}
   ];
 
   // This makes a couple of assumptions:
@@ -74,29 +63,7 @@ var ShareAppCtrl = function($scope, $ionicViewService, $cordovaAppAvailability, 
   $scope.deviceSupportsShareService('FACEBOOK');
 
   $scope.shareApp = function(service) {
-    var shareMesage = $scope.shareMessages[service];
-
-    if (service === 'EMAIL') {
-      // For some reason, this opens up as either Drive or Gmail, and doesn't work for Drive on Android.
-      // This doesn't seem like a huge deal, so for now allow it so that it pops up a share intent
-      // filtered for email clients.
-      window.plugins.socialsharing.shareViaEmail(
-        shareMesage, $scope.shareTitle, null, null, null, null);
-    } else if (service === 'SMS') {
-      $cordovaSocialSharing.shareViaSMS(shareMesage, undefined);
-    } else if (service === 'FACEBOOK') {
-      // The message isn't passed through correctly via FB on Android unfortunately, link is though
-      window.plugins.socialsharing.shareViaFacebook(shareMesage, undefined, $scope.shareURL);
-    } else if (service === 'TWITTER') {
-      window.plugins.socialsharing.shareViaTwitter(shareMesage, undefined, $scope.shareURL);
-    } else if (service === 'OTHER') {
-      // Open up a standard share intent:
-      window.plugins.socialsharing.share(shareMesage, null, null, $scope.shareURL);
-    }
-  };
-
-  $scope.appShareLink = function() {
-
+    acmSharing.shareApp(service);
   };
 
 };
