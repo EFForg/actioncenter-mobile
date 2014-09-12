@@ -55,7 +55,9 @@ actionCenterMobile.run(function ($state, $ionicPlatform, acmPushNotification, ac
       StatusBar.styleDefault();
     }
 
-    acmPushNotification.register();
+    if (window.plugins !== undefined) {
+      acmPushNotification.register();
+    }
 
     // NOTE: this is delayed until post-ready as some plugins are not available otherwise (e.g.
     //       appAvailability) and cause problems if accessed.

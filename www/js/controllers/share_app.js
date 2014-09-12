@@ -45,8 +45,9 @@ var ShareAppCtrl = function($scope, $ionicViewService, $cordovaAppAvailability, 
   $scope.deviceSupportsShareService = function(service) {
     var platform = ionic.Platform.platform().toUpperCase();
 
+    var appAvailabilityByPlatform = $scope.appAvailabilityChecks[platform];
     // Make the function no-op for services we can't check
-    if ($scope.appAvailabilityChecks[platform][service] !== undefined) {
+    if (appAvailabilityByPlatform !== undefined && appAvailabilityByPlatform[service] !== undefined) {
       $cordovaAppAvailability
         .check($scope.appAvailabilityChecks[platform][service])
         .then(function(success) {
@@ -55,6 +56,8 @@ var ShareAppCtrl = function($scope, $ionicViewService, $cordovaAppAvailability, 
         function(error) {
           $scope.serviceAvailability[service] = false;
         });
+    } else {
+      $scope.serviceAvailability[service] = false;
     }
   };
 
