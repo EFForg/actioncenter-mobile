@@ -10,6 +10,8 @@ var sprintf = require('../../../bower_components/sprintf/src/sprintf.js').sprint
 var PushNotificationService = function (
   $rootScope, $state, $cordovaPush, $cordovaLocalNotification, acmUserDefaults, acmAPI) {
 
+  var PUSH_RECEIVED_FOREGROUND_NOTIFICATION_ID = 'acm-push-received-foreground';
+
   var pushRegistrationFailed = function(err) {
     // TODO(leah): update this.
     console.error('Unable to register device with push server');
@@ -41,6 +43,7 @@ var PushNotificationService = function (
       var isForeground = e.foreground;
       acmUserDefaults.setUserDefault(
         acmUserDefaults.keys.MOST_RECENT_ACTION, payload['action']);
+      // TODO(leah): Add in a constants type file with a base url param
       acmUserDefaults.setUserDefault(
         acmUserDefaults.keys.MOST_RECENT_ACTION_URL,
         sprintf('https://act.eff.org/action/%s', payload['actionURLSuffix']));
@@ -58,22 +61,19 @@ var PushNotificationService = function (
         // * If the user is looking at the action page, just update the visible action and suppress
         //   the push notification. This is confusing, but this situation should be very rare.
         // * If the user is browsing the carousel / at the post intro page, just spawn a notification.
-        console.log(currentState);
         if (currentState === 'home') {
           $rootScope.$broadcast('refresh-home-page');
         } else {
-          $cordovaLocalNotification.add({
-            id: 'some_notification_id',
-            title: 'this is a test',
-            message: 'this is a message'
-            // parameter documentation:
-            // https://github.com/katzer/cordova-plugin-local-notifications#further-informations-1
-          }).then(function () {
-            console.log('callback for adding background notification');
+          // parameter documentation:
+          // https://github.com/katzer/cordova-plugin-local-notifications#further-informations-1
+          window.plugin.notification.local.add({
+            id: PUSH_RECEIVED_FOREGROUND_NOTIFICATION_ID,
+            title: payload['title'],
+            message: payload['message'],
+            autoCancel: true
           });
         }
       }
-
 
     } else if (eventType === 'error') {
       console.error('GCM error received: ' + e.msg);
@@ -103,6 +103,11 @@ var PushNotificationService = function (
 
     register: function() {
       $cordovaPush.register(this.pushConfig()).then(registrationSuccess, registrationError);
+      window.plugin.notification.local.onclick = function(id, state, json) {
+        if (id === PUSH_RECEIVED_FOREGROUND_NOTIFICATION_ID) {
+          $state.go('home');
+        }
+      };
     },
 
     pushConfig: function() {
