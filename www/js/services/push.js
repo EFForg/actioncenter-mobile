@@ -7,7 +7,8 @@
 
 var sprintf = require('../../../bower_components/sprintf/src/sprintf.js').sprintf; // Using /src as /dist doesn't contain unminified code
 
-var PushNotificationService = function ($state, $cordovaPush, $cordovaLocalNotification, acmUserDefaults, acmAPI) {
+var PushNotificationService = function (
+  $rootScope, $state, $cordovaPush, $cordovaLocalNotification, acmUserDefaults, acmAPI) {
 
   var devicePlatform;
 
@@ -59,16 +60,20 @@ var PushNotificationService = function ($state, $cordovaPush, $cordovaLocalNotif
         // * If the user is looking at the action page, just update the visible action and suppress
         //   the push notification. This is confusing, but this situation should be very rare.
         // * If the user is browsing the carousel / at the post intro page, just spawn a notification.
-        // TODO(leah): Figure out how to implement the above logic
-        $cordovaLocalNotification.add({
-          id: 'some_notification_id',
-          title: 'this is a test',
-          message: 'this is a message'
-          // parameter documentation:
-          // https://github.com/katzer/cordova-plugin-local-notifications#further-informations-1
-        }).then(function () {
-          console.log('callback for adding background notification');
-        });
+        console.log(currentState);
+        if (currentState === 'home') {
+          $rootScope.$broadcast('refresh-home-page');
+        } else {
+          $cordovaLocalNotification.add({
+            id: 'some_notification_id',
+            title: 'this is a test',
+            message: 'this is a message'
+            // parameter documentation:
+            // https://github.com/katzer/cordova-plugin-local-notifications#further-informations-1
+          }).then(function () {
+            console.log('callback for adding background notification');
+          });
+        }
       }
 
 
