@@ -46,7 +46,6 @@ gulp.task('sass', function (done) {
     .pipe(sass(gutil.log))
     .pipe(concat('eff.css'))
     .pipe(sass())
-    .pipe(gulp.dest(targets.css))
     // TODO(leah): Update this to read off an "is prod variable"
     .pipe(gulpIf(false, minifyCss({
       keepSpecialComments: 0

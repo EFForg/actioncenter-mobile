@@ -10,8 +10,6 @@ var sprintf = require('../../../bower_components/sprintf/src/sprintf.js').sprint
 var PushNotificationService = function (
   $rootScope, $state, $cordovaPush, $cordovaLocalNotification, acmUserDefaults, acmAPI) {
 
-  var devicePlatform;
-
   var pushRegistrationFailed = function(err) {
     // TODO(leah): update this.
     console.error('Unable to register device with push server');
