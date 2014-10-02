@@ -2,9 +2,6 @@
   "name": "actioncenter",
   "version": "0.0.1",
   "description": "EFF Action Center mobile app",
-  "scripts": {
-    "hat": "touch /tmp/hat"
-  },
   "dependencies": {
     "express": "4.8.1",
     "gulp": "^3.5.6",
