@@ -5,9 +5,9 @@
 var WelcomeCarouselCtrl = function($scope, $state, acmUserDefaults) {
 
   $scope.slides = [
-    'welcome/get_notified.html',
-    'welcome/contact_congress.html',
-    'welcome/new_projects.html'
+    'ng_partials/welcome/get_notified.html',
+    'ng_partials/welcome/contact_congress.html',
+    'ng_partials/welcome/new_projects.html'
   ];
 
   $scope.openShareAppPage = function() {

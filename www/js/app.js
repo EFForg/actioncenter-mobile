@@ -2,17 +2,7 @@
  * Primary application target, defines top level module and imports required files.
  */
 
-require('../../bower_components/angular/angular.js');
-require('../../bower_components/angular-animate/angular-animate.js');
-require('../../bower_components/angular-sanitize/angular-sanitize.js');
-require('../../bower_components/angular-ui-router/release/angular-ui-router.js');
-require('../../bower_components/ionic/js/ionic.js');
-require('../../bower_components/ionic/js/ionic-angular.js');
-require('../../bower_components/ngCordova/dist/ng-cordova.js');
-
-require('./controllers');
-require('./services');
-require('./templates/templates');
+var angular = require('angular');
 
 // Registered here so it's in a context that stringByEvaluatingJavaScriptFromString can pick up on.
 pushNotificationEventBus = function(event) {
@@ -21,15 +11,50 @@ pushNotificationEventBus = function(event) {
   pushService.handlePushNotification(event);
 };
 
-var actionCenterMobile = angular.module(
-  'acm', ['ionic', 'ngCordova', 'acm.templates', 'acm.controllers', 'acm.services']);
+var actionCenterMobile = angular.module('acm', ['ionic', 'ngCordova']);
+
+actionCenterMobile.controller('WelcomeCarouselCtrl', require('./controllers/welcome_carousel'));
+actionCenterMobile.controller('ShareAppCtrl', require('./controllers/share_app'));
+actionCenterMobile.controller('HomeCtrl', require('./controllers/home'));
+
+actionCenterMobile.factory('acmUserDefaults', require('./services/user_defaults'));
+actionCenterMobile.factory('acmPushNotification', require('./services/push'));
+actionCenterMobile.factory('acmAPI', require('./services/api'));
+actionCenterMobile.factory('acmDeviceLanguage', require('./services/language'));
+actionCenterMobile.factory('acmSharing', require('./services/sharing'));
 
 actionCenterMobile.config(function ($stateProvider, $urlRouterProvider) {
+
   var appStates = [
-    {name: 'welcome', url: '/welcome', templateUrl: 'welcome/welcome_carousel.html', controller: 'WelcomeCarouselCtrl'},
-    {name: 'post_intro', url: '/post_intro', templateUrl: 'post_intro.html', controller: 'ShareAppCtrl'},
-    {name: 'share_app', url: '/share_app', templateUrl: 'post_intro.html', controller: 'ShareAppCtrl'},
-    {name: 'home', url: '/home', templateUrl: 'home.html', controller: 'HomeCtrl'}
+
+    {
+      name: 'welcome',
+      url: '/welcome',
+      templateUrl: 'ng_partials/welcome/welcome_carousel.html',
+      controller: 'WelcomeCarouselCtrl'
+    },
+
+    {
+      name: 'post_intro',
+      url: '/post_intro',
+      templateUrl: 'ng_partials/post_intro.html',
+      controller: 'ShareAppCtrl'
+    },
+
+    {
+      name: 'share_app',
+      url: '/share_app',
+      templateUrl: 'ng_partials/post_intro.html',
+      controller: 'ShareAppCtrl'
+    },
+
+    {
+      name: 'home',
+      url: '/home',
+      templateUrl: 'ng_partials/home.html',
+      controller: 'HomeCtrl'
+    }
+
   ];
 
   for (var i = 0, len = appStates.length; i < len; i++) {
@@ -73,3 +98,6 @@ actionCenterMobile.run(function ($state, $ionicPlatform, acmPushNotification, ac
     }
   });
 });
+
+// Require in the cached templates - see gulp/tasks/ng_templates.js for details
+require('../build/acmTemplates');

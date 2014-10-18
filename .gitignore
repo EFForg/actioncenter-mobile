@@ -1,6 +1,10 @@
 node_modules
+
 # Ignore the bower components directories
 bower_components
 components
+
+www/dist/*
+www/build/*
 
 *.pyc
