@@ -92,7 +92,7 @@ actionCenterMobile.run(function ($state, $ionicPlatform, acmPushNotification, ac
       acmUserDefaults.keys.MOST_RECENT_ACTION) !== null;
 
     if (completedWelcome) {
-      $state.go(hasReceivedActionPush ? 'home' : 'post-intro');
+      $state.go(hasReceivedActionPush ? 'home' : 'post_intro');
     } else {
       $state.go('welcome');
     }

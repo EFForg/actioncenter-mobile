@@ -6,11 +6,11 @@
   <name>actioncenter</name>
   <description>
 	EFF ActionCenter mobile app
-    </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
-    </author>
-  <content src="release/index.html"/>
+  </description>
+  <author email="" href="https://github.com/EFForg/actioncenter-mobile">
+      EFF Activism Tech
+  </author>
+  <content src="dist/index.html"/>
   <access origin="*"/>
 
   <preference name="webviewbounce"          value="false"/>

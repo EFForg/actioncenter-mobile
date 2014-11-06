@@ -11,6 +11,12 @@ gulp bower
 gulp build
 ```
 
+### Setting up Cordova
+
+```
+cordova platform add android
+```
+
 ### Running the server
 
 Spins up a local server to serve the app.

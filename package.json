@@ -19,11 +19,13 @@
     "gulp-minify-html": "^0.1.4",
     "gulp-notify": "^2.0.0",
     "gulp-rename": "^1.2.0",
+    "gulp-run": "^1.6.4",
     "gulp-sass": "^1.2.0",
     "gulp-util": "^3.0.1",
     "merge-stream": "^0.1.6",
     "pretty-hrtime": "^0.2.2",
     "require-dir": "^0.1.0",
+    "vinyl": "0.3.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.0.0"
   },
