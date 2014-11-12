@@ -1,5 +1,5 @@
 /**
- * Simple service for fetching the Alpha2 country code for a device.
+ * Fetcher service for retrievint the Alpha2 country code for a device.
  */
 
 var DeviceLanguageCodeService = function (acmUserDefaults) {
@@ -29,7 +29,7 @@ var DeviceLanguageCodeService = function (acmUserDefaults) {
             // will handle this.
             //
             // Given the initial (and foreseen) versions of this app are slim and target
-            // a primarily english speaking population make a basic attempt to capture language
+            // a primarily english speaking population, make a basic attempt to capture language
             // preferences, but err on the side of a US-centric, but easy implementation.
             //
             // This approach DOES NOT guarantee that the sourced language codes will be well

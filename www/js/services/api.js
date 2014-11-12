@@ -2,21 +2,46 @@
  * Action center API.
  */
 
+var sprintf = require('sprintf');
+
+var appSettings = require('../../build/app_settings');
+
+
 var APIService = function ($http, acmDeviceLanguage) {
+
+  var MAX_RETRIES = 3;
 
   return {
 
     registerDeviceForNotifications: function(deviceId, success, error) {
-      var languageSuccess = function(language) {
+
+      var registrationAttempts = 0;
+
+      var registerDevice = function(language) {
         var params = {
-          'protocol': ionic.Platform.platform().toUpperCase() === 'ANDROID' ? 'GCM' : 'APNS',
-          'device_id': deviceId,
+          'channel': ionic.Platform.platform().toUpperCase() === 'ANDROID' ? 'GCM' : 'APNS',
+          'deviceId': deviceId,
           'language': language
         };
-        $http.post('http://127.0.0.1:5000/api/1/subscriptions', params).success(success).error(error);
+
+        var url = sprintf(
+          '%s/%s/subscriptions', appSettings['API']['ENDPOINT'], appSettings['API']['VERSION']);
+        $http.post(url, params)
+          .success(success)
+          .error(function(data, status, headers, config) {
+            registrationAttempts++;
+            if (registrationAttempts < MAX_RETRIES) {
+              setTimeout(function() {
+                registerDevice(language);
+              }, 1000);
+            } else {
+              error(data, status, headers, config);
+            }
+          });
       };
 
-      acmDeviceLanguage.getLanguageCode(languageSuccess);
+      // NOTE: this returns default en-US if it's unable to get the device's language
+      acmDeviceLanguage.getLanguageCode(registerDevice);
     }
 
   };

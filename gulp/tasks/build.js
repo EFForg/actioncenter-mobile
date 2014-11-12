@@ -1,3 +1,3 @@
 var gulp = require('gulp');
 
-gulp.task('build', ['jsLibs', 'ngTemplates', 'templates', 'browserify', 'sass']);
+gulp.task('build', ['appSettings', 'jsLibs', 'ngTemplates', 'templates', 'browserify', 'sass']);

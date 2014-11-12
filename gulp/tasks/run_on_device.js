@@ -7,10 +7,10 @@ var runOnDevice = function(platform) {
   run(cmd).exec();
 };
 
-gulp.task('runOnAndroid', ['build'], function() {
+gulp.task('runAndroid', ['build'], function() {
   runOnDevice('android');
 });
 
-gulp.task('runOnIos', ['build'], function() {
+gulp.task('runIos', ['build'], function() {
   runOnDevice('ios');
 });

@@ -16,6 +16,16 @@ var SERVER_PORT = 4000;
 
 module.exports = {
 
+  appSettings: {
+    dest: BUILD_DIR,
+    fileName: 'app_settings.js',
+    settingsKeys: [
+      'API',
+      'APP',
+      'CREDENTIALS'
+    ]
+  },
+
   assets: {
     dest: DIST_DIR,
     assetsDir: path.join(DIST_DIR, 'assets'),
@@ -55,7 +65,8 @@ module.exports = {
       path.join(COMPONENTS_DIR, 'angular-ui-router/release/angular-ui-router.js'),
       path.join(COMPONENTS_DIR, 'ionic/js/ionic.js'),
       path.join(COMPONENTS_DIR, 'ionic/js/ionic-angular.js'),
-      path.join(COMPONENTS_DIR, 'ngCordova/dist/ng-cordova.js')
+      path.join(COMPONENTS_DIR, 'ngCordova/dist/ng-cordova.js'),
+      path.join(COMPONENTS_DIR, 'sprintf/src/sprintf.js')
     ]
   },
 

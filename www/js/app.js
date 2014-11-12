@@ -4,7 +4,16 @@
 
 var angular = require('angular');
 
-// Registered here so it's in a context that stringByEvaluatingJavaScriptFromString can pick up on.
+/**
+ * Top level handler for all push notification events.
+ *
+ * This has to be registered here so that it's scoped to allow
+ * stringByEvaluatingJavaScriptFromString to pick it up.
+ *
+ * NOTE: the var is deliberately left off the function declaration.
+ *
+ * @param event
+ */
 pushNotificationEventBus = function(event) {
   var pushService = angular.element(document.querySelector('body')).injector().get(
     'acmPushNotification');
@@ -19,6 +28,7 @@ actionCenterMobile.controller('HomeCtrl', require('./controllers/home'));
 
 actionCenterMobile.factory('acmUserDefaults', require('./services/user_defaults'));
 actionCenterMobile.factory('acmPushNotification', require('./services/push'));
+actionCenterMobile.factory('acmGCMPushNotification', require('./services/push/gcm'));
 actionCenterMobile.factory('acmAPI', require('./services/api'));
 actionCenterMobile.factory('acmDeviceLanguage', require('./services/language'));
 actionCenterMobile.factory('acmSharing', require('./services/sharing'));
