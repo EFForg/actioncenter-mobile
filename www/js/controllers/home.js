@@ -1,5 +1,5 @@
 /**
- * Controller for the home page.
+ * Main app page, shows the latest action and a share button.
  */
 
 var HomeCtrl = function($scope, acmUserDefaults, acmSharing) {
@@ -13,6 +13,8 @@ var HomeCtrl = function($scope, acmUserDefaults, acmSharing) {
     $scope.latestAction = acmUserDefaults.getUserDefault(acmUserDefaults.keys.ACTION);
     $scope.$apply();
   });
+
 };
+
 
 module.exports = HomeCtrl;

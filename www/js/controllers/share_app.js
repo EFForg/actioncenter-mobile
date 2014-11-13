@@ -1,5 +1,5 @@
 /**
- * Controller to manage the share application screen.
+ * Displays share options and buttons.
  */
 
 var ShareAppCtrl = function($scope, $ionicViewService, $cordovaAppAvailability, acmSharing) {
@@ -70,5 +70,6 @@ var ShareAppCtrl = function($scope, $ionicViewService, $cordovaAppAvailability, 
   };
 
 };
+
 
 module.exports = ShareAppCtrl;

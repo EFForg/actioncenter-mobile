@@ -27,38 +27,30 @@ var GCMNotificationService = function($state, $cordovaLocalNotification, acmUser
 
   var handleMessage = function(e) {
     var payload = e.payload;
-    // Due to the app's simplicity, right now there's no distinction between how messages received
-    // in different states are handled. For now, just pull out the most recent action from the
-    // message params and cache it.
-    // var isColdstart = e.coldstart;
+    // Right now there's no distinction between how messages received in different states are
+    // handled. For now, just pull out the most recent action from the message params and cache it.
     var isForeground = e.foreground;
+
+    // TODO(leah): coldstart?
 
     acmPushNotificationHelpers.updateUserDefaults(payload);
 
     var currentState = $state.current.name;
-    if (!isForeground) {
+    if (isForeground) {
+      // parameter documentation:
+      // https://github.com/katzer/cordova-plugin-local-notifications#further-informations-1
+      window.plugin.notification.local.add({
+        id: constants.PUSH_RECEIVED_FOREGROUND_NOTIFICATION_ID,
+        title: payload['title'],
+        message: payload['message'],
+        autoCancel: true
+      });
+    } else {
       // If the app is backgrounded, any push notification received redirects the user to the action
       // page, updated for the most recent action, irrespective of whether they've completed the
       // welcome carousel etc.
       if (currentState !== 'home') {
         $state.go('home');
-      }
-    } else {
-      // If the app is foregrounded, there are some slightly more complex rules:
-      // * If the user is looking at the action page, just update the visible action and suppress
-      //   the push notification. This is confusing, but this situation should be very rare.
-      // * If the user is browsing the carousel / at the post intro page, just spawn a notification.
-      if (currentState === 'home') {
-        $rootScope.$broadcast('refresh-home-page');
-      } else {
-        // parameter documentation:
-        // https://github.com/katzer/cordova-plugin-local-notifications#further-informations-1
-        window.plugin.notification.local.add({
-          id: constants.PUSH_RECEIVED_FOREGROUND_NOTIFICATION_ID,
-          title: payload['title'],
-          message: payload['message'],
-          autoCancel: true
-        });
       }
     }
   };

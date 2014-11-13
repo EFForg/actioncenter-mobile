@@ -1,5 +1,5 @@
 /**
- * Simple controller wrapping the welcome carousel.
+ * Displays a welcome carousel introducing the app.
  */
 
 var WelcomeCarouselCtrl = function($scope, $state, acmUserDefaults) {
@@ -16,5 +16,6 @@ var WelcomeCarouselCtrl = function($scope, $state, acmUserDefaults) {
   };
 
 };
+
 
 module.exports = WelcomeCarouselCtrl;

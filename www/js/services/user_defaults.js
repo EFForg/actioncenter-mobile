@@ -7,7 +7,7 @@ var UserDefaultsService = function () {
   var userDefaultsPrefix = 'acm.eff';
   var localStorage = window.localStorage;
 
-  var serviceImplementation = {
+  var service = {
 
     keys: Object.freeze({
       USER_HAS_COMPLETED_WELCOME: 'userHasCompletedWelcome',
@@ -34,15 +34,16 @@ var UserDefaultsService = function () {
 
   };
 
+  // Configure the keyLookup object before passing back the service
   var keyLookup = {};
-  for (var property in serviceImplementation.keys) {
-    if (serviceImplementation.keys.hasOwnProperty(property)) {
-      keyLookup[serviceImplementation.keys[property]] = property;
+  for (var property in service.keys) {
+    if (service.keys.hasOwnProperty(property)) {
+      keyLookup[service.keys[property]] = property;
     }
   }
-  serviceImplementation.keyLookup = Object.freeze(keyLookup);
+  service.keyLookup = Object.freeze(keyLookup);
 
-  return serviceImplementation;
+  return service;
 };
 
 module.exports = UserDefaultsService;

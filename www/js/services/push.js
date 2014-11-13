@@ -22,6 +22,9 @@ var PushNotificationService = function ($rootScope, $state, $cordovaPush, acmGCM
 
   var service = {
 
+    /**
+     * Register the device with the notification backend.
+     */
     register: function() {
       var pushConfig = appSettings['CREDENTIALS'][ionic.Platform.platform().toUpperCase()];
       pushConfig['ecb'] = 'pushNotificationEventBus';
@@ -34,6 +37,11 @@ var PushNotificationService = function ($rootScope, $state, $cordovaPush, acmGCM
       };
     },
 
+    /**
+     * Top level handler for push notifications on all platforms.
+     *
+     * @param {*} event The push notification event.
+     */
     handlePushNotification: function(event) {
       var devicePlatform = ionic.Platform.platform().toUpperCase();
       if (devicePlatform === 'ANDROID') {
@@ -45,6 +53,9 @@ var PushNotificationService = function ($rootScope, $state, $cordovaPush, acmGCM
 
   };
 
+  /**
+   * Listen to push notification events from the event bus.
+   */
   $rootScope.$on('push-notification', function(event, pushEvent) {
     service.handlePushNotification(pushEvent);
   });

@@ -41,6 +41,13 @@ var APIService = function ($http, acmDeviceLanguage) {
 
   return {
 
+    /**
+     * Registers a device id with the backend.
+     *
+     * @param {string} deviceId The id of the device to register (registration_id for GCM etc.)
+     * @param success
+     * @param error
+     */
     registerDeviceForNotifications: function(deviceId, success, error) {
 
       var registerDevice = function(language) {

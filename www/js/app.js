@@ -54,7 +54,7 @@ actionCenterMobile.factory('acmPushNotification', require('./services/push'));
 actionCenterMobile.factory('acmGCMPushNotification', require('./services/push/gcm'));
 actionCenterMobile.factory('acmPushNotificationHelpers', require('./services/push/helpers'));
 
-actionCenterMobile.config(function ($stateProvider, $urlRouterProvider) {
+actionCenterMobile.config(function ($stateProvider) {
 
   var appStates = [
 

@@ -32,7 +32,7 @@ var DeviceLanguageCodeService = function (acmUserDefaults) {
             // a primarily english speaking population, make a basic attempt to capture language
             // preferences, but err on the side of a US-centric, but easy implementation.
             //
-            // This approach DOES NOT guarantee that the sourced language codes will be well
+            // This approach * DOES NOT * guarantee that the sourced language codes will be well
             // formatted BCP47 codes on either Android or iOS.
 
             var language = languageObj.value;
