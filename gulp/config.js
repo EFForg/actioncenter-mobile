@@ -98,6 +98,13 @@ module.exports = {
     // Paths is a little more complex here, as it's doing a recursive copy relative to a base dir
     paths: [path.join(WWW_DIR, 'templates/**/*.html')],
     pathsBaseDir: path.join(WWW_DIR, 'templates')
+  },
+
+  test: {
+    mochaOptions: {
+      reporter: 'spec'
+    },
+    paths: path.join(BASE_DIR, 'test/**/*.js')
   }
 
 };

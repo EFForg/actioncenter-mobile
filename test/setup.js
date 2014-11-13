@@ -1,0 +1,3 @@
+/**
+ * Mocha setup.
+ */
