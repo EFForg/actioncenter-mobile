@@ -4,6 +4,19 @@
     "VERSION": 1,
     "ENDPOINT": "http://127.0.0.1:5000/api"
   },
+  
+  "SHARING": {
+    "URL": "https://eff.org",
+    "MESSAGES": {
+      "SMS": "Hey, did you know the Electronic Frontier Foundation has a mobile app? It alerts you when they need your help, and you can download it using this link: %s",
+      "EMAIL": {
+        "SUBJECT": "EFF's Android App",
+        "BODY": "Hey, did you know the Electronic Frontier Foundation has a mobile app? It alerts you when they need your help, and you can download it from this link: %s"
+      },
+      "TWITTER": "Help out @EFF by downloading their Android App and get instant action alerts: ",
+      "OTHER": "Download the EFF's mobile app and get instant alerts when they need your help"
+    }
+  },
 
   "CREDENTIALS": {
     "ANDROID": {
