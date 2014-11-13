@@ -9,7 +9,7 @@ var appSettings = require('../../../build/app_settings');
 var constants = require('./constants');
 
 
-var GCMNotificationService = function ($state, $cordovaLocalNotification, acmUserDefaults, acmAPI) {
+var GCMNotificationService = function($state, $cordovaLocalNotification, acmUserDefaults, acmAPI, acmPushNotificationHelpers) {
 
   var gcmRegistrationFailed = function(err) {
     // TODO(leah): update this.
@@ -33,15 +33,7 @@ var GCMNotificationService = function ($state, $cordovaLocalNotification, acmUse
     // var isColdstart = e.coldstart;
     var isForeground = e.foreground;
 
-    if (!angular.isUndefined(payload['action'])) {
-      acmUserDefaults.setUserDefault(acmUserDefaults.keys.MOST_RECENT_ACTION, payload['action']);
-    }
-
-    if (!angular.isUndefined(payload['actionURLSuffix'])) {
-      acmUserDefaults.setUserDefault(
-        acmUserDefaults.keys.MOST_RECENT_ACTION_URL,
-        sprintf(appSettings['APP']['BASE_ACTION_URL'], payload['actionURLSuffix']));
-    }
+    acmPushNotificationHelpers.updateUserDefaults(payload);
 
     var currentState = $state.current.name;
     if (!isForeground) {

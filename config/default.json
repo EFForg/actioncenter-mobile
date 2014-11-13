@@ -5,14 +5,9 @@
     "ENDPOINT": "http://127.0.0.1:5000/api"
   },
 
-  "APP": {
-    "BASE_ACTION_URL": "https://act.eff.org/action/%s"
-  },
-
   "CREDENTIALS": {
     "ANDROID": {
-      "senderID": "",
-      "ecb": "pushNotificationEventBus"
+      "senderID": ""
     },
 
     "IOS": {

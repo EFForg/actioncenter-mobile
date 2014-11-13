@@ -20,10 +20,11 @@ var PushNotificationService = function ($rootScope, $state, $cordovaPush, acmGCM
     console.log('Push registration failed: ' + error);
   };
 
-  return {
+  var service = {
 
     register: function() {
       var pushConfig = appSettings['CREDENTIALS'][ionic.Platform.platform().toUpperCase()];
+      pushConfig['ecb'] = 'pushNotificationEventBus';
       $cordovaPush.register(pushConfig).then(registrationSuccess, registrationError);
 
       window.plugin.notification.local.onclick = function(id, state, json) {
@@ -43,6 +44,12 @@ var PushNotificationService = function ($rootScope, $state, $cordovaPush, acmGCM
     }
 
   };
+
+  $rootScope.$on('push-notification', function(event, pushEvent) {
+    service.handlePushNotification(pushEvent);
+  });
+
+  return service;
 };
 
 module.exports = PushNotificationService;

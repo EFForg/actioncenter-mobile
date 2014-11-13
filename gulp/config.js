@@ -21,7 +21,6 @@ module.exports = {
     fileName: 'app_settings.js',
     settingsKeys: [
       'API',
-      'APP',
       'CREDENTIALS'
     ]
   },

@@ -23,8 +23,7 @@ var installPlugins = function(installedPlugins) {
   for (var key in plugins) {
     if (installedPlugins.indexOf(key) === -1) {
       pluginName = plugins[key];
-      // the prepare each time is required to ensure the local notification plugin works correctly
-      exec('cordova plugin add '+ pluginName + ' && cordova prepare', function(error, stdout, stderr) {
+      exec('cordova plugin add '+ pluginName, function(error, stdout, stderr) {
         sys.print(stdout);
       });
     }

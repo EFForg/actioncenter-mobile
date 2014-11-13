@@ -15,23 +15,44 @@ var angular = require('angular');
  * @param event
  */
 pushNotificationEventBus = function(event) {
-  var pushService = angular.element(document.querySelector('body')).injector().get(
-    'acmPushNotification');
-  pushService.handlePushNotification(event);
+  var $rootScope = angular.element(document.querySelector('body')).injector().get('$rootScope');
+  $rootScope.$emit('push-notification', event);
 };
 
+
 var actionCenterMobile = angular.module('acm', ['ionic', 'ngCordova']);
+
+/**
+ * Captures application errors and pipes them to the server.
+ *
+ * EFF has a strict privacy policy that precludes using standard err reporting. To give us a shot
+ * at acting on application errors, this handler captures any that bubble all the way up to window
+ * and passes them to an error bus function to pipe them to the backend.
+ */
+actionCenterMobile.factory('$exceptionHandler', function($injector, $log) {
+
+  var acmAPI;
+
+  return function(exception, cause) {
+    acmAPI = acmAPI || $injector.get('acmAPI');
+    acmAPI.reportError(exception);
+    $log.error(exception, cause);
+  };
+
+});
 
 actionCenterMobile.controller('WelcomeCarouselCtrl', require('./controllers/welcome_carousel'));
 actionCenterMobile.controller('ShareAppCtrl', require('./controllers/share_app'));
 actionCenterMobile.controller('HomeCtrl', require('./controllers/home'));
 
 actionCenterMobile.factory('acmUserDefaults', require('./services/user_defaults'));
-actionCenterMobile.factory('acmPushNotification', require('./services/push'));
-actionCenterMobile.factory('acmGCMPushNotification', require('./services/push/gcm'));
 actionCenterMobile.factory('acmAPI', require('./services/api'));
 actionCenterMobile.factory('acmDeviceLanguage', require('./services/language'));
 actionCenterMobile.factory('acmSharing', require('./services/sharing'));
+
+actionCenterMobile.factory('acmPushNotification', require('./services/push'));
+actionCenterMobile.factory('acmGCMPushNotification', require('./services/push/gcm'));
+actionCenterMobile.factory('acmPushNotificationHelpers', require('./services/push/helpers'));
 
 actionCenterMobile.config(function ($stateProvider, $urlRouterProvider) {
 
@@ -99,7 +120,7 @@ actionCenterMobile.run(function ($state, $ionicPlatform, acmPushNotification, ac
     var completedWelcome = acmUserDefaults.getUserDefault(
       acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME);
     var hasReceivedActionPush = acmUserDefaults.getUserDefault(
-      acmUserDefaults.keys.MOST_RECENT_ACTION) !== null;
+      acmUserDefaults.keys.ACTION) !== null;
 
     if (completedWelcome) {
       $state.go(hasReceivedActionPush ? 'home' : 'post_intro');
