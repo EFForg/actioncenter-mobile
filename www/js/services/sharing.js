@@ -2,39 +2,40 @@
  * Wrapper service for common sharing actions.
  */
 
+var shareSettings = require('../../build/app_settings')['SHARING'];
+var sprintf = require('sprintf');
+
+
 var SharingService = function () {
 
-  // TODO(leah): Talk to Lilia / Bill re. getting a redirect friendly URL set up
-  var shareURL = 'https://www.eff.org/';
-  var shareTitle = 'this is a share title';
-
-  var shareMessages = {
-    'SMS': 'sms share message',
-    'EMAIL': 'email share message',
-    'TWITTER': 'twitter share message',
-    'FACEBOOK': 'facebook share message',
-    'OTHER': 'other share message'
-  };
+  var DEFAULT_SHARE_MSG = 'Download the EFF\'s mobile app and get instant alerts when they need your help';
 
   return {
 
     shareApp: function(service) {
-      var shareMesage = shareMessages[service];
+
+      var shareURL = shareSettings['URL'];
+      var shareMessage = shareSettings['MESSAGES'][service] || DEFAULT_SHARE_MSG;
+      shareMessage = sprintf(shareMessage, shareURL);
+
       if (service === 'EMAIL') {
+        var title = shareMessage['TITLE'] || 'Download the EFF\'s Android app';
+        var body = shareMessage['BODY'] || DEFAULT_SHARE_MSG;
+
         // On Android this opens up as either Drive or Gmail, and doesn't work for Drive.
         // This doesn't seem like a huge deal, so for now allow it so that it pops up a share intent
         // filtered for email clients.
-        window.plugins.socialsharing.shareViaEmail(shareMesage, shareTitle, null, null, null, null);
+        window.plugins.socialsharing.shareViaEmail(body, title, null, null, null, null);
       } else if (service === 'SMS') {
-        window.plugins.socialsharing.shareViaSMS(shareMesage, undefined);
+        window.plugins.socialsharing.shareViaSMS(shareMessage, undefined);
       } else if (service === 'FACEBOOK') {
         // The message isn't passed through correctly via FB on Android unfortunately, link is though
-        window.plugins.socialsharing.shareViaFacebook(shareMesage, undefined, shareURL);
+        window.plugins.socialsharing.shareViaFacebook(shareMessage, undefined, shareURL);
       } else if (service === 'TWITTER') {
-        window.plugins.socialsharing.shareViaTwitter(shareMesage, undefined, shareURL);
+        window.plugins.socialsharing.shareViaTwitter(shareMessage, undefined, shareURL);
       } else if (service === 'OTHER') {
         // Open up a standard share intent:
-        window.plugins.socialsharing.share(shareMesage, null, null, shareURL);
+        window.plugins.socialsharing.share(shareMessage, null, null, shareURL);
       }
     }
 

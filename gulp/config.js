@@ -10,7 +10,6 @@ var COMPONENTS_DIR = path.join(BASE_DIR, 'bower_components');
 var WWW_DIR = path.join(BASE_DIR, 'www');
 var BUILD_DIR = path.join(WWW_DIR, 'build');
 var DIST_DIR = path.join(WWW_DIR, 'dist');
-var COMPONENTS_DIR = path.join(BASE_DIR, 'bower_components');
 
 var SERVER_PORT = 4000;
 
@@ -21,7 +20,8 @@ module.exports = {
     fileName: 'app_settings.js',
     settingsKeys: [
       'API',
-      'CREDENTIALS'
+      'CREDENTIALS',
+      'SHARING'
     ]
   },
 
