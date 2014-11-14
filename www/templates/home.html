@@ -1,8 +1,9 @@
 <div class="home">
   <div class="vertical-center">
-    <p><span class="uppercase">Latest EFF action: </span><br>{{latestAction}}</p>
+    <p><span class="uppercase">Latest EFF action: </span><br>{{actionInfo.title}}</p>
+    {{actionInfo.action}}
     <div class="buttons">
-      <button class="button take-action">
+      <button class="button take-action" ng-click="openURL(actionInfo.url)">
         Take action
       </button>
     </div>

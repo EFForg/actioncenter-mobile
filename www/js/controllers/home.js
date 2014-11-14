@@ -3,16 +3,16 @@
  */
 
 var HomeCtrl = function($scope, acmUserDefaults, acmSharing) {
-  $scope.latestAction = acmUserDefaults.getUserDefault(acmUserDefaults.keys.ACTION);
+
+  /**
+   * Object containing the title, description and URL of the latest action.
+   * @type {{}}
+   */
+  $scope.actionInfo = acmUserDefaults.getActionInfo();
 
   $scope.openShareIntent = function() {
     acmSharing.shareApp('OTHER');
   };
-
-  $scope.$on('refresh-home-page', function() {
-    $scope.latestAction = acmUserDefaults.getUserDefault(acmUserDefaults.keys.ACTION);
-    $scope.$apply();
-  });
 
 };
 

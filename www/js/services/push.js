@@ -32,7 +32,7 @@ var PushNotificationService = function ($rootScope, $state, $cordovaPush, acmGCM
 
       window.plugin.notification.local.onclick = function(id, state, json) {
         if (id === pushConstants.PUSH_RECEIVED_FOREGROUND_NOTIFICATION_ID) {
-          $state.go('home');
+          $state.go('home', {}, {reload: true});
         }
       };
     },

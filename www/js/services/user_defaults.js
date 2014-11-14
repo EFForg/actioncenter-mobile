@@ -30,6 +30,14 @@ var UserDefaultsService = function () {
       var userDefaultsKey = [userDefaultsPrefix, key].join('.');
       var localValue = localStorage.getItem(userDefaultsKey);
       return localValue === null ? localValue : JSON.parse(localValue);
+    },
+
+    getActionInfo: function() {
+      return {
+        title: this.getUserDefault(this.keys.ACTION_TITLE),
+        action: this.getUserDefault(this.keys.ACTION),
+        url: this.getUserDefault(this.keys.ACTION_URL)
+      };
     }
 
   };

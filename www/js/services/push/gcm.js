@@ -9,7 +9,8 @@ var appSettings = require('../../../build/app_settings');
 var constants = require('./constants');
 
 
-var GCMNotificationService = function($state, $cordovaLocalNotification, acmUserDefaults, acmAPI, acmPushNotificationHelpers) {
+var GCMNotificationService = function(
+  $state, $cordovaLocalNotification, acmUserDefaults, acmAPI, acmPushNotificationHelpers) {
 
   var gcmRegistrationFailed = function(err) {
     // TODO(leah): update this.
@@ -37,12 +38,15 @@ var GCMNotificationService = function($state, $cordovaLocalNotification, acmUser
 
     var currentState = $state.current.name;
     if (isForeground) {
+      var message = payload['message'];
+      message = message.length > 140 ? message.substring(0, 136) + ' ...' : message;
+
       // parameter documentation:
       // https://github.com/katzer/cordova-plugin-local-notifications#further-informations-1
       window.plugin.notification.local.add({
         id: constants.PUSH_RECEIVED_FOREGROUND_NOTIFICATION_ID,
         title: payload['title'],
-        message: payload['message'],
+        message: message,
         autoCancel: true
       });
     } else {
