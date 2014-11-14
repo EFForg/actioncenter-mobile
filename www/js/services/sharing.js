@@ -2,8 +2,10 @@
  * Wrapper service for common sharing actions.
  */
 
-var shareSettings = require('../../build/app_settings')['SHARING'];
+var angular = require('angular');
 var sprintf = require('sprintf');
+
+var shareSettings = require('../../build/app_settings')['SHARING'];
 
 
 var SharingService = function () {
@@ -16,10 +18,17 @@ var SharingService = function () {
 
       var shareURL = shareSettings['URL'];
       var shareMessage = shareSettings['MESSAGES'][service] || DEFAULT_SHARE_MSG;
-      shareMessage = sprintf(shareMessage, shareURL);
+
+      if (angular.isObject(shareMessage)) {
+        angular.forEach(shareMessage, function(val, key) {
+          shareMessage[key] = sprintf(val, shareURL);
+        });
+      } else {
+        shareMessage = sprintf(shareMessage, shareURL);
+      }
 
       if (service === 'EMAIL') {
-        var title = shareMessage['TITLE'] || 'Download the EFF\'s Android app';
+        var title = shareMessage['SUBJECT'] || 'Download the EFF\'s Android app';
         var body = shareMessage['BODY'] || DEFAULT_SHARE_MSG;
 
         // On Android this opens up as either Drive or Gmail, and doesn't work for Drive.

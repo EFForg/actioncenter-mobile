@@ -10,6 +10,7 @@ var COMPONENTS_DIR = path.join(BASE_DIR, 'bower_components');
 var WWW_DIR = path.join(BASE_DIR, 'www');
 var BUILD_DIR = path.join(WWW_DIR, 'build');
 var DIST_DIR = path.join(WWW_DIR, 'dist');
+var TEST_DIR = path.join(BASE_DIR, 'test');
 
 var SERVER_PORT = 4000;
 
@@ -20,6 +21,7 @@ module.exports = {
     fileName: 'app_settings.js',
     settingsKeys: [
       'API',
+      'APP',
       'CREDENTIALS',
       'SHARING'
     ]
@@ -101,10 +103,40 @@ module.exports = {
   },
 
   test: {
-    mochaOptions: {
-      reporter: 'spec'
-    },
-    paths: path.join(BASE_DIR, 'test/**/*.js')
+    karma: {
+
+      basePath: '',
+
+      frameworks: ['mocha', 'chai', 'sinon'],
+
+      // Order matters
+      files: [
+        path.join(WWW_DIR, 'dist/js/libs.min.js'),
+        path.join(COMPONENTS_DIR, 'angular-mocks/angular-mocks.js'),
+        path.join(WWW_DIR, 'dist/js/acm.min.js'),
+        path.join(TEST_DIR, '**/*.js')
+      ],
+
+      exclude: [],
+
+      port: 9876,
+
+      browsers: [
+        'PhantomJS'
+      ],
+
+      plugins: [
+        'karma-phantomjs-launcher',
+        'karma-mocha',
+        'karma-chai',
+        'karma-sinon'
+      ],
+
+      singleRun: true,
+
+      colors: true
+
+    }
   }
 
 };

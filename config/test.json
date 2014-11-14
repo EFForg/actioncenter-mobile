@@ -1,0 +1,19 @@
+{
+
+  "MODE": "test",
+
+  "SHARING": {
+    "URL": "testURL",
+    "MESSAGES": {
+      "SMS": "test: %s",
+      "EMAIL": {
+        "SUBJECT": "test",
+        "BODY": "test: %s"
+      },
+      "FACEBOOK": "test: %s",
+      "TWITTER": "test: %s",
+      "OTHER": "test: %s"
+    }
+  }
+
+}

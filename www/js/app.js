@@ -4,6 +4,9 @@
 
 var angular = require('angular');
 
+var appSettings = require('../build/app_settings');
+
+
 /**
  * Top level handler for all push notification events.
  *
@@ -101,6 +104,8 @@ actionCenterMobile.run(function ($state, $ionicPlatform, acmPushNotification, ac
 
   $ionicPlatform.ready(function () {
 
+    var platform = ionic.Platform.platform().toUpperCase();
+
     // Hide the accessory bar by default
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -111,7 +116,8 @@ actionCenterMobile.run(function ($state, $ionicPlatform, acmPushNotification, ac
       StatusBar.styleDefault();
     }
 
-    if (window.plugins !== undefined) {
+    if (window.plugins !== undefined &&
+        appSettings['APP']['PUSH_CAPABLE_PLATFORMS'].indexOf(platform) != -1) {
       acmPushNotification.register();
     }
 
