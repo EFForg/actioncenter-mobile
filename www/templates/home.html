@@ -2,7 +2,7 @@
   <div class="vertical-center">
     <p><span class="uppercase">Latest EFF action: </span><br>{{actionInfo.title}}</p>
     {{actionInfo.action}}
-    <div class="buttons">
+    <div class="buttons" ng-if="actionInfo.url">
       <button class="button take-action" ng-click="openURL(actionInfo.url)">
         Take action
       </button>

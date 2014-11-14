@@ -1,8 +1,11 @@
 /**
  * Displays share options and buttons.
+ *
+ * This an interstial control that should only be tmeporarily accessible in the app. The user should
+ * see it after completing the welcome carousel
  */
 
-var ShareAppCtrl = function($scope, $ionicViewService, $cordovaAppAvailability, acmSharing) {
+var ShareAppCtrl = function($scope, $ionicViewService, $cordovaAppAvailability, acmSharing, acmUserDefaults) {
 
   // Clear the history stack when the user first gets here from the welcome carousel, so that they
   // can't use the back button on Android to return to the carousel.
@@ -50,10 +53,10 @@ var ShareAppCtrl = function($scope, $ionicViewService, $cordovaAppAvailability, 
     if (appAvailabilityByPlatform !== undefined && appAvailabilityByPlatform[service] !== undefined) {
       $cordovaAppAvailability
         .check($scope.appAvailabilityChecks[platform][service])
-        .then(function(success) {
+        .then(function() {
           $scope.serviceAvailability[service] = true;
         },
-        function(error) {
+        function() {
           $scope.serviceAvailability[service] = false;
         });
     } else {

@@ -27,33 +27,32 @@ var GCMNotificationService = function(
   };
 
   var handleMessage = function(e) {
-    var payload = e.payload;
-    // Right now there's no distinction between how messages received in different states are
-    // handled. For now, just pull out the most recent action from the message params and cache it.
     var isForeground = e.foreground;
 
-    // TODO(leah): coldstart?
-
-    acmPushNotificationHelpers.updateUserDefaults(payload);
+    acmPushNotificationHelpers.updateUserDefaults(e.payload);
 
     var currentState = $state.current.name;
     if (isForeground) {
-      var message = payload['message'];
+      var message = acmUserDefaults.getUserDefault(acmUserDefaults.keys.ACTION);
       message = message.length > 140 ? message.substring(0, 136) + ' ...' : message;
 
       // parameter documentation:
       // https://github.com/katzer/cordova-plugin-local-notifications#further-informations-1
       window.plugin.notification.local.add({
+        icon: 'notification_icon',
         id: constants.PUSH_RECEIVED_FOREGROUND_NOTIFICATION_ID,
-        title: payload['title'],
+        title: acmUserDefaults.getUserDefault(acmUserDefaults.keys.ACTION_TITLE),
         message: message,
         autoCancel: true
       });
     } else {
-      // If the app is backgrounded, any push notification received redirects the user to the action
+      // If the app's backgrounded, any push notification received redirects the user to the action
       // page, updated for the most recent action, irrespective of whether they've completed the
-      // welcome carousel etc.
+      // welcome carousel.
       if (currentState !== 'home') {
+        // Force-set the has completed welcome flag, to avoid sending the user back to the carousel
+        // if they've ever been to the action page via this handler.
+        acmUserDefaults.setUserDefault(acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME, true);
         $state.go('home');
       }
     }
@@ -61,7 +60,7 @@ var GCMNotificationService = function(
 
   var handleError = function(e) {
     console.error('GCM error received: ' + e.msg);
-    // Deliberately left unhandled for now.
+    // Not a lot that can be done here
   };
 
   var handlerLookup = {

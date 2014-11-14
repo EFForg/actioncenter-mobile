@@ -38,6 +38,10 @@ var UserDefaultsService = function () {
         action: this.getUserDefault(this.keys.ACTION),
         url: this.getUserDefault(this.keys.ACTION_URL)
       };
+    },
+
+    hasReceivedAction: function() {
+      return this.getUserDefault(this.keys.ACTION) !== null
     }
 
   };

@@ -100,9 +100,23 @@ actionCenterMobile.config(function ($stateProvider) {
   //  * it causes a load of the page by default prior to the routing logic in run() kicking in
 });
 
-actionCenterMobile.run(function ($state, $ionicPlatform, acmPushNotification, acmUserDefaults) {
+actionCenterMobile.run(function(
+  $rootScope, $state, $ionicViewService, $ionicPlatform, acmPushNotification, acmUserDefaults) {
 
   $ionicPlatform.ready(function () {
+
+    // Listen to the resume event - this is fired when the app re-enters the foreground
+    // There's an edge case where a user gets a notification, but doesn't click it, where they're
+    // not directed to the action page on app re-open.
+    document.addEventListener('resume', function() {
+      if (acmUserDefaults.hasReceivedAction() && $state.current.name !== 'home') {
+        $state.go('home', {}, {location: 'replace'});
+        var deregister = $rootScope.$on('$stateChangeSuccess', function() {
+          $ionicViewService.clearHistory();
+          deregister();
+        });
+      }
+    }, false);
 
     var platform = ionic.Platform.platform().toUpperCase();
 
@@ -125,11 +139,9 @@ actionCenterMobile.run(function ($state, $ionicPlatform, acmPushNotification, ac
     //       appAvailability) and cause problems if accessed.
     var completedWelcome = acmUserDefaults.getUserDefault(
       acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME);
-    var hasReceivedActionPush = acmUserDefaults.getUserDefault(
-      acmUserDefaults.keys.ACTION) !== null;
 
     if (completedWelcome) {
-      $state.go(hasReceivedActionPush ? 'home' : 'post_intro');
+      $state.go(acmUserDefaults.hasReceivedAction() ? 'home' : 'post_intro');
     } else {
       $state.go('welcome');
     }

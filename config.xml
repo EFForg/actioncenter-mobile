@@ -7,8 +7,8 @@
   <description>
 	EFF ActionCenter mobile app
   </description>
-  <author email="" href="https://github.com/EFForg/actioncenter-mobile">
-      EFF Activism Tech
+  <author email="apps@eff.org" href="https://github.com/EFForg/actioncenter-mobile">
+      EFF
   </author>
   <content src="dist/index.html"/>
   <access origin="*"/>

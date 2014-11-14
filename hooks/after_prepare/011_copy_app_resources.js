@@ -15,9 +15,11 @@ var fetchDirectories = function(dirPath) {
 }
 
 var copyResources = function(srcDir, destDir) {
+  console.log(srcDir);
+  console.log(destDir);
   fs.exists(destDir, function(exists) {
     if (exists) {
-      var cmd = 'cp -rf ' + srcDir + '/* ' + destDir + '/*';
+      var cmd = 'cp -rf ' + srcDir + '/* ' + destDir + '/';
     } else {
       var cmd = 'cp -rf ' + srcDir + ' ' + destDir;
     }
