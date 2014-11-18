@@ -15,7 +15,8 @@ var UserDefaultsService = function () {
       DEVICE_LANGUAGE_LAST_CHECKED_TIMESTAMP: 'deviceLanguageLastCheckedTimestamp',
       ACTION_TITLE: 'mostRecentActionTitle',
       ACTION: 'mostRecentAction',
-      ACTION_URL: 'mostRecentActionURL'
+      ACTION_URL: 'mostRecentActionURL',
+      REGISTERED_FOR_PUSH: 'registeredForPush'
     }),
 
     keyLookup: undefined,

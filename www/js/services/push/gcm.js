@@ -3,28 +3,12 @@
  */
 
 var angular = require('angular');
-var sprintf = require('sprintf');
 
-var appSettings = require('../../../build/app_settings');
 var constants = require('./constants');
 
 
 var GCMNotificationService = function(
   $state, $cordovaLocalNotification, acmUserDefaults, acmAPI, acmPushNotificationHelpers) {
-
-  var gcmRegistrationFailed = function(err) {
-    // TODO(leah): update this.
-    console.error('Unable to register device with push server');
-  };
-
-  var handleRegistered = function(e) {
-    // This could be skipped by checking whether or not a locally held copy of the id matches that
-    // returned on registration. However, due to privacy concerns, the app is intended to record
-    // as little information as possible, so just ping the server each time.
-    acmAPI.registerDeviceForNotifications(e.regid, function() {
-      console.info('registered device with push server');
-    }, gcmRegistrationFailed);
-  };
 
   var handleMessage = function(e) {
     var isForeground = e.foreground;
@@ -58,24 +42,35 @@ var GCMNotificationService = function(
     }
   };
 
-  var handleError = function(e) {
-    console.error('GCM error received: ' + e.msg);
-    // Not a lot that can be done here
-  };
-
   var handlerLookup = {
-    'registered': handleRegistered,
+    'registered': function(e) {
+      acmPushNotificationHelpers.registerDeviceId(e.regid);
+    },
     'message': handleMessage
   };
 
   return {
     handleNotification: function(e) {
-      var eventType = e.event;
-      console.log(sprintf('GCM push notification for event "%s" received', eventType));
+
+      var error = function(err) {
+        console.error('GCM error received: ' + err.msg);
+        // Not a lot that can be done here
+      };
 
       // Default to firing the error handler if it's an unrecognized event type.
-      (handlerLookup[eventType] || handleError)(e);
+      (handlerLookup[e.event] || error)(e);
+    },
+
+    registrationSuccess: function(event) {
+      // No-op, as the registration is handled via the event interface
+      // NOTE: this doesn't actually indicate that the device registered remotely, it will fire even
+      //       if the device is in airplane mode etc.
+    },
+
+    registrationError: function(err) {
+      console.error('Unable to register for GCM push: ' + err);
     }
+
   }
 
 };

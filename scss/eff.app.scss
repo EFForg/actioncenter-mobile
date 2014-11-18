@@ -164,18 +164,6 @@ button.transparent {
 .home, .post-intro {
 	background-color: $red;
 
-	.graphic {
-		width: 60%;
-		padding-top:60px;
-		display: block;
-		margin: 0 auto;
-		@extend .shadow;
-	}
-
-	.vertical-center {
-		top: -30px;
-	}
-
 	.buttons {
 		text-align: center;
 		width: 100%;
@@ -196,11 +184,7 @@ button.transparent {
 	p {
 		font-size: 20px;
 	}
-	h1 {
-		margin-top: 10px;
-		margin-bottom:10px;
-		font-size:16px;
-	}
+
 	button.transparent {
 		width: 60%;
 		margin-bottom: 10px;
@@ -208,20 +192,7 @@ button.transparent {
 		padding-left: 8px;
 		border-width: 1px;
 	}
-	button.take-action {
-		@extend button.transparent;
-		width: 60%;
-		margin-bottom: 17px;
-		text-align: center;
-		padding-left: 8px;
-		background-color: #fff;
-		color: $red;
-	}
-	span.uppercase {
-		text-transform: uppercase;
-		font-weight:bold;
-		font-size: 14px;
-	}
+
 	i {
 		font-size: 28px;
 		height: 33px;
@@ -233,11 +204,124 @@ button.transparent {
 	}
 }
 
+
+// TODO(sina): Review this, as it's been quickly hacked together
+.home {
+
+    .home-row {
+        height: 100%;
+
+        .spacer-row {
+          max-height: 5%;
+        }
+
+        .action-title {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            max-height: 15%;
+
+            $action-title-font-size: 26px;
+            $action-title-line-height: 1.4;
+            $action-title-lines-to-show: 2;
+
+            // Adapted from http://codepen.io/martinwolf/pen/qlFdp
+            h1 {
+                display: block; /* Fallback for non-webkit */
+                display: -webkit-box;
+                height: $action-title-font-size * $action-title-line-height * $action-title-lines-to-show; /* Fallback for non-webkit */
+                margin: 0 auto;
+                font-size: $action-title-font-size;
+                font-weight: bold;
+                line-height: $action-title-line-height;
+                -webkit-line-clamp: $action-title-lines-to-show;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        .action-body {
+            overflow: hidden;
+
+            $action-body-font-size: 20px;
+            $action-body-line-height: 1.4;
+            $action-body-lines-to-show: 7;
+
+            p {
+                display: block; /* Fallback for non-webkit */
+                display: -webkit-box;
+                height: $action-body-font-size * $action-body-line-height * $action-body-lines-to-show; /* Fallback for non-webkit */
+                margin: 0 auto;
+                font-size: $action-body-font-size;
+                line-height: $action-body-line-height;
+                -webkit-line-clamp: $action-body-lines-to-show;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+        }
+
+        .action-button {
+            max-height: 15%;
+            min-height: 15%;
+
+            button.take-action {
+                @extend button.transparent;
+                width: 60%;
+                text-align: center;
+                padding-left: 8px;
+                background-color: #fff;
+                color: $red;
+            }
+        }
+
+        .share-button {
+            max-height: 15%;
+            min-height: 15%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .buttons {
+                margin: 0;
+            }
+
+            button {
+              margin: 0;
+            }
+        }
+
+    }
+
+}
+
 .post-intro {
+
+  	.graphic {
+		width: 60%;
+		padding-top:60px;
+		display: block;
+		margin: 0 auto;
+		@extend .shadow;
+	}
+
+  	.vertical-center {
+		top: -30px;
+	}
+
+  	h1 {
+		margin-top: 10px;
+		margin-bottom:10px;
+		font-size:16px;
+	}
+
 	.buttons.share {
-			position: relative;
-			bottom: 0;
-			margin-top:20px;
+        position: relative;
+        bottom: 0;
+        margin-top: 20px;
 	}
 }
 

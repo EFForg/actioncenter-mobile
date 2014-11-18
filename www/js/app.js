@@ -7,22 +7,6 @@ var angular = require('angular');
 var appSettings = require('../build/app_settings');
 
 
-/**
- * Top level handler for all push notification events.
- *
- * This has to be registered here so that it's scoped to allow
- * stringByEvaluatingJavaScriptFromString to pick it up.
- *
- * NOTE: the var is deliberately left off the function declaration.
- *
- * @param event
- */
-pushNotificationEventBus = function(event) {
-  var $rootScope = angular.element(document.querySelector('body')).injector().get('$rootScope');
-  $rootScope.$emit('push-notification', event);
-};
-
-
 var actionCenterMobile = angular.module('acm', ['ionic', 'ngCordova']);
 
 /**
@@ -55,6 +39,7 @@ actionCenterMobile.factory('acmSharing', require('./services/sharing'));
 
 actionCenterMobile.factory('acmPushNotification', require('./services/push'));
 actionCenterMobile.factory('acmGCMPushNotification', require('./services/push/gcm'));
+actionCenterMobile.factory('acmAPNSPushNotification', require('./services/push/apns'));
 actionCenterMobile.factory('acmPushNotificationHelpers', require('./services/push/helpers'));
 
 actionCenterMobile.config(function ($stateProvider) {
@@ -103,12 +88,22 @@ actionCenterMobile.config(function ($stateProvider) {
 actionCenterMobile.run(function(
   $rootScope, $state, $ionicViewService, $ionicPlatform, acmPushNotification, acmUserDefaults) {
 
+  var registerForPush = function() {
+    var platform = ionic.Platform.platform().toUpperCase();
+
+    if (window.plugins !== undefined &&
+        appSettings['APP']['PUSH_CAPABLE_PLATFORMS'].indexOf(platform) != -1) {
+      acmPushNotification.register();
+    }
+  };
+
   $ionicPlatform.ready(function () {
 
     // Listen to the resume event - this is fired when the app re-enters the foreground
     // There's an edge case where a user gets a notification, but doesn't click it, where they're
     // not directed to the action page on app re-open.
     document.addEventListener('resume', function() {
+
       if (acmUserDefaults.hasReceivedAction() && $state.current.name !== 'home') {
         $state.go('home', {}, {location: 'replace'});
         var deregister = $rootScope.$on('$stateChangeSuccess', function() {
@@ -116,9 +111,14 @@ actionCenterMobile.run(function(
           deregister();
         });
       }
-    }, false);
 
-    var platform = ionic.Platform.platform().toUpperCase();
+      if (!acmUserDefaults.getUserDefault(acmUserDefaults.REGISTERED_FOR_PUSH)) {
+        registerForPush();
+      }
+
+      console.log(acmUserDefaults.getActionInfo());
+
+    }, false);
 
     // Hide the accessory bar by default
     if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -130,10 +130,7 @@ actionCenterMobile.run(function(
       StatusBar.styleDefault();
     }
 
-    if (window.plugins !== undefined &&
-        appSettings['APP']['PUSH_CAPABLE_PLATFORMS'].indexOf(platform) != -1) {
-      acmPushNotification.register();
-    }
+    registerForPush();
 
     // NOTE: this is delayed until post-ready as some plugins are not available otherwise (e.g.
     //       appAvailability) and cause problems if accessed.

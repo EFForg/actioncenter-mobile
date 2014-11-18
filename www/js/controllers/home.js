@@ -10,7 +10,6 @@ var HomeCtrl = function($scope, acmUserDefaults, acmSharing) {
    */
   $scope.actionInfo = acmUserDefaults.getActionInfo();
 
-
   /**
    * Opens the supplied URL in a mobile browser.
    * @param url

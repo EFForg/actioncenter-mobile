@@ -25,6 +25,7 @@
     "gulp-rename": "^1.2.0",
     "gulp-run": "^1.6.4",
     "gulp-sass": "^1.2.0",
+    "gulp-shell": "^0.2.10",
     "gulp-util": "^3.0.1",
     "karma": "^0.12.24",
     "karma-chai": "^0.1.0",

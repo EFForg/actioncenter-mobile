@@ -60,12 +60,7 @@ module.exports = {
   jsLibs: {
     distDir: path.join(DIST_DIR, 'js'),
     jsLibs: [
-      path.join(COMPONENTS_DIR, 'angular/angular.js'),
-      path.join(COMPONENTS_DIR, 'angular-animate/angular-animate.js'),
-      path.join(COMPONENTS_DIR, 'angular-sanitize/angular-sanitize.js'),
-      path.join(COMPONENTS_DIR, 'angular-ui-router/release/angular-ui-router.js'),
-      path.join(COMPONENTS_DIR, 'ionic/js/ionic.js'),
-      path.join(COMPONENTS_DIR, 'ionic/js/ionic-angular.js'),
+      path.join(COMPONENTS_DIR, 'ionic/release/js/ionic.bundle.js'),
       path.join(COMPONENTS_DIR, 'ngCordova/dist/ng-cordova.js'),
       path.join(COMPONENTS_DIR, 'sprintf/src/sprintf.js')
     ]

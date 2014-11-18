@@ -11,6 +11,13 @@ gulp.task('runAndroid', ['build'], function() {
   runOnDevice('android');
 });
 
-gulp.task('runIos', ['build'], function() {
-  runOnDevice('ios');
+gulp.task('runIos', function() {
+  var output = [
+    'To run on iOS, you\'ll need to:',
+    '* run "gulp build ; cordova prepare" to copy iOS resources over',
+    '* set up XCode with your certificates',
+    '* open the app located in platforms/ios in XCode',
+    '* test from there'
+  ];
+  console.log(output.join('\n'));
 });

@@ -9,32 +9,47 @@ var appSettings = require('../../build/app_settings');
 var pushConstants = require('./push/constants');
 
 
-var PushNotificationService = function ($rootScope, $state, $cordovaPush, acmGCMPushNotification) {
-
-  // NOTE: this function will fire even if the device is offline etc., so don't really trust it
-  var registrationSuccess = function(result) {
-    console.log('Push registration success: ' + result);
-  };
-
-  var registrationError = function(error) {
-    console.log('Push registration failed: ' + error);
-  };
+var PushNotificationService = function(
+  $rootScope, $state, $cordovaPush, acmGCMPushNotification, acmAPNSPushNotification) {
 
   var service = {
+
+    getPlatformPushService_: function(devicePlatform) {
+      if (devicePlatform === 'ANDROID') {
+        return acmGCMPushNotification;
+      } else if (devicePlatform === 'IOS') {
+        return acmAPNSPushNotification;
+      }
+    },
 
     /**
      * Register the device with the notification backend.
      */
     register: function() {
-      var pushConfig = appSettings['CREDENTIALS'][ionic.Platform.platform().toUpperCase()];
-      pushConfig['ecb'] = 'pushNotificationEventBus';
-      $cordovaPush.register(pushConfig).then(registrationSuccess, registrationError);
+      var platform = ionic.Platform.platform().toUpperCase();
+      var devicePushHandler = this.getPlatformPushService_(platform)
+      if (!angular.isUndefined(devicePushHandler)) {
+        var pushConfig = appSettings['CREDENTIALS'][platform];
 
-      window.plugin.notification.local.onclick = function(id, state, json) {
-        if (id === pushConstants.PUSH_RECEIVED_FOREGROUND_NOTIFICATION_ID) {
-          $state.go('home', {}, {reload: true});
+        if (platform === 'IOS') {
+          angular.extend(pushConfig, {
+            'badge': 'true',
+            'sound': 'true',
+            'alert': 'true'
+          });
+        } else if (platform === 'ANDROID') {
+          // Android uses the local notification interface to pop up notifications, so register the click
+          // handler here.
+          window.plugin.notification.local.onclick = function(id, state, json) {
+            if (id === pushConstants.PUSH_RECEIVED_FOREGROUND_NOTIFICATION_ID) {
+              $state.go('home', {}, {reload: true});
+            }
+          };
         }
-      };
+
+        $cordovaPush.register(pushConfig).then(
+            devicePushHandler.registrationSuccess, devicePushHandler.registrationError);
+      }
     },
 
     /**
@@ -44,11 +59,7 @@ var PushNotificationService = function ($rootScope, $state, $cordovaPush, acmGCM
      */
     handlePushNotification: function(event) {
       var devicePlatform = ionic.Platform.platform().toUpperCase();
-      if (devicePlatform === 'ANDROID') {
-        acmGCMPushNotification.handleNotification(event);
-      } else if (devicePlatform === 'IOS') {
-
-      }
+      this.getPlatformPushService_(devicePlatform).handleNotification(event);
     }
 
   };
@@ -56,7 +67,7 @@ var PushNotificationService = function ($rootScope, $state, $cordovaPush, acmGCM
   /**
    * Listen to push notification events from the event bus.
    */
-  $rootScope.$on('push-notification', function(event, pushEvent) {
+  $rootScope.$on('pushNotificationReceived', function(event, pushEvent) {
     service.handlePushNotification(pushEvent);
   });
 

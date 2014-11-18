@@ -1,18 +1,33 @@
 <div class="home">
-  <div class="vertical-center">
-    <p><span class="uppercase">Latest EFF action: </span><br>{{actionInfo.title}}</p>
-    {{actionInfo.action}}
-    <div class="buttons" ng-if="actionInfo.url">
-      <button class="button take-action" ng-click="openURL(actionInfo.url)">
-        Take action
-      </button>
+
+  <div class="row responsive-lg home-row">
+
+    <div class="col spacer-row"></div>
+
+    <div class="col action-title">
+      <h1>{{actionInfo.title}}</h1>
     </div>
 
-    <div class="buttons share">
-      <button class="button transparent" ng-click="openShareIntent()">
-        <i class="ion-ios7-upload-outline"></i> Share this app
-      </button>
+    <div class="col action-body">
+      <p>{{actionInfo.action}}</p>
+    </div>
+
+    <div class="col action-button">
+      <div class="buttons action-button" ng-if="actionInfo.url">
+        <button class="button take-action" ng-click="openURL(actionInfo.url)">
+          Take action
+        </button>
+      </div>
+    </div>
+
+    <div class="col share-button">
+      <div class="buttons share-button-wrapper">
+        <button class="button transparent" ng-click="openShareIntent()">
+          <i class="ion-ios7-upload-outline"></i> Share this app
+        </button>
+      </div>
     </div>
 
   </div>
+
 </div>

@@ -17,7 +17,7 @@ Ionic app for receiving and handling push notifications.
 
 ```
 npm install
-gulp bower
+bower install
 gulp build
 ```
 
