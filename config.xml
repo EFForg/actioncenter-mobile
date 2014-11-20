@@ -5,10 +5,10 @@
         xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>EFF Alerts</name>
   <description>
-	EFF ActionCenter mobile app
+	EFF Alerts
   </description>
   <author email="apps@eff.org" href="https://github.com/EFForg/actioncenter-mobile">
-      EFF
+      EFF Apps
   </author>
   <content src="dist/index.html"/>
   <access origin="*"/>

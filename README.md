@@ -1,10 +1,11 @@
-actioncenter-mobile
+EFF Alerts
 ============
 
 Ionic app for receiving and handling push notifications.
 
 ## Table of Contents
 
+* [Background Info](#background-info)
 * [Getting Started](#getting-started)
 * [Setting up Cordova](#setting-up-cordova)
 * [App Configuration](#app-configuration)
@@ -12,6 +13,14 @@ Ionic app for receiving and handling push notifications.
 * [Running the server](#running-the-server)
 * [Running on device](#running-on-device)
 * [Angular App](#angular-app)
+
+## Background Info
+
+EFF Alerts is a pager style app that notifies EFF supporters when the EFF needs their help.
+
+Although it works on both iOS and Android, the app is only targeting Android as of today. If you need to deploy to iOS as well, please check out the [Ionic docs](http://ionicframework.com/docs/) or contact the project maintainer for help.
+
+The app is written using Cordova / Ionic, deploying an Angular webapp inside a UIWebView. This is to reduce the maintenance involved in managing multiple languages and fit with the existing EFF team's expertise.
 
 ## Getting started
 
