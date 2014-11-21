@@ -34,7 +34,7 @@ module.exports = {
       path.join(COMPONENTS_DIR, 'open-sans-fontface/fonts', 'Light/*'),
       path.join(COMPONENTS_DIR, 'open-sans-fontface/fonts', 'Regular/*'),
       path.join(COMPONENTS_DIR, 'open-sans-fontface/fonts', 'Bold/*'),
-      path.join(COMPONENTS_DIR, 'ionic/fonts/*')
+      path.join(COMPONENTS_DIR, 'ionic/release/fonts/*')
     ],
     imgPaths: [
       path.join(WWW_DIR, 'img/**/*')
