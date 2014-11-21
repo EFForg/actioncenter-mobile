@@ -41,6 +41,17 @@ var PushHelpersService = function(acmUserDefaults, acmAPI) {
       // returned on registration. However, due to privacy concerns, the app is intended to record
       // as little information as possible, so just ping the server each time.
       acmAPI.registerDeviceForNotifications(deviceId, success, error);
+    },
+
+    truncateString: function(string, length) {
+      var requiresTruncation = string.length > length;
+
+      if (requiresTruncation) {
+        var truncatedString = string.substr(0, length - 1);
+        return truncatedString.substr(0, truncatedString.lastIndexOf(' ')) + '...';
+      }
+
+      return string;
     }
 
   };

@@ -4,7 +4,19 @@
 
   "API": {
     "VERSION": 1,
-    "ENDPOINT": "http://127.0.0.1:5000/api"
+    "ENDPOINT": "http://69.50.225.158/api"
+  },
+
+  "CREDENTIALS": {
+
+    "ANDROID": {
+      "senderID": ""
+    },
+
+    "IOS": {
+
+    }
+
   }
 
 }

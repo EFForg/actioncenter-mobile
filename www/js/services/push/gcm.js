@@ -18,7 +18,7 @@ var GCMNotificationService = function(
     var currentState = $state.current.name;
     if (isForeground) {
       var message = acmUserDefaults.getUserDefault(acmUserDefaults.keys.ACTION);
-      message = message.length > 140 ? message.substring(0, 136) + ' ...' : message;
+      message = acmPushNotificationHelpers.truncateString(message, 140);
 
       // parameter documentation:
       // https://github.com/katzer/cordova-plugin-local-notifications#further-informations-1

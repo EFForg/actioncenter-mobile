@@ -17,14 +17,15 @@ Check that you've updated [your configuration settings](/config/production.json]
 
 ## Update ionic.project
 
-Update the [Ionic project file](/ionic.project) and [config.xml](/config.xml) files to reflect your organization, e.g. update the <description> field
+Update the [Ionic project file](/ionic.project) and [config.xml](/config.xml) files to reflect your organization, e.g. update the <description> field, set the domains the app is allowed to communicate with etc.
+
 
 ## Prepare your Cordova project
 
 Please see the Ionic - [Publishing your app page for full details](http://ionicframework.com/docs/guide/publishing.html)
 
 * Run <code>cordova plugin rm org.apache.cordova.console</code>
-* Edit the AndroidManifest.xml file under platforms/android and change <code>android:debuggable="true"</code> to <code>android:debuggable="false"</code>
+* Edit the AndroidManifest.xml file under platforms/android and change <code>android:debuggable="true"</code> to <code>android:debuggable="false"</code> or add it if not present
 
 ## Creating a release build
 
