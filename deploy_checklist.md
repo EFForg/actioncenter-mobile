@@ -7,7 +7,7 @@ Deploying the app
 
 ## Update config settings
 
-Check that you've updated [your configuration settings](/config/production.json] file to reflect the correct values:
+Check that you've updated [your configuration settings](/config/production.json) file to reflect the correct values:
 
 * Delete or remove the local.json file in the config directory. Otherwise this will overwrite the values in production.json
 * <code>API.ENDPOINT</code>: update to point this at the remote API server
@@ -25,7 +25,9 @@ Update the [Ionic project file](/ionic.project) and [config.xml](/config.xml) fi
 Please see the Ionic - [Publishing your app page for full details](http://ionicframework.com/docs/guide/publishing.html)
 
 * Run <code>cordova plugin rm org.apache.cordova.console</code>
-* Edit the AndroidManifest.xml file under platforms/android and change <code>android:debuggable="true"</code> to <code>android:debuggable="false"</code> or add it if not present
+* Edit the AndroidManifest.xml file under platforms/android
+  * change <code>android:name</code> to the correct name for your app
+  * change <code>android:debuggable="true"</code> to <code>android:debuggable="false"</code> or add it if not present
 
 ## Creating a release build
 
