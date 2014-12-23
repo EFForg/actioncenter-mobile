@@ -21,8 +21,8 @@
         "BODY": "Hey, did you know the Electronic Frontier Foundation has a mobile app? It alerts you when they need your help, and you can download it from this link: %s"
       },
       "FACEBOOK": "Download the EFF's mobile app and get instant alerts when they need your help: %s",
-      "TWITTER": "Help out @EFF by downloading their Android App and get instant action alerts: %s",
-      "OTHER": "Download the EFF's mobile app and get instant alerts when they need your help: %s"
+      "TWITTER": "Help out @EFF by downloading their Android App and get instant action alerts:",
+      "OTHER": "Download the EFF's mobile app and get instant alerts when they need your help:"
     }
   },
 
