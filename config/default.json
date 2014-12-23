@@ -13,7 +13,7 @@
   },
 
   "SHARING": {
-    "URL": "https://eff.org",
+    "URL": "https://www.eff.org/app",
     "MESSAGES": {
       "SMS": "Hey, did you know the Electronic Frontier Foundation has a mobile app? It alerts you when they need your help, and you can download it using this link: %s",
       "EMAIL": {

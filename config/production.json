@@ -4,7 +4,7 @@
 
   "API": {
     "VERSION": 1,
-    "ENDPOINT": "http://69.50.225.158/api"
+    "ENDPOINT": "https://push.eff.org/api"
   },
 
   "CREDENTIALS": {
