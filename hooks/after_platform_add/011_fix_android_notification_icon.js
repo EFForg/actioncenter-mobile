@@ -27,6 +27,6 @@ replace({
 
 replace({
   regex: /package com.plugin.gcm;/,
-  replacement: '// NOTE: THIS FILE HAS BEEN MODIFIED BY THE hooks/011_fix_android_notification_icon.js SCRIPT\n\npackage com.plugin.gcm;\n\nimport com.eff.actioncenter.R;',
+  replacement: '// NOTE: THIS FILE HAS BEEN MODIFIED BY THE hooks/011_fix_android_notification_icon.js SCRIPT\n\npackage com.plugin.gcm;\n\nimport org.eff.actioncenter.R;',
   paths: [gcmIntentServicePath]
 });
