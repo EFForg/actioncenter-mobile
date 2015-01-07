@@ -10,7 +10,7 @@ var shareSettings = require('../../build/app_settings')['SHARING'];
 
 var SharingService = function () {
 
-  var DEFAULT_SHARE_MSG = 'Download the EFF\'s mobile app and get instant alerts when they need your help';
+  var DEFAULT_SHARE_MSG = 'Download EFF\'s mobile app and get instant alerts when they need your help';
 
   return {
 
@@ -28,7 +28,7 @@ var SharingService = function () {
       }
 
       if (service === 'EMAIL') {
-        var title = shareMessage['SUBJECT'] || 'Download the EFF\'s Android app';
+        var title = shareMessage['SUBJECT'] || 'Download EFF\'s Android app';
         var body = shareMessage['BODY'] || DEFAULT_SHARE_MSG;
 
         // On Android this opens up as either Drive or Gmail, and doesn't work for Drive.
