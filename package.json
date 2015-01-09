@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "EFF Action Center mobile app",
   "dependencies": {
-    "express": "4.8.1",
+    "express": "4.8.1"
+  },
+  "optionalDependencies": {
     "ios-deploy": "^1.1.0"
   },
   "devDependencies": {
