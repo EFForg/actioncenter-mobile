@@ -37,7 +37,7 @@ var DeviceLanguageCodeService = function (acmUserDefaults) {
 
             var language = languageObj.value;
 
-            if (typeof language !== 'string' || !(language instanceof String)) {
+            if (typeof language !== 'string') {
               language = DEFAULT_LANGUAGE_CODE;
             }
 
