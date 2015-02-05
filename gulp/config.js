@@ -31,10 +31,10 @@ module.exports = {
     dest: DIST_DIR,
     assetsDir: path.join(DIST_DIR, 'assets'),
     fontPaths: [
-      path.join(COMPONENTS_DIR, 'open-sans-fontface/fonts', 'Light/*'),
-      path.join(COMPONENTS_DIR, 'open-sans-fontface/fonts', 'Regular/*'),
-      path.join(COMPONENTS_DIR, 'open-sans-fontface/fonts', 'Bold/*'),
-      path.join(COMPONENTS_DIR, 'ionic/release/fonts/*')
+      path.join(COMPONENTS_DIR, 'open-sans-fontface/fonts', 'Light/*woff'),
+      path.join(COMPONENTS_DIR, 'open-sans-fontface/fonts', 'Regular/*woff'),
+      path.join(COMPONENTS_DIR, 'open-sans-fontface/fonts', 'Bold/*woff'),
+      path.join(COMPONENTS_DIR, 'ionic/release/fonts/*woff')
     ],
     imgPaths: [
       path.join(WWW_DIR, 'img/**/*')
