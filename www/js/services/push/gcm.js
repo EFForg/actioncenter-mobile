@@ -37,7 +37,7 @@ var GCMNotificationService = function(
         // Force-set the has completed welcome flag, to avoid sending the user back to the carousel
         // if they've ever been to the action page via this handler.
         acmUserDefaults.setUserDefault(acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME, true);
-        $state.go('home');
+        $state.go('acm.home');
       }
     }
   };

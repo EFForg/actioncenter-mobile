@@ -7,7 +7,7 @@ var angular = require('angular');
 var appSettings = require('../build/app_settings');
 
 
-var actionCenterMobile = angular.module('acm', ['ionic', 'ngCordova']);
+var actionCenterMobile = angular.module('acm', ['ionic', 'ngCordova', 'xml']);
 
 /**
  * Captures application errors and pipes them to the server.
@@ -28,9 +28,18 @@ actionCenterMobile.factory('$exceptionHandler', function($injector, $log) {
 
 });
 
+actionCenterMobile.config(function($ionicConfigProvider) {
+    $ionicConfigProvider
+    .tabs.position('top')
+    .style('striped');
+})
+
+actionCenterMobile.controller('ActionCenterCtrl', require('./controllers/actionCenter'));
 actionCenterMobile.controller('WelcomeCarouselCtrl', require('./controllers/welcome_carousel'));
 actionCenterMobile.controller('ShareAppCtrl', require('./controllers/share_app'));
-actionCenterMobile.controller('HomeCtrl', require('./controllers/home'));
+actionCenterMobile.controller('ActionCtrl', require('./controllers/action'));
+actionCenterMobile.controller('NewsCtrl', require('./controllers/news'));
+actionCenterMobile.controller('MoreCtrl', require('./controllers/more'));
 
 actionCenterMobile.factory('acmUserDefaults', require('./services/user_defaults'));
 actionCenterMobile.factory('acmAPI', require('./services/api'));
@@ -47,31 +56,78 @@ actionCenterMobile.config(function ($stateProvider) {
   var appStates = [
 
     {
-      name: 'welcome',
+      name: 'acm',
+      url: '/acm',
+      template: '<div ui-view></div>',
+      abstract: true,
+      controller: 'ActionCenterCtrl'
+    },
+
+    {
+      name: 'acm.welcome',
       url: '/welcome',
       templateUrl: 'ng_partials/welcome/welcome_carousel.html',
       controller: 'WelcomeCarouselCtrl'
     },
 
     {
-      name: 'post_intro',
+      name: 'acm.post_intro',
       url: '/post_intro',
       templateUrl: 'ng_partials/post_intro.html',
       controller: 'ShareAppCtrl'
+     },
+
+    {
+      name: 'acm.home',
+      url: '/home',
+      templateUrl: 'ng_partials/home.html',
+      controller: 'HomeCtrl'
     },
 
     {
-      name: 'share_app',
+      name: 'acm.share_app',
       url: '/share_app',
       templateUrl: 'ng_partials/post_intro.html',
       controller: 'ShareAppCtrl'
     },
 
     {
-      name: 'home',
-      url: '/home',
-      templateUrl: 'ng_partials/home.html',
-      controller: 'HomeCtrl'
+      name: 'acm.homeTabs',
+      abstract: true,
+      url: '/homeTabs',
+      templateUrl: 'ng_partials/homeTabs.html'
+    },
+
+    {
+      name: 'acm.homeTabs.action',
+      url: '/action',
+      views: {
+        'action-tab' :{
+          templateUrl: 'ng_partials/action.html',
+          controller: 'ActionCtrl',
+        }
+      }
+    },
+
+    {
+      name: 'acm.homeTabs.news',
+      url: '/news',
+        views: {
+          'news-tab' :{
+            templateUrl: 'ng_partials/news.html',
+            controller: 'NewsCtrl',
+          }
+        }
+    },
+
+    {
+      name: 'acm.homeTabs.more',
+      url: '/more',
+      views: {
+        'more-tab' :{
+          templateUrl: 'ng_partials/more.html'
+        }
+      }
     }
 
   ];
@@ -104,8 +160,8 @@ actionCenterMobile.run(function(
     // not directed to the action page on app re-open.
     document.addEventListener('resume', function() {
 
-      if (acmUserDefaults.hasReceivedAction() && $state.current.name !== 'home') {
-        $state.go('home', {}, {location: 'replace'});
+      if (acmUserDefaults.hasReceivedAction() && $state.current.name !== 'acm.home') {
+        $state.go('acm.home', {}, {location: 'replace'});
         var deregister = $rootScope.$on('$stateChangeSuccess', function() {
           $ionicViewService.clearHistory();
           deregister();
@@ -138,9 +194,9 @@ actionCenterMobile.run(function(
       acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME);
 
     if (completedWelcome) {
-      $state.go(acmUserDefaults.hasReceivedAction() ? 'home' : 'post_intro');
+      $state.go(acmUserDefaults.hasReceivedAction() ? 'acm.home' : 'acm.homeTabs.action');
     } else {
-      $state.go('welcome');
+      $state.go('acm.welcome');
     }
   });
 });

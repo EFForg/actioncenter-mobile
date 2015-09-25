@@ -42,7 +42,7 @@ var PushNotificationService = function(
           // handler here.
           window.plugin.notification.local.onclick = function(id, state, json) {
             if (id === pushConstants.PUSH_RECEIVED_FOREGROUND_NOTIFICATION_ID) {
-              $state.go('home', {}, {reload: true});
+              $state.go('acm.home', {}, {reload: true});
             }
           };
         }

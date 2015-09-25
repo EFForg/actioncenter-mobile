@@ -1,0 +1,10 @@
+<div class="post-intro">
+  <div class="vertical-center">
+    <ion-list>
+      <ion-item ng-repeat="newsItem in data.newsItems">
+        <h3>{{newsItem.title}}</h3>
+        <p>{{newsItem.creator.text}}</p>
+      </ion-item>
+    </ion-list>
+  </div>
+</div>

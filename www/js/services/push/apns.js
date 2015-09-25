@@ -38,7 +38,7 @@ var APNSNotificationService = function($state, $cordovaPush, acmPushNotification
       acmPushNotificationHelpers.updateUserDefaults(notification);
 
       if (isInForeground) {
-        $state.go('home', {}, {reload: true});
+        $state.go('acm.home', {}, {reload: true});
       } else {
         angular.forEach(handlerLookup, function(handler, key) {
           if (!angular.isUndefined(notification[key])) {
