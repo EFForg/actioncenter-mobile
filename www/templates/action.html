@@ -1,11 +1,14 @@
-<div class="post-intro">
-  <div class="vertical-center">
+<ion-view>
+  <ion-nav-buttons side="right">
+      <a class="button icon ion-navicon"></a>
+  </ion-nav-buttons>
+  <ion-content>
     <ion-list show-delete="true">
-      <ion-item ng-repeat="actionItem in data.actionItems">
+      <ion-item ng-repeat="actionItem in data.actionItems" class="item-button-right">
         <h3>{{actionItem.title}}</h3>
-        <ion-delete-button class="ion-close"
+        <ion-delete-button class="ion-close">
         </ion-delete-button>
       </ion-item>
     </ion-list>
-  </div>
-</div>
+  </ion-content>
+</ion-view>
