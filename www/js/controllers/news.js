@@ -24,6 +24,18 @@ var NewsCtrl = function($scope, $http, x2js) {
     }
   }
 
+  $scope.toggleItem = function(item){
+        if ($scope.isItemShown(item)){
+            $scope.shownItem = null;
+        } else {
+            $scope.shownItem = item;
+        }
+  };
+
+  $scope.isItemShown = function(item){
+        return $scope.shownItem === item;
+  };
+
 }
 
 module.exports = NewsCtrl;
