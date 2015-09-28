@@ -3,10 +3,11 @@
       <a class="button icon ion-navicon"></a>
   </ion-nav-buttons>
   <ion-content>
-    <ion-list show-delete="true">
-      <ion-item ng-repeat="actionItem in data.actionItems" class="item-button-right">
+    <ion-list show-delete="false">
+      <ion-item ng-repeat="actionItem in data.actionItems" ng-click="showActionModal(actionItem)">
         <h3>{{actionItem.title}}</h3>
-        <ion-delete-button class="ion-close">
+        <p>{{actionItem.updated | date:'shortDate'}}</p>
+        <ion-delete-button class="button ion-close" ng-click="deleteItem()">
         </ion-delete-button>
       </ion-item>
     </ion-list>

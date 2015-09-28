@@ -15,6 +15,15 @@ var NewsCtrl = function($scope, $http, x2js) {
       $scope.data.newsItems = json.rss.channel.item;
   });
 
+  $scope.getSubheader = function(newsItem){
+    if (angular.isDefined(newsItem.category)){
+      return newsItem.creator.__text + ' - ' + newsItem.category.__text;
+    }
+    else {
+      return newsItem.creator.__text;
+    }
+  }
+
 }
 
 module.exports = NewsCtrl;
