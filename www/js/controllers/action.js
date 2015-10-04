@@ -28,6 +28,10 @@ var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading) {
     });
   }
 
+  $scope.toggleShareButtons = function(){
+    $scope.showShareButtons = !!!$scope.showShareButtons;
+  }
+
   $scope.deleteItem = function(){
   }
 

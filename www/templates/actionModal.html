@@ -8,8 +8,8 @@
         <span ng-bind-html="data.actionItem.summary.__text"></span>
       </label>
       <button class="button button-full button-assertive" ng-click="goToUrl(data.actionItem.link._href)">Take Action</button>
-      <button class="button button-full button-assertive" ng-click="closeModal()">Share This Action</button>
-      <div class="button-bar bar-assertive">
+      <button class="button button-full button-assertive" ng-class="{'active': showShareButtons}" ng-click="toggleShareButtons()">Share This Action</button>
+      <div class="button-bar bar-assertive" ng-if="showShareButtons">
         <a class="button icon ion-social-twitter"></a>
         <a class="button icon ion-social-facebook"></a>
         <a class="button icon ion-social-googleplus"></a>
