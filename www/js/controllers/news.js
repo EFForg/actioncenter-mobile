@@ -3,12 +3,14 @@
  *
  */
 
-var NewsCtrl = function($scope, $http, x2js) {
+var NewsCtrl = function($scope, $http, x2js, $ionicLoading) {
 
+  $ionicLoading.show({template: '<ion-spinner icon="ripple" class="spinner-energized"></ion-spinner>', noBackdrop: true, hideOnStateChange: true});
   $http.get('https://www.eff.org/rss/updates.xml', {
       cache: false,
   })
   .then(function(response) {
+      $ionicLoading.hide();
       $scope.data = {};
       var xmlDoc = x2js.parseXmlString(response.data);
       var json = x2js.xml2json(xmlDoc);
