@@ -1,15 +1,14 @@
 <ion-view>
   <ion-nav-buttons side="right">
-      <a class="button icon ion-navicon"></a>
+      <a class="button icon ion-android-more-vertical"></a>
   </ion-nav-buttons>
   <ion-content>
-    <ion-list show-delete="false">
-      <ion-item ng-repeat="actionItem in data.actionItems" ng-click="showActionModal(actionItem)">
+    <div class="list">
+      <div class="item item-icon-right" ng-repeat="actionItem in data.actionItems" stop-event="click" ng-click="showActionModal(actionItem)">
         <h3>{{actionItem.title}}</h3>
         <p>{{actionItem.updated | date:'shortDate'}}</p>
-        <ion-delete-button class="button ion-close" ng-click="deleteItem()">
-        </ion-delete-button>
-      </ion-item>
-    </ion-list>
+        <i class="icon ion-close" ion-stop-event="click" ng-click="showDeletePopup()"></i>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

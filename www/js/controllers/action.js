@@ -3,7 +3,7 @@
  *
  */
 
-var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading) {
+var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading, $ionicPopup) {
 
   $ionicLoading.show({template: '<ion-spinner icon="ripple" class="spinner-energized"></ion-spinner>', noBackdrop: true, hideOnStateChange: true});
   $http.get('https://act.eff.org/action.atom', {
@@ -32,7 +32,24 @@ var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading) {
     $scope.showShareButtons = !!!$scope.showShareButtons;
   }
 
-  $scope.deleteItem = function(){
+  $scope.showDeletePopup = function(){
+    var myPopup = $ionicPopup.show({
+      title: 'Are you sure?',
+      buttons: [
+        { text: 'Cancel',
+          onTap: function(){return false;}
+        },
+        {
+          text: 'Remove',
+          type: 'button-assertive',
+          onTap: function(){return true;}
+        }
+      ]
+    }).then(function(res){
+      if (res){
+        // TODO: Add code for deleting actions
+      }
+    });
   }
 
 }
