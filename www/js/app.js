@@ -125,7 +125,8 @@ actionCenterMobile.config(function ($stateProvider) {
       url: '/more',
       views: {
         'more-tab' :{
-          templateUrl: 'ng_partials/more.html'
+          templateUrl: 'ng_partials/more.html',
+          controller: 'MoreCtrl'
         }
       }
     }
