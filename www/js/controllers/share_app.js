@@ -5,12 +5,12 @@
  * see it after completing the welcome carousel
  */
 
-var ShareAppCtrl = function($scope, $ionicViewService, $cordovaAppAvailability, acmSharing, acmUserDefaults) {
+var ShareAppCtrl = function($scope, $ionicHistory, $cordovaAppAvailability, acmSharing, acmUserDefaults) {
 
   // Clear the history stack when the user first gets here from the welcome carousel, so that they
   // can't use the back button on Android to return to the carousel.
   if ($scope.$viewHistory.backView && $scope.$viewHistory.backView.stateName === 'welcome') {
-    $ionicViewService.clearHistory();
+    $ionicHistory.clearHistory();
   }
 
   // NOTE: we use the default iOS share icon on both platforms, sorry!

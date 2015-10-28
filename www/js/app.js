@@ -143,7 +143,7 @@ actionCenterMobile.config(function ($stateProvider) {
 });
 
 actionCenterMobile.run(function(
-  $rootScope, $state, $ionicViewService, $ionicPlatform, acmPushNotification, acmUserDefaults) {
+  $rootScope, $state, $ionicHistory, $ionicPlatform, acmPushNotification, acmUserDefaults) {
 
   var registerForPush = function() {
     var platform = ionic.Platform.platform().toUpperCase();
@@ -164,7 +164,7 @@ actionCenterMobile.run(function(
       if (acmUserDefaults.hasReceivedAction() && $state.current.name !== 'acm.home') {
         $state.go('acm.home', {}, {location: 'replace'});
         var deregister = $rootScope.$on('$stateChangeSuccess', function() {
-          $ionicViewService.clearHistory();
+          $ionicHistory.clearHistory();
           deregister();
         });
       }
