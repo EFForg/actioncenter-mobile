@@ -11,6 +11,9 @@
       EFF Apps
   </author>
   <content src="dist/index.html"/>
+  <allow-navigation href="*.eff.org" />
+  <allow-intent href="*.eff.org" />
+
   <access origin="*"/>
 
   <preference name="webviewbounce"          value="false"/>
