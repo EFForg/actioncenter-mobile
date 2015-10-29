@@ -19,7 +19,7 @@ var WelcomeCarouselCtrl = function($scope, $state, acmUserDefaults) {
 
   $scope.openShareAppPage = function() {
     acmUserDefaults.setUserDefault(acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME, true);
-    $state.go('acm.hometabs.action', undefined, {location:'replace'});
+    $state.go('acm.homeTabs.action', undefined, {location:'replace'});
   };
 
 };
