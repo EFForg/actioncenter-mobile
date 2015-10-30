@@ -16,7 +16,16 @@ var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading, $ioni
       var xmlDoc = x2js.parseXmlString(response.data);
       var json = x2js.xml2json(xmlDoc);
       $scope.data.actionItems = json.feed.entry;
+      $scope.addExtraShareAction();
   });
+
+  $scope.addExtraShareAction = function(){
+    // We add an extra action into those we get from RSS, that encourages the users
+    // to tell their contacts about the app.
+    // TODO: Figure out what this Action should look like.
+    var shareAction = {id: 'SHARE_ACTION', title: 'Share this app!', summary:{__text: "Lorem ipsum."}};
+    $scope.data.actionItems.splice(0, 2, shareAction);
+  }
 
   $scope.showActionModal = function(actionItem){
     $scope.data.actionItem = actionItem;
