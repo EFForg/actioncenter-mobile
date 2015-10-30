@@ -16,7 +16,8 @@ var UserDefaultsService = function () {
       ACTION_TITLE: 'mostRecentActionTitle',
       ACTION: 'mostRecentAction',
       ACTION_URL: 'mostRecentActionURL',
-      REGISTERED_FOR_PUSH: 'registeredForPush'
+      REGISTERED_FOR_PUSH: 'registeredForPush',
+      DELETED_ACTIONS: 'deletedActions'
     }),
 
     keyLookup: undefined,

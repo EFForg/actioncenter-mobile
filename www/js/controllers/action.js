@@ -3,15 +3,16 @@
  *
  */
 
-var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading, $ionicPopup) {
+var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading, $ionicPopup, acmSharing, acmUserDefaults) {
 
+  $scope.data = {};
+  $scope.data.deletedActions = acmUserDefaults.getUserDefault(acmUserDefaults.keys.DELETED_ACTIONS) || {};
   $ionicLoading.show({template: '<ion-spinner icon="ripple" class="spinner-energized"></ion-spinner>', noBackdrop: true, hideOnStateChange: true});
   $http.get('https://act.eff.org/action.atom', {
       cache: false,
   })
   .then(function(response) {
       $ionicLoading.hide();
-      $scope.data = {};
       var xmlDoc = x2js.parseXmlString(response.data);
       var json = x2js.xml2json(xmlDoc);
       $scope.data.actionItems = json.feed.entry;
@@ -32,7 +33,12 @@ var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading, $ioni
     $scope.showShareButtons = !!!$scope.showShareButtons;
   }
 
-  $scope.showDeletePopup = function(){
+  $scope.deleteAction = function(actionId){
+    $scope.data.deletedActions[actionId] = true;
+    acmUserDefaults.setUserDefault(acmUserDefaults.keys.DELETED_ACTIONS, $scope.data.deletedActions);
+  }
+
+  $scope.showDeletePopup = function(action){
     var myPopup = $ionicPopup.show({
       title: 'Are you sure?',
       buttons: [
@@ -47,7 +53,7 @@ var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading, $ioni
       ]
     }).then(function(res){
       if (res){
-        // TODO: Add code for deleting actions
+        $scope.deleteAction(action.id);
       }
     });
   }
