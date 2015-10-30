@@ -58,13 +58,13 @@ actionCenterMobile.config(function ($stateProvider) {
     {
       name: 'acm',
       url: '/acm',
-      template: '<div ui-view></div>',
+      template: '<ion-nav-bar class="bar-assertive"></ion-nav-bar><div ui-view></div>',
       abstract: true,
       controller: 'ActionCenterCtrl'
     },
 
     {
-      name: 'acm.welcome',
+      name: 'welcome',
       url: '/welcome',
       templateUrl: 'ng_partials/welcome/welcome_carousel.html',
       controller: 'WelcomeCarouselCtrl'
@@ -197,7 +197,7 @@ actionCenterMobile.run(function(
     if (completedWelcome) {
       $state.go(acmUserDefaults.hasReceivedAction() ? 'acm.home' : 'acm.homeTabs.action');
     } else {
-      $state.go('acm.welcome');
+      $state.go('welcome');
     }
   });
 });
