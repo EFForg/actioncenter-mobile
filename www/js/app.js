@@ -58,7 +58,7 @@ actionCenterMobile.config(function ($stateProvider) {
     {
       name: 'acm',
       url: '/acm',
-      template: '<ion-nav-bar class="bar-assertive"></ion-nav-bar><div ui-view></div>',
+      templateUrl: 'ng_partials/base.html',
       abstract: true,
       controller: 'ActionCenterCtrl'
     },

@@ -342,3 +342,15 @@ button.transparent {
 .list .item.item-accordion.ng-hide-remove {
     display: block !important;
 }
+
+.resize-images {
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.title-image {
+    float: left;
+    max-height: 100%;
+}
