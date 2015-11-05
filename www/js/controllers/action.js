@@ -3,7 +3,7 @@
  *
  */
 
-var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading, $ionicPopup, acmSharing, acmUserDefaults) {
+var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading, $ionicPopup, acmSharing, acmUserDefaults, $cordovaAppAvailability) {
 
   $scope.data = {};
   $scope.data.deletedActions = acmUserDefaults.getUserDefault(acmUserDefaults.keys.DELETED_ACTIONS) || {};
@@ -23,7 +23,12 @@ var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading, $ioni
     // We add an extra action into those we get from RSS, that encourages the users
     // to tell their contacts about the app.
     // TODO: Figure out what this Action should look like.
-    var shareAction = {id: 'SHARE_ACTION', title: 'Share this app!', summary:{__text: "Lorem ipsum."}};
+    var shareAction = {
+      id: 'SHARE_ACTION',
+      title: 'Share this app!',
+      link: {__href: 'https://act.eff.org/'},
+      summary: {__text: "Help us spread the word about this app."}
+    };
     $scope.data.actionItems.splice(0, 2, shareAction);
   }
 
@@ -66,6 +71,69 @@ var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading, $ioni
       }
     });
   }
+
+  // NOTE: we use the default iOS share icon on both platforms, sorry!
+  $scope.shareServices = [
+    {name: 'EMAIL', displayName: 'Email', cssClass: 'ion-ios-email-outline'},
+    {name: 'SMS', displayName: 'SMS', cssClass: 'ion-ios-chatbubble-outline'},
+    {name: 'TWITTER', displayName: 'Twitter', cssClass: 'ion-social-twitter-outline'},
+    {name: 'FACEBOOK', displayName: 'Facebook', cssClass: 'ion-social-facebook-outline'},
+    {name: 'OTHER', displayName: 'Other', cssClass: 'ion-ios-upload-outline'}
+  ];
+
+  // This makes a couple of assumptions:
+  //   * email support is always available
+  //   * sms is always available - it's a pain to check this on Android, although is possible on iOS
+  //     (check tel://), so for now, assume available.
+  $scope.appAvailabilityChecks = {
+    'IOS': {
+      'TWITTER': 'twitter://',
+      'FACEBOOK': 'fb://'
+    },
+    'ANDROID': {
+      'TWITTER': 'com.twitter.android',
+      'FACEBOOK': 'com.facebook.katana'
+    }
+  };
+
+  $scope.serviceAvailability = {
+    'SMS': true,
+    'EMAIL': true,
+    'TWITTER': false,
+    'FACEBOOK': false,
+    'OTHER': true
+  };
+
+  $scope.deviceSupportsShareService = function(service) {
+    var platform = ionic.Platform.platform().toUpperCase();
+
+    var appAvailabilityByPlatform = $scope.appAvailabilityChecks[platform];
+    // Make the function no-op for services we can't check
+    if (appAvailabilityByPlatform !== undefined && appAvailabilityByPlatform[service] !== undefined) {
+      $cordovaAppAvailability
+        .check($scope.appAvailabilityChecks[platform][service])
+        .then(function() {
+          $scope.serviceAvailability[service] = true;
+        },
+        function() {
+          $scope.serviceAvailability[service] = false;
+        });
+    } else {
+      $scope.serviceAvailability[service] = false;
+    }
+  };
+
+  // The service checks appear instantaneous (tested on a Nexus 4), so just do them inline each time
+  $scope.deviceSupportsShareService('TWITTER');
+  $scope.deviceSupportsShareService('FACEBOOK');
+
+  $scope.shareApp = function(service) {
+    acmSharing.shareApp(service);
+  };
+
+  $scope.shareAction = function(action, service) {
+    acmSharing.shareAction(action, service);
+  };
 
 }
 

@@ -36,7 +36,6 @@ actionCenterMobile.config(function($ionicConfigProvider) {
 
 actionCenterMobile.controller('ActionCenterCtrl', require('./controllers/actionCenter'));
 actionCenterMobile.controller('WelcomeCarouselCtrl', require('./controllers/welcome_carousel'));
-actionCenterMobile.controller('ShareAppCtrl', require('./controllers/share_app'));
 actionCenterMobile.controller('ActionCtrl', require('./controllers/action'));
 actionCenterMobile.controller('NewsCtrl', require('./controllers/news'));
 actionCenterMobile.controller('MoreCtrl', require('./controllers/more'));
@@ -71,24 +70,10 @@ actionCenterMobile.config(function ($stateProvider) {
     },
 
     {
-      name: 'acm.post_intro',
-      url: '/post_intro',
-      templateUrl: 'ng_partials/post_intro.html',
-      controller: 'ShareAppCtrl'
-     },
-
-    {
       name: 'acm.home',
       url: '/home',
       templateUrl: 'ng_partials/home.html',
       controller: 'HomeCtrl'
-    },
-
-    {
-      name: 'acm.share_app',
-      url: '/share_app',
-      templateUrl: 'ng_partials/post_intro.html',
-      controller: 'ShareAppCtrl'
     },
 
     {
