@@ -358,3 +358,10 @@ button.transparent {
     float: left;
     max-height: 100%;
 }
+
+.tab-item.noIcon {
+    padding-top: 15px;
+    .tab-title {
+        font-size: 150%;
+    }
+}
