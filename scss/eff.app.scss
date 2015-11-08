@@ -4,6 +4,10 @@
 
 $ionicons-font-path: "../assets/fonts" !default;
 
+// Overriding Ionic's assertive color to be EFF Red
+$eff-red: #f90000;
+$assertive: $eff-red;
+
 @import "../bower_components/ionic/scss/ionic";
 @import "./fonts";
 
