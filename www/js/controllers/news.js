@@ -5,7 +5,7 @@
 
 var NewsCtrl = function($scope, $http, x2js, $ionicLoading) {
 
-  $ionicLoading.show({template: '<ion-spinner icon="ripple" class="spinner-energized"></ion-spinner>', noBackdrop: true, hideOnStateChange: true});
+  $ionicLoading.show({template: '<ion-spinner icon="ripple" class="spinner-assertive"></ion-spinner>', noBackdrop: true, hideOnStateChange: true});
   $http.get('https://www.eff.org/rss/updates.xml', {
       cache: false,
   })
@@ -15,6 +15,9 @@ var NewsCtrl = function($scope, $http, x2js, $ionicLoading) {
       var xmlDoc = x2js.parseXmlString(response.data);
       var json = x2js.xml2json(xmlDoc);
       $scope.data.newsItems = json.rss.channel.item;
+      angular.forEach($scope.data.newsItems, function(item){
+        item.description = item.description.replace(/img src="\//g, 'img src="http://eff.org/');
+      })
   });
 
   $scope.getSubheader = function(newsItem){

@@ -7,7 +7,7 @@ var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading, $ioni
 
   $scope.data = {};
   $scope.data.deletedActions = acmUserDefaults.getUserDefault(acmUserDefaults.keys.DELETED_ACTIONS) || {};
-  $ionicLoading.show({template: '<ion-spinner icon="ripple" class="spinner-energized"></ion-spinner>', noBackdrop: true, hideOnStateChange: true});
+  $ionicLoading.show({template: '<ion-spinner icon="ripple" class="spinner-assertive"></ion-spinner>', noBackdrop: true, hideOnStateChange: true});
   $http.get('https://act.eff.org/action.atom', {
       cache: false,
   })
