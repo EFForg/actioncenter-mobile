@@ -17,6 +17,9 @@ var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading, $ioni
       var json = x2js.xml2json(xmlDoc);
       $scope.data.actionItems = json.feed.entry;
       $scope.addExtraShareAction();
+  }, function (response) {
+    // Action feed failed to load.
+    $ionicLoading.hide();
   });
 
   $scope.addExtraShareAction = function(){

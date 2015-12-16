@@ -18,6 +18,9 @@ var NewsCtrl = function($scope, $http, x2js, $ionicLoading) {
       angular.forEach($scope.data.newsItems, function(item){
         item.description = item.description.replace(/img src="\//g, 'img src="http://eff.org/');
       })
+  }, function (response) {
+    // News feed failed to load.
+    $ionicLoading.hide();
   });
 
   $scope.getSubheader = function(newsItem){
