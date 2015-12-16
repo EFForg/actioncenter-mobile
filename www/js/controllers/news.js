@@ -16,7 +16,7 @@ var NewsCtrl = function($scope, $http, x2js, $ionicLoading) {
       var json = x2js.xml2json(xmlDoc);
       $scope.data.newsItems = json.rss.channel.item;
       angular.forEach($scope.data.newsItems, function(item){
-        item.description = item.description.replace(/img src="\//g, 'img src="http://eff.org/');
+        item.description = item.description.replace(/img src="\//g, 'img src="https://www.eff.org/');
       })
   }, function (response) {
     // News feed failed to load.
