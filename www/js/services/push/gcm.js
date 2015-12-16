@@ -7,10 +7,10 @@ var angular = require('angular');
 var constants = require('./constants');
 
 
-var GCMNotificationService = function(
+var GCMNotificationService = function (
   $state, $cordovaLocalNotification, acmUserDefaults, acmAPI, acmPushNotificationHelpers) {
 
-  var handleMessage = function(e) {
+  var handleMessage = function (e) {
     var isForeground = e.foreground;
 
     acmPushNotificationHelpers.updateUserDefaults(e.payload);
@@ -43,16 +43,16 @@ var GCMNotificationService = function(
   };
 
   var handlerLookup = {
-    'registered': function(e) {
+    'registered': function (e) {
       acmPushNotificationHelpers.registerDeviceId(e.regid);
     },
     'message': handleMessage
   };
 
   return {
-    handleNotification: function(e) {
+    handleNotification: function (e) {
 
-      var error = function(err) {
+      var error = function (err) {
         console.error('GCM error received: ' + err.msg);
         // Not a lot that can be done here
       };
@@ -61,17 +61,17 @@ var GCMNotificationService = function(
       (handlerLookup[e.event] || error)(e);
     },
 
-    registrationSuccess: function(event) {
+    registrationSuccess: function (event) {
       // No-op, as the registration is handled via the event interface
       // NOTE: this doesn't actually indicate that the device registered remotely, it will fire even
       //       if the device is in airplane mode etc.
     },
 
-    registrationError: function(err) {
+    registrationError: function (err) {
       console.error('Unable to register for GCM push: ' + err);
     }
 
-  }
+  };
 
 };
 

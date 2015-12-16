@@ -17,22 +17,22 @@ var APIService = function ($http, acmDeviceLanguage) {
   /**
    * Wrapper function to support retrying failing API calls.
    */
-  var retryWrapper = function(apiCall, args, success, error) {
+  var retryWrapper = function (apiCall, args, success, error) {
     var retryAttempts = 0;
-    var wrappedCall = function() {
+    var wrappedCall = function () {
 
       apiCall.apply(this, args)
         .success(success)
-        .error(function(data, status, headers, config) {
+        .error(function (data, status, headers, config) {
           retryAttempts++;
           if (retryAttempts <= MAX_RETRIES) {
-            setTimeout(function() {
+            setTimeout(function () {
               wrappedCall();
             }, RETRY_BACKOFF);
           } else {
             error(data, status, headers, config);
           }
-        })
+        });
 
     };
 
@@ -48,9 +48,9 @@ var APIService = function ($http, acmDeviceLanguage) {
      * @param success
      * @param error
      */
-    registerDeviceForNotifications: function(deviceId, success, error) {
+    registerDeviceForNotifications: function (deviceId, success, error) {
 
-      var registerDevice = function(language) {
+      var registerDevice = function (language) {
         var params = {
           'channel': ionic.Platform.platform().toUpperCase() === 'ANDROID' ? 'GCM' : 'APNS',
           'deviceId': deviceId,
@@ -70,7 +70,7 @@ var APIService = function ($http, acmDeviceLanguage) {
     /**
      * Sends a stack trace to the backend,
      */
-    reportError: function(err) {
+    reportError: function (err) {
       try {
         var url = sprintf(
           '%s/%s/errors', appSettings['API']['ENDPOINT'], appSettings['API']['VERSION']);

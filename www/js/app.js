@@ -16,11 +16,11 @@ var actionCenterMobile = angular.module('acm', ['ionic', 'ngCordova', 'xml']);
  * at acting on application errors, this handler captures any that bubble all the way up to window
  * and passes them to an error bus function to pipe them to the backend.
  */
-actionCenterMobile.factory('$exceptionHandler', function($injector, $log) {
+actionCenterMobile.factory('$exceptionHandler', function ($injector, $log) {
 
   var acmAPI;
 
-  return function(exception, cause) {
+  return function (exception, cause) {
     acmAPI = acmAPI || $injector.get('acmAPI');
     acmAPI.reportError(exception);
     $log.error(exception, cause);
@@ -28,11 +28,11 @@ actionCenterMobile.factory('$exceptionHandler', function($injector, $log) {
 
 });
 
-actionCenterMobile.config(function($ionicConfigProvider) {
-    $ionicConfigProvider
+actionCenterMobile.config(function ($ionicConfigProvider) {
+  $ionicConfigProvider
     .tabs.position('top')
     .style('striped');
-})
+});
 
 actionCenterMobile.controller('ActionCenterCtrl', require('./controllers/actionCenter'));
 actionCenterMobile.controller('WelcomeCarouselCtrl', require('./controllers/welcome_carousel'));
@@ -97,7 +97,7 @@ actionCenterMobile.config(function ($stateProvider) {
     {
       name: 'acm.homeTabs.news',
       url: '/news',
-        views: {
+      views: {
           'news-tab' :{
             templateUrl: 'ng_partials/news.html',
             controller: 'NewsCtrl',
@@ -127,14 +127,14 @@ actionCenterMobile.config(function ($stateProvider) {
   //  * it causes a load of the page by default prior to the routing logic in run() kicking in
 });
 
-actionCenterMobile.run(function(
+actionCenterMobile.run(function (
   $rootScope, $state, $ionicHistory, $ionicPlatform, acmPushNotification, acmUserDefaults) {
 
-  var registerForPush = function() {
+  var registerForPush = function () {
     var platform = ionic.Platform.platform().toUpperCase();
 
     if (window.plugins !== undefined &&
-        appSettings['APP']['PUSH_CAPABLE_PLATFORMS'].indexOf(platform) != -1) {
+        appSettings['APP']['PUSH_CAPABLE_PLATFORMS'].indexOf(platform) !== -1) {
       acmPushNotification.register();
     }
   };
@@ -144,11 +144,11 @@ actionCenterMobile.run(function(
     // Listen to the resume event - this is fired when the app re-enters the foreground
     // There's an edge case where a user gets a notification, but doesn't click it, where they're
     // not directed to the action page on app re-open.
-    document.addEventListener('resume', function() {
+    document.addEventListener('resume', function () {
 
       if (acmUserDefaults.hasReceivedAction() && $state.current.name !== 'acm.home') {
         $state.go('acm.home', {}, {location: 'replace'});
-        var deregister = $rootScope.$on('$stateChangeSuccess', function() {
+        var deregister = $rootScope.$on('$stateChangeSuccess', function () {
           $ionicHistory.clearHistory();
           deregister();
         });

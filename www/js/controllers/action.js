@@ -3,26 +3,26 @@
  *
  */
 
-var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading, $ionicPopup, acmSharing, acmUserDefaults, $cordovaAppAvailability) {
+var ActionCtrl = function ($scope, $http, x2js, $ionicModal, $ionicLoading, $ionicPopup, acmSharing, acmUserDefaults, $cordovaAppAvailability) {
 
   $scope.data = {};
   $scope.data.deletedActions = acmUserDefaults.getUserDefault(acmUserDefaults.keys.DELETED_ACTIONS) || {};
   $ionicLoading.show({template: '<ion-spinner icon="ripple" class="spinner-assertive"></ion-spinner>', noBackdrop: true, hideOnStateChange: true});
   $http.get('https://act.eff.org/action.atom', {
-      cache: false,
+    cache: false,
   })
-  .then(function(response) {
-      $ionicLoading.hide();
-      var xmlDoc = x2js.parseXmlString(response.data);
-      var json = x2js.xml2json(xmlDoc);
-      $scope.data.actionItems = json.feed.entry;
-      $scope.addExtraShareAction();
+  .then(function (response) {
+    $ionicLoading.hide();
+    var xmlDoc = x2js.parseXmlString(response.data);
+    var json = x2js.xml2json(xmlDoc);
+    $scope.data.actionItems = json.feed.entry;
+    $scope.addExtraShareAction();
   }, function (response) {
     // Action feed failed to load.
     $ionicLoading.hide();
   });
 
-  $scope.addExtraShareAction = function(){
+  $scope.addExtraShareAction = function () {
     // We add an extra action into those we get from RSS, that encourages the users
     // to tell their contacts about the app.
     // TODO: Figure out what this Action should look like.
@@ -30,50 +30,50 @@ var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading, $ioni
       id: 'SHARE_ACTION',
       title: 'Share this app!',
       link: {__href: 'https://act.eff.org/'},
-      summary: {__text: "Help us spread the word about this app."}
+      summary: {__text: 'Help us spread the word about this app.'}
     };
     $scope.data.actionItems.splice(0, 2, shareAction);
-  }
+  };
 
-  $scope.showActionModal = function(actionItem){
+  $scope.showActionModal = function (actionItem) {
     $scope.data.actionItem = actionItem;
     $ionicModal.fromTemplateUrl('templates/actionModal.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-    }).then(function(modal) {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function (modal) {
       $scope.modal = modal;
       modal.show();
     });
-  }
+  };
 
-  $scope.toggleShareButtons = function(){
+  $scope.toggleShareButtons = function () {
     $scope.showShareButtons = !!!$scope.showShareButtons;
-  }
+  };
 
-  $scope.deleteAction = function(actionId){
+  $scope.deleteAction = function (actionId) {
     $scope.data.deletedActions[actionId] = true;
     acmUserDefaults.setUserDefault(acmUserDefaults.keys.DELETED_ACTIONS, $scope.data.deletedActions);
-  }
+  };
 
-  $scope.showDeletePopup = function(action){
+  $scope.showDeletePopup = function (action) {
     var myPopup = $ionicPopup.show({
       title: 'Are you sure?',
       buttons: [
-        { text: 'Cancel',
-          onTap: function(){return false;}
+        {text: 'Cancel',
+          onTap: function () {return false;}
         },
         {
           text: 'Remove',
           type: 'button-assertive',
-          onTap: function(){return true;}
+          onTap: function () {return true;}
         }
       ]
-    }).then(function(res){
-      if (res){
+    }).then(function (res) {
+      if (res) {
         $scope.deleteAction(action.id);
       }
     });
-  }
+  };
 
   // NOTE: we use the default iOS share icon on both platforms, sorry!
   $scope.shareServices = [
@@ -107,7 +107,7 @@ var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading, $ioni
     'OTHER': true
   };
 
-  $scope.deviceSupportsShareService = function(service) {
+  $scope.deviceSupportsShareService = function (service) {
     var platform = ionic.Platform.platform().toUpperCase();
 
     var appAvailabilityByPlatform = $scope.appAvailabilityChecks[platform];
@@ -115,10 +115,10 @@ var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading, $ioni
     if (appAvailabilityByPlatform !== undefined && appAvailabilityByPlatform[service] !== undefined) {
       $cordovaAppAvailability
         .check($scope.appAvailabilityChecks[platform][service])
-        .then(function() {
+        .then(function () {
           $scope.serviceAvailability[service] = true;
         },
-        function() {
+        function () {
           $scope.serviceAvailability[service] = false;
         });
     } else {
@@ -130,14 +130,14 @@ var ActionCtrl = function($scope, $http, x2js, $ionicModal, $ionicLoading, $ioni
   $scope.deviceSupportsShareService('TWITTER');
   $scope.deviceSupportsShareService('FACEBOOK');
 
-  $scope.shareApp = function(service) {
+  $scope.shareApp = function (service) {
     acmSharing.shareApp(service);
   };
 
-  $scope.shareAction = function(action, service) {
+  $scope.shareAction = function (action, service) {
     acmSharing.shareAction(action, service);
   };
 
-}
+};
 
 module.exports = ActionCtrl;

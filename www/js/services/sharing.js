@@ -14,13 +14,13 @@ var SharingService = function () {
 
   return {
 
-    shareApp: function(service) {
+    shareApp: function (service) {
 
       var shareURL = shareSettings['URL'];
       var shareMessage = shareSettings['MESSAGES'][service] || DEFAULT_SHARE_APP_MSG;
 
       if (angular.isObject(shareMessage)) {
-        angular.forEach(shareMessage, function(val, key) {
+        angular.forEach(shareMessage, function (val, key) {
           shareMessage[key] = sprintf(val, shareURL);
         });
       } else {
@@ -48,7 +48,7 @@ var SharingService = function () {
       }
     },
 
-    shareAction: function(action, service) {
+    shareAction: function (action, service) {
       var shareURL = action.link._href;
       var shareMessage = action.summary.__text;
 

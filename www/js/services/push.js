@@ -9,12 +9,12 @@ var appSettings = require('../../build/app_settings');
 var pushConstants = require('./push/constants');
 
 
-var PushNotificationService = function(
+var PushNotificationService = function (
   $rootScope, $state, $cordovaPush, acmGCMPushNotification, acmAPNSPushNotification) {
 
   var service = {
 
-    getPlatformPushService_: function(devicePlatform) {
+    getPlatformPushService_: function (devicePlatform) {
       if (devicePlatform === 'ANDROID') {
         return acmGCMPushNotification;
       } else if (devicePlatform === 'IOS') {
@@ -25,9 +25,9 @@ var PushNotificationService = function(
     /**
      * Register the device with the notification backend.
      */
-    register: function() {
+    register: function () {
       var platform = ionic.Platform.platform().toUpperCase();
-      var devicePushHandler = this.getPlatformPushService_(platform)
+      var devicePushHandler = this.getPlatformPushService_(platform);
       if (!angular.isUndefined(devicePushHandler)) {
         var pushConfig = appSettings['CREDENTIALS'][platform];
 
@@ -40,7 +40,7 @@ var PushNotificationService = function(
         } else if (platform === 'ANDROID') {
           // Android uses the local notification interface to pop up notifications, so register the click
           // handler here.
-          window.plugin.notification.local.onclick = function(id, state, json) {
+          window.plugin.notification.local.onclick = function (id, state, json) {
             if (id === pushConstants.PUSH_RECEIVED_FOREGROUND_NOTIFICATION_ID) {
               $state.go('acm.home', {}, {reload: true});
             }
@@ -57,7 +57,7 @@ var PushNotificationService = function(
      *
      * @param {*} event The push notification event.
      */
-    handlePushNotification: function(event) {
+    handlePushNotification: function (event) {
       var devicePlatform = ionic.Platform.platform().toUpperCase();
       this.getPlatformPushService_(devicePlatform).handleNotification(event);
     }
@@ -67,7 +67,7 @@ var PushNotificationService = function(
   /**
    * Listen to push notification events from the event bus.
    */
-  $rootScope.$on('pushNotificationReceived', function(event, pushEvent) {
+  $rootScope.$on('pushNotificationReceived', function (event, pushEvent) {
     service.handlePushNotification(pushEvent);
   });
 
