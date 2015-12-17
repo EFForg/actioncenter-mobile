@@ -16,7 +16,8 @@ var NewsCtrl = function ($scope, $http, x2js, $ionicLoading) {
     var json = x2js.xml2json(xmlDoc);
     $scope.data.newsItems = json.rss.channel.item;
     angular.forEach($scope.data.newsItems, function (item) {
-      item.description = item.description.replace(/ src="\//g, ' src="https://www.eff.org/');
+      item.description = item.description.replace(/ src="\//g, ' src="https://www.eff.org/')
+        .concat('<img src="https://anon-stats.eff.org/piwik.php?idsite=1&amp;rec=1&amp;action_name=Mobile%20app%20news%20tab&amp;url=' + encodeURIComponent(item.link) + '" />');
     });
   }, function (response) {
     // News feed failed to load.
