@@ -338,6 +338,24 @@ button.transparent {
     //transition: 0.09s all linear;
 }
 
+/**
+ * News item styling.
+ */
+[name="news-tab"] .list {
+  img {
+    max-width: 100%;
+  }
+  .item {
+    border-width: 1px 1px 0;
+  }
+  .item h3 {
+    white-space: normal;
+  }
+  .item.ion-accordion.item-body {
+    border-width: 0;
+  }
+}
+
 .list .item.item-accordion.ng-hide {
     line-height: 0px;
 }
