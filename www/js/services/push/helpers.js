@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 
-var PushHelpersService = function(acmUserDefaults, acmAPI) {
+var PushHelpersService = function (acmUserDefaults, acmAPI) {
 
   var defaultsPayloadArr = [
     ['title', acmUserDefaults.keys.ACTION_TITLE],
@@ -13,14 +13,14 @@ var PushHelpersService = function(acmUserDefaults, acmAPI) {
     ['url', acmUserDefaults.keys.ACTION_URL],
   ];
   var defaultsPayloadMap = {};
-  angular.forEach(defaultsPayloadArr, function(arr) {
+  angular.forEach(defaultsPayloadArr, function (arr) {
     defaultsPayloadMap[arr[0]] = arr[1];
   });
 
   return {
 
-    updateUserDefaults: function(payload) {
-      angular.forEach(defaultsPayloadMap, function(userDefaultsKey, payloadKey) {
+    updateUserDefaults: function (payload) {
+      angular.forEach(defaultsPayloadMap, function (userDefaultsKey, payloadKey) {
         if (!angular.isUndefined(payload[payloadKey])) {
           console.log('setting ' + userDefaultsKey);
           acmUserDefaults.setUserDefault(userDefaultsKey, payload[payloadKey]);
@@ -28,12 +28,12 @@ var PushHelpersService = function(acmUserDefaults, acmAPI) {
       });
     },
 
-    registerDeviceId: function(deviceId) {
-      var success = function() {
+    registerDeviceId: function (deviceId) {
+      var success = function () {
         acmUserDefaults.setUserDefault(acmUserDefaults.REGISTERED_FOR_PUSH, true);
       };
 
-      var error = function(err) {
+      var error = function (err) {
         console.error('Unable to register device with push server: ' + err);
       };
 
@@ -43,7 +43,7 @@ var PushHelpersService = function(acmUserDefaults, acmAPI) {
       acmAPI.registerDeviceForNotifications(deviceId, success, error);
     },
 
-    truncateString: function(string, length) {
+    truncateString: function (string, length) {
       var requiresTruncation = string.length > length;
 
       if (requiresTruncation) {

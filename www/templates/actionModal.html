@@ -1,0 +1,20 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">{{data.actionItem.title}}</h1>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-text-wrap">
+        <span ng-bind-html="data.actionItem.summary.__text"></span>
+      </label>
+      <button class="button button-full button-assertive" ng-click="goToUrl(data.actionItem.link._href)">Take Action</button>
+      <button class="button button-full button-assertive" ng-class="{'active': showShareButtons}" ng-click="toggleShareButtons()">Share This Action</button>
+      <div class="button-bar bar-assertive" ng-if="showShareButtons">
+        <a class="button icon {{service.cssClass}}"
+           ng-repeat="service in shareServices"
+           ng-click="shareAction(data.actionItem, service.name)"
+           ng-show="serviceAvailability[service.name]"></a>
+      </div>
+    </div>
+  </ion-content>
+</ion-modal-view>

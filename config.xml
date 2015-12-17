@@ -11,6 +11,13 @@
       EFF Apps
   </author>
   <content src="dist/index.html"/>
+  <allow-navigation href="https://*.eff.org/*" />
+  <allow-intent href="http://*/*" />
+  <allow-intent href="https://*/*" />
+  <allow-intent href="tel:*" />
+  <allow-intent href="sms:*" />
+  <allow-intent href="mailto:*" />
+
   <access origin="*"/>
 
   <preference name="webviewbounce"          value="false"/>

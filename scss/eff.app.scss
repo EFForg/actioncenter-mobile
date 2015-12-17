@@ -4,6 +4,10 @@
 
 $ionicons-font-path: "../assets/fonts" !default;
 
+// Overriding Ionic's assertive color to be EFF Red
+$eff-red: #f90000;
+$assertive: $eff-red;
+
 @import "../bower_components/ionic/scss/ionic";
 @import "./fonts";
 
@@ -325,4 +329,57 @@ button.transparent {
 .home .button.transparent {
 		width: auto;
 		padding-right:15px;
+}
+
+.list .item.item-accordion {
+    line-height: 1em;
+    padding-top: 0;
+    padding-bottom: 0;
+    //transition: 0.09s all linear;
+}
+
+/**
+ * News item styling.
+ */
+[name="news-tab"] .list {
+  img {
+    max-width: 100%;
+  }
+  .item {
+    border-width: 1px 1px 0;
+  }
+  .item h3 {
+    white-space: normal;
+  }
+  .item.ion-accordion.item-body {
+    border-width: 0;
+  }
+}
+
+.list .item.item-accordion.ng-hide {
+    line-height: 0px;
+}
+
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+    display: block !important;
+}
+
+.resize-images {
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.title-image {
+    float: left;
+    max-height: 100%;
+}
+
+.tab-item.noIcon {
+    padding-top: 15px;
+    .tab-title {
+        font-size: 150%;
+    }
 }

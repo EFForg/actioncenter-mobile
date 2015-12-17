@@ -7,7 +7,7 @@ var angular = require('angular');
 var appSettings = require('../build/app_settings');
 
 
-var actionCenterMobile = angular.module('acm', ['ionic', 'ngCordova']);
+var actionCenterMobile = angular.module('acm', ['ionic', 'ngCordova', 'xml']);
 
 /**
  * Captures application errors and pipes them to the server.
@@ -16,11 +16,11 @@ var actionCenterMobile = angular.module('acm', ['ionic', 'ngCordova']);
  * at acting on application errors, this handler captures any that bubble all the way up to window
  * and passes them to an error bus function to pipe them to the backend.
  */
-actionCenterMobile.factory('$exceptionHandler', function($injector, $log) {
+actionCenterMobile.factory('$exceptionHandler', function ($injector, $log) {
 
   var acmAPI;
 
-  return function(exception, cause) {
+  return function (exception, cause) {
     acmAPI = acmAPI || $injector.get('acmAPI');
     acmAPI.reportError(exception);
     $log.error(exception, cause);
@@ -28,9 +28,17 @@ actionCenterMobile.factory('$exceptionHandler', function($injector, $log) {
 
 });
 
+actionCenterMobile.config(function ($ionicConfigProvider) {
+  $ionicConfigProvider
+    .tabs.position('top')
+    .style('striped');
+});
+
+actionCenterMobile.controller('ActionCenterCtrl', require('./controllers/actionCenter'));
 actionCenterMobile.controller('WelcomeCarouselCtrl', require('./controllers/welcome_carousel'));
-actionCenterMobile.controller('ShareAppCtrl', require('./controllers/share_app'));
-actionCenterMobile.controller('HomeCtrl', require('./controllers/home'));
+actionCenterMobile.controller('ActionCtrl', require('./controllers/action'));
+actionCenterMobile.controller('NewsCtrl', require('./controllers/news'));
+actionCenterMobile.controller('MoreCtrl', require('./controllers/more'));
 
 actionCenterMobile.factory('acmUserDefaults', require('./services/user_defaults'));
 actionCenterMobile.factory('acmAPI', require('./services/api'));
@@ -47,6 +55,14 @@ actionCenterMobile.config(function ($stateProvider) {
   var appStates = [
 
     {
+      name: 'acm',
+      url: '/acm',
+      templateUrl: 'ng_partials/base.html',
+      abstract: true,
+      controller: 'ActionCenterCtrl'
+    },
+
+    {
       name: 'welcome',
       url: '/welcome',
       templateUrl: 'ng_partials/welcome/welcome_carousel.html',
@@ -54,24 +70,50 @@ actionCenterMobile.config(function ($stateProvider) {
     },
 
     {
-      name: 'post_intro',
-      url: '/post_intro',
-      templateUrl: 'ng_partials/post_intro.html',
-      controller: 'ShareAppCtrl'
-    },
-
-    {
-      name: 'share_app',
-      url: '/share_app',
-      templateUrl: 'ng_partials/post_intro.html',
-      controller: 'ShareAppCtrl'
-    },
-
-    {
-      name: 'home',
+      name: 'acm.home',
       url: '/home',
       templateUrl: 'ng_partials/home.html',
       controller: 'HomeCtrl'
+    },
+
+    {
+      name: 'acm.homeTabs',
+      abstract: true,
+      url: '/homeTabs',
+      templateUrl: 'ng_partials/homeTabs.html'
+    },
+
+    {
+      name: 'acm.homeTabs.action',
+      url: '/action',
+      views: {
+        'action-tab' :{
+          templateUrl: 'ng_partials/action.html',
+          controller: 'ActionCtrl',
+        }
+      }
+    },
+
+    {
+      name: 'acm.homeTabs.news',
+      url: '/news',
+      views: {
+          'news-tab' :{
+            templateUrl: 'ng_partials/news.html',
+            controller: 'NewsCtrl',
+          }
+        }
+    },
+
+    {
+      name: 'acm.homeTabs.more',
+      url: '/more',
+      views: {
+        'more-tab' :{
+          templateUrl: 'ng_partials/more.html',
+          controller: 'MoreCtrl'
+        }
+      }
     }
 
   ];
@@ -85,14 +127,14 @@ actionCenterMobile.config(function ($stateProvider) {
   //  * it causes a load of the page by default prior to the routing logic in run() kicking in
 });
 
-actionCenterMobile.run(function(
-  $rootScope, $state, $ionicViewService, $ionicPlatform, acmPushNotification, acmUserDefaults) {
+actionCenterMobile.run(function (
+  $rootScope, $state, $ionicHistory, $ionicPlatform, acmPushNotification, acmUserDefaults) {
 
-  var registerForPush = function() {
+  var registerForPush = function () {
     var platform = ionic.Platform.platform().toUpperCase();
 
     if (window.plugins !== undefined &&
-        appSettings['APP']['PUSH_CAPABLE_PLATFORMS'].indexOf(platform) != -1) {
+        appSettings['APP']['PUSH_CAPABLE_PLATFORMS'].indexOf(platform) !== -1) {
       acmPushNotification.register();
     }
   };
@@ -102,12 +144,12 @@ actionCenterMobile.run(function(
     // Listen to the resume event - this is fired when the app re-enters the foreground
     // There's an edge case where a user gets a notification, but doesn't click it, where they're
     // not directed to the action page on app re-open.
-    document.addEventListener('resume', function() {
+    document.addEventListener('resume', function () {
 
-      if (acmUserDefaults.hasReceivedAction() && $state.current.name !== 'home') {
-        $state.go('home', {}, {location: 'replace'});
-        var deregister = $rootScope.$on('$stateChangeSuccess', function() {
-          $ionicViewService.clearHistory();
+      if (acmUserDefaults.hasReceivedAction() && $state.current.name !== 'acm.home') {
+        $state.go('acm.home', {}, {location: 'replace'});
+        var deregister = $rootScope.$on('$stateChangeSuccess', function () {
+          $ionicHistory.clearHistory();
           deregister();
         });
       }
@@ -138,7 +180,7 @@ actionCenterMobile.run(function(
       acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME);
 
     if (completedWelcome) {
-      $state.go(acmUserDefaults.hasReceivedAction() ? 'home' : 'post_intro');
+      $state.go(acmUserDefaults.hasReceivedAction() ? 'acm.home' : 'acm.homeTabs.action');
     } else {
       $state.go('welcome');
     }

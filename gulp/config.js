@@ -62,7 +62,10 @@ module.exports = {
     jsLibs: [
       path.join(COMPONENTS_DIR, 'ionic/release/js/ionic.bundle.js'),
       path.join(COMPONENTS_DIR, 'ngCordova/dist/ng-cordova.js'),
-      path.join(COMPONENTS_DIR, 'sprintf/src/sprintf.js')
+      path.join(COMPONENTS_DIR, 'sprintf/src/sprintf.js'),
+      path.join(COMPONENTS_DIR, 'x2js/xml2json.js'),
+      path.join(COMPONENTS_DIR, 'angular-xml/angular-xml.js'),
+
     ]
   },
 

@@ -8,3 +8,5 @@ www/dist/*
 www/build/*
 
 *.pyc
+.DS_Store
+resources/

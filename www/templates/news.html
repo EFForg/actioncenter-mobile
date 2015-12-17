@@ -1,0 +1,16 @@
+<ion-view>
+  <ion-nav-buttons side="right">
+      <a class="button icon ion-android-more-vertical" ng-click="openOptionsPopover($event)"></a>
+  </ion-nav-buttons>
+  <ion-content>
+    <ion-list>
+      <ion-item ng-click="toggleItem(newsItem)" ng-repeat-start="newsItem in data.newsItems">
+        <h3>{{newsItem.title}}</h3>
+        <p ng-bind-html="getSubheader(newsItem)"></p>
+      </ion-item>
+      <ion-item class="item item-body ion-accordion" ng-if="isItemShown(newsItem)" ng-repeat-end>
+        <p ng-bind-html="newsItem.description"></p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,14 @@
+<ion-view>
+  <ion-nav-buttons side="right">
+      <a class="button icon ion-android-more-vertical" ng-click="openOptionsPopover($event)"></a>
+  </ion-nav-buttons>
+  <ion-content>
+    <div class="list">
+      <div class="item item-icon-right" ng-repeat="actionItem in data.actionItems" stop-event="click" ng-click="showActionModal(actionItem)" ng-if="!data.deletedActions[actionItem.id]">
+        <h3>{{actionItem.title}}</h3>
+        <p>{{actionItem.updated | date:'shortDate'}}</p>
+        <i class="icon ion-close" ion-stop-event="click" ng-click="showDeletePopup(actionItem)"></i>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
