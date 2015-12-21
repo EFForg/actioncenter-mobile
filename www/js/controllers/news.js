@@ -25,12 +25,7 @@ var NewsCtrl = function ($scope, $http, x2js, $ionicLoading) {
   });
 
   $scope.getSubheader = function (newsItem) {
-    if (angular.isDefined(newsItem.category)) {
-      return newsItem.creator.__text + ' - ' + newsItem.category.__text;
-    }
-    else {
-      return newsItem.creator.__text;
-    }
+    return newsItem.creator.__text;
   };
 
   $scope.toggleItem = function (item) {
