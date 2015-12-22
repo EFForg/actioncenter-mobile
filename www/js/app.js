@@ -52,10 +52,6 @@ actionCenterMobile.config(function ($ionicConfigProvider) {
     .style('striped');
 });
 
-actionCenterMobile.config(function (x2jsProvider) {
-  x2jsProvider.config = { escapeMode: false };
-});
-
 actionCenterMobile.controller('ActionCenterCtrl', require('./controllers/actionCenter'));
 actionCenterMobile.controller('WelcomeCarouselCtrl', require('./controllers/welcome_carousel'));
 actionCenterMobile.controller('ActionCtrl', require('./controllers/action'));
