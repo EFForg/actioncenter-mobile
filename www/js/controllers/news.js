@@ -30,10 +30,10 @@ var NewsCtrl = function ($scope, $http, x2js, $ionicLoading) {
 
   $scope.toggleItem = function (item) {
     if ($scope.isItemShown(item)) {
-          $scope.shownItem = null;
-        } else {
-          $scope.shownItem = item;
-        }
+      $scope.shownItem = null;
+    } else {
+      $scope.shownItem = item;
+    }
   };
 
   $scope.isItemShown = function (item) {
