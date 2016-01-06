@@ -15,11 +15,9 @@
     "ngCordova": "v0.1.7-alpha",
     "open-sans-fontface": "1.1.0",
     "sprintf": "~1.0.0",
-    "angular-xml": "~2.2.1",
-    "x2js": "7536cb4bf577f989168b052cb06e683600a5bfed"
+    "angular-xml": "~2.2.1"
   },
   "resolutions": {
-    "angular": "~1.4.3",
-    "x2js": "7536cb4bf577f989168b052cb06e683600a5bfed"
+    "angular": "~1.4.3"
   }
 }
