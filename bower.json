@@ -4,7 +4,7 @@
   "devDependencies": {
     "angular": "~1.4.3",
     "angular-mocks": "~1.4.8",
-    "ionic": "v1.1.0",
+    "ionic": "v1.2.1",
     "ngCordova": "v0.1.7-alpha",
     "open-sans-fontface": "1.1.0",
     "sprintf": "~1.0.0"
