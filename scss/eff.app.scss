@@ -6,6 +6,12 @@ $ionicons-font-path: "../assets/fonts" !default;
 
 // Overriding Ionic's assertive color to be EFF Red
 $eff-red: #f90000;
+
+// Let's talk about this... the above red is really unnecessarily harsh IMO -jeremy
+$non-eye-burning-eff-red: #c50800;
+$eff-red: $non-eye-burning-eff-red;
+$tab-item-inactive: #aa0700;
+
 $assertive: $eff-red;
 
 @import "../bower_components/ionic/scss/ionic";
@@ -382,4 +388,33 @@ button.transparent {
     .tab-title {
         font-size: 150%;
     }
+}
+
+.bar-header {
+  height: 60px;
+}
+
+.bar-header > * {
+  margin-top: 10px !important;
+}
+
+.tab-nav {
+  margin-top: 10px;
+}
+
+.list .item:first-of-type {
+	margin-top: 9px;
+}
+
+.item-icon-right .ion-close {
+	font-size: 18px !important;
+}
+
+.tab-item-active {
+	background-color: $tab-item-inactive !important;
+}
+
+.tab-item:not(.tab-item-active) span {
+	color: #fff;
+	opacity: 0.8;
 }
