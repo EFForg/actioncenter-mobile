@@ -391,7 +391,7 @@ button.transparent {
 }
 
 .bar-header {
-  height: 60px;
+  height: 65px;
 }
 
 .bar-header > * {
@@ -399,22 +399,43 @@ button.transparent {
 }
 
 .tab-nav {
-  margin-top: 10px;
+  margin-top: 20px;
+  background-color: $tab-item-inactive !important;
+  border-bottom: 1px solid $tab-item-inactive !important;
 }
 
+
 .list .item:first-of-type {
-	margin-top: 9px;
+	margin-top: 19px;
 }
 
 .item-icon-right .ion-close {
 	font-size: 18px !important;
 }
 
+.tab-item {
+	border-bottom: 0 !important;
+}
 .tab-item-active {
-	background-color: $tab-item-inactive !important;
+	background-color: $non-eye-burning-eff-red !important;
+	
 }
 
 .tab-item:not(.tab-item-active) span {
 	color: #fff;
-	opacity: 0.8;
+	opacity: 1;
+}
+
+.share-links a:last-of-type { // join eff
+	clear: both;
+	display: block;
+	color: #fff;
+	font-size: 16px;
+	background-color: $non-eye-burning-eff-red;
+	width: 120px;
+	padding: 10px 5px 10px 5px;
+	border-radius: 5px;
+	text-align: center;
+	text-decoration: none;
+
 }
