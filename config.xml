@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="org.eff.actioncenter"
-        version="0.0.5"
+        version="0.0.6-beta-5"
+        android-versionCode="10"
         xmlns="http://www.w3.org/ns/widgets"
         xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>EFF Alerts</name>
@@ -11,7 +12,6 @@
       EFF Apps
   </author>
   <content src="dist/index.html"/>
-  <allow-navigation href="https://*.eff.org/*" />
   <allow-intent href="http://*/*" />
   <allow-intent href="https://*/*" />
   <allow-intent href="tel:*" />
