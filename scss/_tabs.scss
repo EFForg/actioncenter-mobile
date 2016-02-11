@@ -1,0 +1,32 @@
+$action-color: rgba(246, 168, 0, 1);
+$news-color: rgba(0, 121, 53, 1);
+$more-color: rgba(0, 47, 135, 1);
+$donate-color: rgba(135, 16, 84, 1);
+// default is fine for $settings-color
+
+
+.tab-item.tab-item-active {
+	border-color: transparent !important; // by making it transparent rather than removing it we don't mess up the box model
+	
+	&:nth-of-type(1) {
+		i {
+			color: $action-color;
+		}
+	}
+	&:nth-of-type(2) {
+		i {
+			color: $news-color;
+		}
+	}
+	&:nth-of-type(3) {
+		i {
+			color: $more-color;
+		}
+	}
+	&:nth-of-type(4) {
+		i {
+			color: $donate-color;
+		}
+	}
+
+}

@@ -15,7 +15,9 @@ $tab-item-inactive: #aa0700;
 $assertive: $eff-red;
 
 @import "../bower_components/ionic/scss/ionic";
-@import "./fonts";
+@import "fonts";
+@import "tabs";
+@import "action";
 
 $red: #cc0000;
 $blue: #2979ff;
@@ -383,48 +385,48 @@ button.transparent {
     max-height: 100%;
 }
 
-.tab-item.noIcon {
-    padding-top: 15px;
-    .tab-title {
-        font-size: 150%;
-    }
-}
+// .tab-item.noIcon {
+//     padding-top: 15px;
+//     .tab-title {
+//         font-size: 150%;
+//     }
+// }
 
-.bar-header {
-  height: 65px;
-}
+// .bar-header {
+//   height: 65px;
+// }
 
-.bar-header > * {
-  margin-top: 10px !important;
-}
+// .bar-header > * {
+//   margin-top: 10px !important;
+// }
 
-.tab-nav {
-  margin-top: 20px;
-  background-color: $tab-item-inactive !important;
-  border-bottom: 1px solid $tab-item-inactive !important;
-}
+// .tab-nav {
+//   margin-top: 20px;
+//   background-color: $tab-item-inactive !important;
+//   border-bottom: 1px solid $tab-item-inactive !important;
+// }
 
 
-.list .item:first-of-type {
-	margin-top: 19px;
-}
+// .list .item:first-of-type {
+// 	margin-top: 19px;
+// }
 
 .item-icon-right .ion-close {
 	font-size: 18px !important;
 }
 
-.tab-item {
-	border-bottom: 0 !important;
-}
-.tab-item-active {
-	background-color: $non-eye-burning-eff-red !important;
+// .tab-item {
+// 	border-bottom: 0 !important;
+// }
+// .tab-item-active {
+// 	background-color: $non-eye-burning-eff-red !important;
 	
-}
+// }
 
-.tab-item:not(.tab-item-active) span {
-	color: #fff;
-	opacity: 1;
-}
+// .tab-item:not(.tab-item-active) span {
+// 	color: #fff;
+// 	opacity: 1;
+// }
 
 .share-links a:last-of-type { // join eff
 	clear: both;

@@ -48,7 +48,7 @@ actionCenterMobile.factory('$exceptionHandler', function ($injector, $log) {
 
 actionCenterMobile.config(function ($ionicConfigProvider) {
   $ionicConfigProvider
-    .tabs.position('top')
+    .tabs.position('bottom')
     .style('striped');
 });
 
@@ -57,6 +57,8 @@ actionCenterMobile.controller('WelcomeCarouselCtrl', require('./controllers/welc
 actionCenterMobile.controller('ActionCtrl', require('./controllers/action'));
 actionCenterMobile.controller('NewsCtrl', require('./controllers/news'));
 actionCenterMobile.controller('MoreCtrl', require('./controllers/more'));
+actionCenterMobile.controller('DonateCtrl', require('./controllers/donate'));
+actionCenterMobile.controller('SettingsCtrl', require('./controllers/settings'));
 
 actionCenterMobile.factory('acmUserDefaults', require('./services/user_defaults'));
 actionCenterMobile.factory('acmAPI', require('./services/api'));
@@ -130,6 +132,26 @@ actionCenterMobile.config(function ($stateProvider) {
         'more-tab' :{
           templateUrl: 'ng_partials/more.html',
           controller: 'MoreCtrl'
+        }
+      }
+    },
+    {
+      name: 'acm.homeTabs.donate',
+      url: '/donate',
+      views: {
+        'donate-tab' :{
+          templateUrl: 'ng_partials/donate.html',
+          controller: 'DonateCtrl'
+        }
+      }
+    },
+    {
+      name: 'acm.homeTabs.settings',
+      url: '/settings',
+      views: {
+        'settings-tab' :{
+          templateUrl: 'ng_partials/settings.html',
+          controller: 'SettingsCtrl'
         }
       }
     }
