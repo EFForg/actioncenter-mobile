@@ -14,20 +14,27 @@ $tab-item-inactive: #aa0700;
 
 $assertive: $eff-red;
 
-@import "../bower_components/ionic/scss/ionic";
-@import "fonts";
-@import "tabs";
-@import "action";
+
+// font variables need to be defined before importing ionic
+
+$font-family-base: "Source Sans" !default;
+$font-family-sans-serif: "Source Sans" !default;
+$font-family-light-sans-serif: "Source Sans" !default;
+
 
 $red: #cc0000;
 $blue: #2979ff;
 $green: #689f38;
 
-// SCSS variables
-$font-family-sans-serif: "Open Sans";
-$font-family-light-sans-serif: "Open Sans";
+@import "../bower_components/ionic/scss/ionic";
+@import "fonts";
+@import "tabs";
+@import "action";
+
+
 
 // Universal styles for reuse
+
 
 .welcome-carousel .slider {
 	position: absolute;
