@@ -1,7 +1,7 @@
-ion-header-bar {
+ion-nav-bar ion-header-bar {
 	transform: translate3d(0px,-44px,0px) !important;
 }
 
-ion-content {
+ion-nav-view ion-content {
 	transform: translate3d(0px,-45px,0px) !important; // +1px to kill the border
 }
