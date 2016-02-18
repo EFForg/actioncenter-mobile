@@ -7,7 +7,8 @@
     "ionic": "v1.2.1",
     "ngCordova": "v0.1.7-alpha",
     "open-sans-fontface": "1.1.0",
-    "sprintf": "~1.0.0"
+    "sprintf": "~1.0.0",
+    "breakpoint-sass": "~2.6.1"
   },
   "dependencies": {
     "angular": "~1.4.3",

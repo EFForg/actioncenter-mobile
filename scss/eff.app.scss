@@ -27,6 +27,7 @@ $blue: #2979ff;
 $green: #689f38;
 
 @import "../bower_components/ionic/scss/ionic";
+@import "../bower_components/breakpoint-sass/stylesheets/breakpoint";
 @import "fonts";
 @import "tabs";
 @import "action";
