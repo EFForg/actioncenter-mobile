@@ -32,7 +32,7 @@ var ActionCtrl = function ($scope, $http, x2js, $ionicModal, $ionicLoading, $ion
       link: {__href: 'https://act.eff.org/'},
       summary: {__text: 'Help us spread the word about this app.'}
     };
-    $scope.data.actionItems.splice(0, 2, shareAction);
+    $scope.data.actionItems.splice(0, 0, shareAction);
   };
 
   $scope.showActionModal = function (actionItem) {
