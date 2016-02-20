@@ -1,0 +1,11 @@
+[name="news-tab"] div.field-item p {
+
+	font-size: 1.45em;
+	line-height: 1.45em;
+
+	@include breakpoint($medium) {
+		font-size: 1.35em;
+		line-height: 1.35em;
+	}
+
+}

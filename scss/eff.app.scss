@@ -26,11 +26,16 @@ $red: #cc0000;
 $blue: #2979ff;
 $green: #689f38;
 
+
+$medium: 640px;
+$large: 1024px;
+
 @import "../bower_components/ionic/scss/ionic";
 @import "../bower_components/breakpoint-sass/stylesheets/breakpoint";
 @import "fonts";
 @import "tabs";
 @import "action";
+@import "news";
 @import "header";
 
 
