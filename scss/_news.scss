@@ -3,25 +3,36 @@
 
 	div.field-item {
 
-		p, h1, h2, h3, h4, h5, h6, li {
+		p, h1, h2, h3, h4, h5, h6 {
 
 			font-size: 1.45em;
 			line-height: 1.45em;
 
 			@include breakpoint($medium) {
-				font-size: 1.35em;
-				line-height: 1.35em;
+				font-size: 1.15em;
+				line-height: 1.15em;
 			}
 		}
 
 	}
 
 
-	> img {
+	img {
 		width: 100%;
 		height: auto;
 		max-width: 640px !important;
 		clear: both;
+		display: block;
+		margin-bottom: 1em;
+
+		&::after {
+			content: "\A"; //  newline
+			white-space: pre;
+		}
+	}
+
+	.share-links img {
+		width: 50px;
 	}
 
 
