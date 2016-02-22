@@ -1,11 +1,28 @@
-[name="news-tab"] div.field-item p {
+[name="news-tab"] {
 
-	font-size: 1.45em;
-	line-height: 1.45em;
 
-	@include breakpoint($medium) {
-		font-size: 1.35em;
-		line-height: 1.35em;
+	div.field-item {
+
+		p, h1, h2, h3, h4, h5, h6, li {
+
+			font-size: 1.45em;
+			line-height: 1.45em;
+
+			@include breakpoint($medium) {
+				font-size: 1.35em;
+				line-height: 1.35em;
+			}
+		}
+
 	}
+
+
+	> img {
+		width: 100%;
+		height: auto;
+		max-width: 640px !important;
+		clear: both;
+	}
+
 
 }
