@@ -10,8 +10,7 @@
         <span ng-bind-html="data.actionItem.summary.__text"></span>
       </label>
       <button class="button button-full button-assertive" ng-click="goToUrl(data.actionItem.link._href)">Take Action</button>
-      <button class="button button-full button-assertive" ng-class="{'active': showShareButtons}" ng-click="toggleShareButtons()">Share This Action</button>
-      <div class="button-bar bar-assertive" ng-if="showShareButtons">
+      <div class="button-bar bar-assertive">
         <a class="button icon {{service.cssClass}}"
            ng-repeat="service in shareServices"
            ng-click="shareAction(data.actionItem, service.name)"
