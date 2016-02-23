@@ -455,3 +455,9 @@ button.transparent {
 	text-decoration: none;
 
 }
+
+// change to android share
+
+.ion-ios-upload-outline::before {
+    content: "\f3ac" !important
+}

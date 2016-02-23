@@ -55,20 +55,24 @@ ion-modal-view {
 
 	}
 
-	.action-image {
-		width: 100%;
-		height: auto;
-	}
+	// .action-image { // if img tag
+	// 	width: 100%;
+	// 	height: auto;
+	// }
 
-	.no-action-image {
+	.action-image {
 		display: block;
-		background: $eff-red url('/assets/img/eff-logo-white.svg') no-repeat 50% 50%;
+		background-repeat: no-repeat;
+		background-position: 50% 50% !important;
 		background-color: $eff-red;
 		width: 100%;
 		height: $width / $aspect-ratio;
 		margin-bottom: 10px;
 		background-size: auto 50%;
-		
+	}
+
+	.no-image {
+		background-image: url('/assets/img/eff-logo-white.svg') !important;		
 	}
 
 }

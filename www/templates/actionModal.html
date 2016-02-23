@@ -4,8 +4,8 @@
   </ion-header-bar>
   <ion-content class="padding">
     <div class="list">
-      <img class="action-image" ng-if="data.actionItem.image" src="{{data.actionItem.image}}">
-      <div class="no-action-image" ng-if="!data.actionItem.image">&nbsp;</div>
+      <div class="action-image" ng-if="data.actionItem.image" style="background: url({{data.actionItem.image}})">&nbsp;</div>
+      <div class="action-image no-image" ng-if="!data.actionItem.image">&nbsp;</div>
       <label class="item item-text-wrap">
         <span ng-bind-html="data.actionItem.summary.__text"></span>
       </label>
