@@ -1,4 +1,4 @@
-$aspect-ratio: 40 / 21;
+$aspect-ratio: 615 / 300;
 
 $width: 615px;
 $height: 300px;
@@ -58,6 +58,17 @@ ion-modal-view {
 	.action-image {
 		width: 100%;
 		height: auto;
+	}
+
+	.no-action-image {
+		display: block;
+		background: $eff-red url('/assets/img/eff-logo-white.svg') no-repeat 50% 50%;
+		background-color: $eff-red;
+		width: 100%;
+		height: $width / $aspect-ratio;
+		margin-bottom: 10px;
+		background-size: auto 50%;
+		
 	}
 
 }
