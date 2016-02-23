@@ -30,7 +30,7 @@ ion-nav-view[name="action-tab"] {
 	}
 
 	.list .item h3 {
-		font-size: 1.15em !important;
+		font-size: 1.05em !important;
 		margin-bottom: 0 !important;
 		padding-bottom: 0 !important;
 		top: 0 !important;
@@ -41,14 +41,23 @@ ion-nav-view[name="action-tab"] {
 
 }
 
-ion-modal-view p {
+ion-modal-view {
 
-	font-size: 1.25em !important;
-	line-height: 1.25em !important;
+	p {
 
-	@include breakpoint($medium) {
-		font-size: 1em;
-		line-height: 1em;
+		font-size: 1.25em !important;
+		line-height: 1.25em !important;
+
+		@include breakpoint($medium) {
+			font-size: 1em;
+			line-height: 1em;
+		}
+
+	}
+
+	.action-image {
+		width: 100%;
+		height: auto;
 	}
 
 }
