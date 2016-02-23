@@ -3,24 +3,36 @@ $aspect-ratio: 40 / 21;
 $width: 615px;
 $height: 300px;
 
-.action-thumbnail {
-	width: $width;
-	height: $height;
-	display: block;
-	background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-size: auto 100%; // width height
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    float: left;
-    margin-right: 15px;
-}
+ion-nav-view[name="action-tab"] {
 
-.list .item h3 {
-	font-size: 1.1em !important;
-	margin-bottom: 0 !important;
-	padding-bottom: 0 !important;
+	.action-thumbnail {
+		display: block;
+		background-repeat: no-repeat;
+	    background-position: 50% 50%;
+	    background-size: auto 100%; // width height
+	    width: 50px;
+	    height: 50px;
+	    min-width: 50px;
+	    border-radius: 50%;
+	    float: left;
+	    margin-right: 15px;
+	}
+
+	.list .item {
+		display: flex;
+		align-items: center;
+	}
+	
+	.list .item h3 {
+		font-size: 1.15em !important;
+		margin-bottom: 0 !important;
+		padding-bottom: 0 !important;
+		top: 0 !important;
+		overflow: visible !important;
+		text-overflow: clip !important;
+		white-space: normal !important;
+	}
+
 }
 
 ion-modal-view p {
