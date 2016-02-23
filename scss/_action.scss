@@ -18,11 +18,17 @@ ion-nav-view[name="action-tab"] {
 	    margin-right: 15px;
 	}
 
+	.no-thumb {
+		background-color: $eff-red;
+		background-image: url('/assets/img/eff-logo-white.svg');
+		background-size: auto 50%;
+	}
+
 	.list .item {
 		display: flex;
 		align-items: center;
 	}
-	
+
 	.list .item h3 {
 		font-size: 1.15em !important;
 		margin-bottom: 0 !important;
