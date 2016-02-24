@@ -63,26 +63,26 @@ var SharingService = function () {
 
     shareAction: function (action, service) {
       var shareURL = action.link._href;
-      var shareMessage = action.summary.__text;
+      var shareMessage = angular.element(action.summary.__text).text();
+      var title = action.title;
 
       if (service === 'EMAIL') {
-        var title = action.title;
-        var body = action.summary.__text;
+        var body = shareMessage + "\n\n" + shareURL;
 
         // On Android this opens up as either Drive or Gmail, and doesn't work for Drive.
         // This doesn't seem like a huge deal, so for now allow it so that it pops up a share intent
         // filtered for email clients.
         window.plugins.socialsharing.shareViaEmail(body, title, null, null, null, null);
       } else if (service === 'SMS') {
-        window.plugins.socialsharing.shareViaSMS(shareMessage, undefined);
+        window.plugins.socialsharing.shareViaSMS(title + ' ' + shareURL, undefined);
       } else if (service === 'FACEBOOK') {
         // The message isn't passed through correctly via FB on Android unfortunately, link is though
         window.plugins.socialsharing.shareViaFacebook(shareMessage, undefined, shareURL);
       } else if (service === 'TWITTER') {
-        window.plugins.socialsharing.shareViaTwitter(shareMessage, undefined, shareURL);
+        window.plugins.socialsharing.shareViaTwitter(title, undefined, shareURL);
       } else if (service === 'OTHER') {
         // Open up a standard share intent:
-        window.plugins.socialsharing.share(shareMessage, null, null, shareURL);
+        window.plugins.socialsharing.share(title, null, null, shareURL);
       }
     },
 
