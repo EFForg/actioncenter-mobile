@@ -25,14 +25,7 @@ var ActionCtrl = function ($scope, $http, x2js, $ionicModal, $ionicLoading, $ion
   $scope.addExtraShareAction = function () {
     // We add an extra action into those we get from RSS, that encourages the users
     // to tell their contacts about the app.
-    // TODO: Figure out what this Action should look like.
-    var shareAction = {
-      id: 'SHARE_ACTION',
-      title: 'Share this app!',
-      link: {__href: 'https://act.eff.org/'},
-      summary: {__text: 'Help us spread the word about this app.'}
-    };
-    $scope.data.actionItems.splice(0, 0, shareAction);
+    $scope.data.actionItems.splice(0, 0, acmSharing.shareAppAsAction());
   };
 
   $scope.showActionModal = function (actionItem) {

@@ -9,9 +9,16 @@
       <label class="item item-text-wrap">
         <span ng-bind-html="data.actionItem.summary.__text"></span>
       </label>
-      <button class="button button-full button-assertive" ng-click="goToUrl(data.actionItem.link._href)">Take Action</button>
-      <div class="button-bar bar-assertive">
-        <a class="button icon {{service.cssClass}}"
+      <div ng-switch="data.actionItem.id">
+        <span ng-switch-when="SHARE_ACTION"></span>
+        <button ng-switch-default class="button button-full button-assertive" ng-click="goToUrl(data.actionItem.link._href)">Take Action</button>
+      </div>
+      <div ng-switch="data.actionItem.id" class="button-bar bar-assertive">
+        <a ng-switch-when="SHARE_ACTION" class="button icon {{service.cssClass}}"
+           ng-repeat="service in shareServices"
+           ng-click="shareApp(service.name)"
+           ng-show="serviceAvailability[service.name]"></a>
+        <a ng-switch-default class="button icon {{service.cssClass}}"
            ng-repeat="service in shareServices"
            ng-click="shareAction(data.actionItem, service.name)"
            ng-show="serviceAvailability[service.name]"></a>

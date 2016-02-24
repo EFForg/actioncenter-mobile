@@ -48,6 +48,19 @@ var SharingService = function () {
       }
     },
 
+    shareAppAsAction: function () {
+      return {
+        id: 'SHARE_ACTION',
+        link: {
+          _href: shareSettings['URL']
+        },
+        summary: {
+          __text: shareSettings['TEXT']
+        },
+        title: shareSettings['TITLE']
+      };
+    },
+
     shareAction: function (action, service) {
       var shareURL = action.link._href;
       var shareMessage = action.summary.__text;
