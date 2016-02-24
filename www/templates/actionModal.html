@@ -1,11 +1,10 @@
 <ion-modal-view>
-  <ion-header-bar>
-    <h1 class="title">{{data.actionItem.title}}</h1>
-  </ion-header-bar>
   <ion-content class="padding">
     <div class="list">
       <div class="action-image-wrapper">
-        <div class="action-image" ng-if="data.actionItem.image" style="background: url({{data.actionItem.image}})">&nbsp;</div>
+        <h3 class="inner-title">{{data.actionItem.title}}</h3>
+       <!--  <div class="action-image" ng-if="data.actionItem.image" style="background: url({{data.actionItem.image}})">&nbsp;</div> -->
+        <img src="{{data.actionItem.image}}" class="action-image" ng-if="data.actionItem.image">
       </div>
       <div class="action-image no-image" ng-if="!data.actionItem.image">&nbsp;</div>
       <label class="item item-text-wrap">
