@@ -58,21 +58,58 @@ ion-modal-view {
 	// .action-image { // if img tag
 	// 	width: 100%;
 	// 	height: auto;
+	// 	opacity: 0.3;
+	// }
+	// .action-image-container {
+	// 	background-color: #000;
+	// 	h3 {
+
+	// 	}
+
 	// }
 
-	.action-image {
+	.action-image-wrapper {
+		background-color: #000;
 		display: block;
-		background-repeat: no-repeat;
-		background-position: 50% 50% !important;
-		background-color: $eff-red;
 		width: 100%;
-		height: $width / $aspect-ratio;
-		margin-bottom: 10px;
-		background-size: auto 50%;
+		height: 100%;
+
+		&:after{
+			display: block;
+			height: 100%;
+			width: 100;
+			color: #000;
+		}
 	}
 
+		
+	.action-image { // if a div
+		display: block;
+		background-repeat: no-repeat !important;
+		// background-position: 50% 50% !important;
+		background-color: $eff-red;
+		width: 100%;
+		background-size: 100% !important;
+		position: relative;
+		// opacity: 0.35;
+		margin: 0;
+		padding: 0;
+		margin-bottom: 15px;
+		&:after {
+			display: block;
+			content: '';
+			width: 100%;
+			padding-top: ($height / $width) * 100%;
+		}
+	}
+
+
 	.no-image {
-		background-image: url('/assets/img/eff-logo-white.svg') !important;		
+		background-image: url('/assets/img/eff-logo-white.svg') !important;
+		background-position: 50% 50% !important;
+		background-size: 50% !important;
+		background-color: $eff-red;
+		opacity: 1;
 	}
 
 	.button-bar { // share buttons
