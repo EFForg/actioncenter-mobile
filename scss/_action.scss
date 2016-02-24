@@ -20,7 +20,7 @@ ion-nav-view[name="action-tab"] {
 
 	.no-thumb {
 		background-color: $eff-red;
-		background-image: url('/assets/img/eff-logo-white.svg');
+		background-image: url('../assets/img/eff-logo-white.svg');
 		background-size: auto 50%;
 	}
 
@@ -101,7 +101,7 @@ ion-modal-view {
 	}
 
 	.no-image {
-		background-image: url('/assets/img/eff-logo-white.svg') !important;
+		background-image: url('../assets/img/eff-logo-white.svg') !important;
 		background-position: 50% 50% !important;
 		background-size: 50% !important;
 		background-color: $eff-red;
