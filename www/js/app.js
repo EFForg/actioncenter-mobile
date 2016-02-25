@@ -1,6 +1,6 @@
 /**
  * EFF Alerts is a mobile app for receiving news and notifications from EFF.
- * Copyright (C) 2014-2015 Electronic Frontier Foundation (EFF).
+ * Copyright (C) 2014-2016 Electronic Frontier Foundation (EFF).
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License as published by the Free
@@ -54,6 +54,7 @@ actionCenterMobile.config(function ($ionicConfigProvider) {
 
 actionCenterMobile.controller('ActionCenterCtrl', require('./controllers/actionCenter'));
 actionCenterMobile.controller('WelcomeCarouselCtrl', require('./controllers/welcome_carousel'));
+actionCenterMobile.controller('HomeCtrl', require('./controllers/home'));
 actionCenterMobile.controller('ActionCtrl', require('./controllers/action'));
 actionCenterMobile.controller('NewsCtrl', require('./controllers/news'));
 actionCenterMobile.controller('MoreCtrl', require('./controllers/more'));
@@ -90,17 +91,17 @@ actionCenterMobile.config(function ($stateProvider) {
     },
 
     {
-      name: 'acm.home',
-      url: '/home',
-      templateUrl: 'ng_partials/home.html',
-      controller: 'HomeCtrl'
-    },
-
-    {
       name: 'acm.homeTabs',
       abstract: true,
       url: '/homeTabs',
       templateUrl: 'ng_partials/homeTabs.html'
+    },
+
+    {
+      name: 'acm.homeTabs.home',
+      url: '/home',
+      templateUrl: 'ng_partials/home.html',
+      controller: 'HomeCtrl'
     },
 
     {
