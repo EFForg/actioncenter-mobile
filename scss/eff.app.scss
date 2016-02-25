@@ -185,7 +185,7 @@ button.transparent {
 
 
 .home, .post-intro {
-	background-color: $red;
+	background-color: $eff-red;
 
 	.buttons {
 		text-align: center;
@@ -303,7 +303,6 @@ button.transparent {
         .share-button {
             max-height: 15%;
             min-height: 15%;
-
             display: flex;
             align-items: center;
             justify-content: center;
@@ -314,6 +313,7 @@ button.transparent {
 
             button {
               margin: 0;
+              border: 2px #fff solid;
             }
         }
 
