@@ -28,17 +28,48 @@
 		height: auto;
 		max-width: 640px !important;
 		clear: both;
-		display: block;
+		display: block !important;
 		margin-bottom: 1em;
 
 		&::after {
-			content: "\A"; //  newline
+			content: "\A" !important; //  newline
 			white-space: pre;
 		}
 	}
 
+	.share-links a {
+		position: relative;
+		display: inline-block !important;
+		top: 25px !important;
+	}
+
+	.share-links a:last-of-type { // join eff
+		display: inline-block;
+		color: #fff;
+		font-size: 12px;
+		background-color: $non-eye-burning-eff-red;
+		width: 80px;
+		padding: 5px 5px 5px 5px;
+		border-radius: 5px;
+		text-align: center;
+		text-decoration: none;
+		top: 0px !important;
+		position: relative;
+
+	}
+
+
 	.share-links img {
-		width: 50px;
+		height: 32px;
+		width: 32px;
+		&::after {
+			content: '' !important; // no newline
+			white-space: normal !important;
+		}
+	}
+
+	blockquote * {
+		font-family: $font-family-base !important;
 	}
 
 
