@@ -1,7 +1,4 @@
-$aspect-ratio: 615 / 300;
-
-$width: 615px;
-$height: 300px;
+$aspect-ratio: 315 / 600;
 
 ion-nav-view[name="action-tab"] {
 
@@ -80,9 +77,25 @@ ion-modal-view {
 			content: '';
 			width: 100%;
 			height: auto;
-			padding-bottom: 52.5%;
+			padding-bottom: $aspect-ratio * 100%;
 		}
 	}
+
+	.action-image-wrapper .no-image {
+		background-color: $eff-red;
+	}
+
+	// .no-action-image {
+	// 	background-color: $eff-red;
+	// }
+
+	// .default-image {
+	// 	margin: 0;
+	// 	padding: 0;
+	// 	position: absolute;
+	// 	height: 100%;
+	// 	width: auto;
+	// }
 
 	h3.inner-title {
 		
@@ -100,16 +113,16 @@ ion-modal-view {
 		}
 	}
 
-	.no-image {
-		background-image: url('../assets/img/eff-logo-white.svg') !important;
-		background-position: 50% 50% !important;
-		background-size: 50% !important;
-		background-color: $eff-red;
-		opacity: 1;
-	}
-
-	.button-bar { // share buttons
-		margin-bottom: 15px;
+	.button-margin {
+		margin-top: 15px;
 	}
 
 }
+
+.button-bar { // share buttons
+	margin-bottom: 15px;
+	> a {
+		border-radius: 0px !important;
+	}
+}
+

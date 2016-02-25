@@ -3,10 +3,9 @@
     <div class="list">
       <div class="action-image-wrapper">
         <h3 class="inner-title">{{data.actionItem.title}}</h3>
-       <!--  <div class="action-image" ng-if="data.actionItem.image" style="background: url({{data.actionItem.image}})">&nbsp;</div> -->
         <img src="{{data.actionItem.image}}" class="action-image" ng-if="data.actionItem.image">
+        <img src="/assets/img/action-default.png" class="action-image" ng-if="!data.actionItem.image">
       </div>
-      <div class="action-image no-image" ng-if="!data.actionItem.image">&nbsp;</div>
       <label class="item item-text-wrap">
         <span ng-bind-html="data.actionItem.summary.__text"></span>
       </label>
@@ -14,6 +13,7 @@
         <span ng-switch-when="SHARE_ACTION"></span>
         <button ng-switch-default class="button button-full button-assertive" ng-click="goToUrl(data.actionItem.link._href + '#tools')">Take Action</button>
       </div>
+      <div class="button-margin" ng-if="!data.actionItem.image"></div>
       <div ng-switch="data.actionItem.id" class="button-bar bar-assertive">
         <a ng-switch-when="SHARE_ACTION" class="button icon {{service.cssClass}}"
            ng-repeat="service in shareServices"
