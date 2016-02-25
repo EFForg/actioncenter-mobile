@@ -100,8 +100,12 @@ actionCenterMobile.config(function ($stateProvider) {
     {
       name: 'acm.homeTabs.home',
       url: '/home',
-      templateUrl: 'ng_partials/home.html',
-      controller: 'HomeCtrl'
+      views: {
+        'home-tab' :{
+          templateUrl: 'ng_partials/home.html',
+          controller: 'HomeCtrl'
+        }
+      }
     },
 
     {
