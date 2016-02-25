@@ -176,6 +176,10 @@ actionCenterMobile.run(function (
   $rootScope, $state, $ionicHistory, $ionicPlatform, acmPushNotification, acmUserDefaults) {
 
   var registerForPush = function () {
+    // Do not register if user has disabled push notifications.
+    if (acmUserDefaults.getUserDefault(acmUserDefaults.keys.PUSH_ENABLED) === false) {
+      return;
+    }
     var platform = ionic.Platform.platform().toUpperCase();
 
     if (window.plugins !== undefined &&
