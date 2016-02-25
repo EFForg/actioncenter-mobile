@@ -68,6 +68,11 @@
 		}
 	}
 
+	img.anon-stats {
+		width: 0;
+		height: 0;
+	}
+
 	blockquote * {
 		font-family: $font-family-base !important;
 	}
