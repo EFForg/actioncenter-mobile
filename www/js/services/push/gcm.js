@@ -20,15 +20,17 @@ var GCMNotificationService = function (
       var message = acmUserDefaults.getUserDefault(acmUserDefaults.keys.ACTION);
       message = acmPushNotificationHelpers.truncateString(message, 140);
 
-      // parameter documentation:
-      // https://github.com/katzer/cordova-plugin-local-notifications#further-informations-1
-      window.plugin.notification.local.add({
-        icon: 'notification_icon',
-        id: constants.PUSH_RECEIVED_FOREGROUND_NOTIFICATION_ID,
-        title: acmUserDefaults.getUserDefault(acmUserDefaults.keys.ACTION_TITLE),
-        message: message,
-        autoCancel: true
-      });
+      if (acmUserDefaults.getUserDefault(acmUserDefaults.keys.PUSH_ENABLED) !== false) {
+        // parameter documentation:
+        // https://github.com/katzer/cordova-plugin-local-notifications#further-informations-1
+        window.plugin.notification.local.add({
+          smallIcon: 'res://notification_icon',
+          id: constants.PUSH_RECEIVED_FOREGROUND_NOTIFICATION_ID,
+          title: acmUserDefaults.getUserDefault(acmUserDefaults.keys.ACTION_TITLE),
+          message: message,
+          autoCancel: true
+        });
+      }
       $state.go('acm.homeTabs.home', {}, {reload: true});
     } else {
       // If the app's backgrounded, any push notification received redirects the user to the action
