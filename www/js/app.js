@@ -191,8 +191,8 @@ actionCenterMobile.run(function (
     // not directed to the action page on app re-open.
     document.addEventListener('resume', function () {
 
-      if (acmUserDefaults.hasReceivedAction() && $state.current.name !== 'acm.home') {
-        $state.go('acm.home', {}, {location: 'replace'});
+      if (acmUserDefaults.hasReceivedAction() && $state.current.name !== 'acm.homeTabs.home') {
+        $state.go('acm.homeTabs.home', {}, {location: 'replace'});
         var deregister = $rootScope.$on('$stateChangeSuccess', function () {
           $ionicHistory.clearHistory();
           deregister();
@@ -225,7 +225,7 @@ actionCenterMobile.run(function (
       acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME);
 
     if (completedWelcome) {
-      $state.go(acmUserDefaults.hasReceivedAction() ? 'acm.home' : 'acm.homeTabs.action');
+      $state.go(acmUserDefaults.hasReceivedAction() ? 'acm.homeTabs.home' : 'acm.homeTabs.action');
     } else {
       $state.go('welcome');
     }

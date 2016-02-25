@@ -33,11 +33,11 @@ var GCMNotificationService = function (
       // If the app's backgrounded, any push notification received redirects the user to the action
       // page, updated for the most recent action, irrespective of whether they've completed the
       // welcome carousel.
-      if (currentState !== 'home') {
+      if (currentState !== 'acm.homeTabs.home') {
         // Force-set the has completed welcome flag, to avoid sending the user back to the carousel
         // if they've ever been to the action page via this handler.
         acmUserDefaults.setUserDefault(acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME, true);
-        $state.go('acm.home');
+        $state.go('acm.homeTabs.home');
       }
     }
   };
