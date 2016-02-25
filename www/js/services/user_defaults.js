@@ -36,9 +36,10 @@ var UserDefaultsService = function () {
     },
 
     getActionInfo: function () {
+      var shareSettings = require('../../build/app_settings')['SHARING'];
       return {
         title: this.getUserDefault(this.keys.ACTION_TITLE),
-        action: this.getUserDefault(this.keys.ACTION),
+        action: this.getUserDefault(this.keys.ACTION) || shareSettings['TEXT'],
         url: this.getUserDefault(this.keys.ACTION_URL)
       };
     },
