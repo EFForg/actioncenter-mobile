@@ -16,6 +16,12 @@
 
 	}
 
+	.item {
+		h3 + p {
+			text-transform: capitalize;
+		}
+	}
+
 
 	img {
 		width: 100%;
