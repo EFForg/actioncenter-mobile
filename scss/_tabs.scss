@@ -11,31 +11,31 @@ $donate-color: rgba(135, 16, 84, 1);
 .tab-item.tab-item-active, .tab-item.activated {
 	border-color: transparent !important; // by making it transparent rather than removing it we don't mess up the box model
 
+	// &:nth-of-type(1) {
+	// 	i {
+	// 		color: $alert-color;
+	// 	}
+
+	// }
+
+
 	&:nth-of-type(1) {
-		i {
-			color: $alert-color;
-		}
-
-	}
-
-
-	&:nth-of-type(2) {
 		i {
 			color: $action-color;
 		}
 
 	}
-	&:nth-of-type(3) {
+	&:nth-of-type(2) {
 		i {
 			color: $news-color;
 		}
 	}
-	&:nth-of-type(4) {
+	&:nth-of-type(3) {
 		i {
 			color: $more-color;
 		}
 	}
-	&:nth-of-type(5) {
+	&:nth-of-type(4) {
 		i {
 			color: $donate-color;
 		}

@@ -3,8 +3,8 @@
     <div class="list">
       <div class="action-image-wrapper">
         <h3 class="inner-title">{{data.actionItem.title}}</h3>
-        <img src="{{data.actionItem.image}}" class="action-image" ng-if="data.actionItem.image">
-        <img src="/assets/img/action-default.png" class="action-image" ng-if="!data.actionItem.image">
+        <img ng-src="{{data.actionItem.image}}" class="action-image" ng-if="data.actionItem.image">
+        <img ng-src="assets/img/action-default.png" class="action-image" ng-if="!data.actionItem.image">
       </div>
       <label class="item item-text-wrap">
         <span ng-bind-html="data.actionItem.summary.__text"></span>
