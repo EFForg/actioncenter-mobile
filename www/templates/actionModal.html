@@ -11,7 +11,7 @@
       </label>
       <div ng-switch="data.actionItem.id">
         <span ng-switch-when="SHARE_ACTION"></span>
-        <button ng-switch-default class="button button-full button-assertive" ng-click="goToUrl(data.actionItem.link._href + '#tools')">Take Action</button>
+        <button ng-switch-default class="button button-full button-assertive" ng-click="goToUrl(data.actionItem.link._href + '#action-content')">Take Action</button>
       </div>
       <div class="button-margin" ng-if="!data.actionItem.image"></div>
       <div ng-switch="data.actionItem.id" class="button-bar bar-assertive">

@@ -29,16 +29,15 @@ var GCMNotificationService = function (
         message: message,
         autoCancel: true
       });
+      $state.go('acm.homeTabs.home', {}, {reload: true});
     } else {
       // If the app's backgrounded, any push notification received redirects the user to the action
       // page, updated for the most recent action, irrespective of whether they've completed the
       // welcome carousel.
-      if (currentState !== 'acm.homeTabs.home') {
-        // Force-set the has completed welcome flag, to avoid sending the user back to the carousel
-        // if they've ever been to the action page via this handler.
-        acmUserDefaults.setUserDefault(acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME, true);
-        $state.go('acm.homeTabs.home');
-      }
+      $state.go('acm.homeTabs.home', {}, {reload: true});
+      // Force-set the has completed welcome flag, to avoid sending the user back to the carousel
+      // if they've ever been to the action page via this handler.
+      acmUserDefaults.setUserDefault(acmUserDefaults.keys.USER_HAS_COMPLETED_WELCOME, true);
     }
   };
 
