@@ -16,33 +16,36 @@ var UserDefaultsService = function () {
       ACTION_TITLE: 'mostRecentActionTitle',
       ACTION: 'mostRecentAction',
       ACTION_URL: 'mostRecentActionURL',
-      REGISTERED_FOR_PUSH: 'registeredForPush'
+      REGISTERED_FOR_PUSH: 'registeredForPush',
+      PUSH_ENABLED: 'pushEnabled',
+      DELETED_ACTIONS: 'deletedActions'
     }),
 
     keyLookup: undefined,
 
-    setUserDefault: function(key, val) {
+    setUserDefault: function (key, val) {
       if (this.keyLookup[key] !== undefined) {
         localStorage.setItem([userDefaultsPrefix, key].join('.'), JSON.stringify(val));
       }
     },
 
-    getUserDefault: function(key) {
+    getUserDefault: function (key) {
       var userDefaultsKey = [userDefaultsPrefix, key].join('.');
       var localValue = localStorage.getItem(userDefaultsKey);
       return localValue === null ? localValue : JSON.parse(localValue);
     },
 
-    getActionInfo: function() {
+    getActionInfo: function () {
+      var shareSettings = require('../../build/app_settings')['SHARING'];
       return {
         title: this.getUserDefault(this.keys.ACTION_TITLE),
-        action: this.getUserDefault(this.keys.ACTION),
+        action: this.getUserDefault(this.keys.ACTION) || shareSettings['TEXT'],
         url: this.getUserDefault(this.keys.ACTION_URL)
       };
     },
 
-    hasReceivedAction: function() {
-      return this.getUserDefault(this.keys.ACTION) !== null
+    hasReceivedAction: function () {
+      return this.getUserDefault(this.keys.ACTION) !== null;
     }
 
   };

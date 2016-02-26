@@ -1,0 +1,45 @@
+<ion-view>
+  <ion-content>
+    <div class="list">
+      <div class="item"  ng-click="toggleAbout()" class="item-text-wrap">
+        <h3>About EFF</h3>
+        <p>Started in 1990, the Electronic Frontier Foundation is dedicated to fighting for your rights and freedoms in the digital world.</p>
+      </div>
+      <div class="item item-text-wrap" class="item item-body ion-accordion" ng-if="showAbout">
+        <p>The Electronic Frontier Foundation is a nonprofit civil liberties organization based in San Francisco with members all over the world.</p>
+
+        <p>We examine the impact of new technologies on civil rights and pave the way for new technologies to enhance privacy and freedom of speech. We were founded in 1990 by technology experts concerned that law enforcement officials, judges, policymakers, and even lawyers didn't understand how technology worked—and that their misunderstanding would lead to attacks on peoples' civil liberties and the throttling of creativity and innovation.</p>
+
+        <p>Today, EFF uses three main tools to help safeguard and advance the rights of individuals in the digital world. Our legal team uses impact litigation to create strong court precedents in the United States. Our technology team builds free software tools that anyone can use to protect their privacy and their rights. Our advocacy teams—both U.S. and international—educate key decision makers on digital rights and teach the public what they can do to help protect the future of freedom, privacy, and innovation.</p>
+
+        <p>We believe that new technologies should strengthen individual rights, not erode them. But certain tech companies and government officials don't always see it that way. EFF acts as a voice for technology users who don't want to trade away their rights when they log onto the Internet or turn on their phones.</p>
+
+        <p>With the passionate support of tens of thousands of members across the globe, we've stopped bad laws, pressured companies to change their policies, brought public attention to deceitful government practices, educated people worldwide on how to safeguard their privacy, and repeatedly taken on powerful forces in the fight for freedom.</p>
+      </div>
+      <div class="item item-icon-right item-text-wrap" ng-click="goToUrl('https://supporters.eff.org/donate')">
+        <h3>Donate</h3>
+        <p>Help support the fight for privacy, free speech, and innovation.</p>
+        <i class="icon ion-ios-arrow-right"></i>
+      </div>
+      <div class="item item-icon-right item-text-wrap" ng-click="goToUrl('https://www.eff.org/events/list')">
+        <h3>Events</h3>
+        <p> Find out about upcoming digital rights events in your area.</p>
+        <i class="icon ion-ios-arrow-right"></i>
+      </div>
+      <div class="item item-icon-right item-text-wrap" ng-click="goToUrl('https://www.eff.org/policy')">
+        <h3>Privacy Policy</h3>
+        <p> Read EFF's privacy policy.</p>
+        <i class="icon ion-ios-arrow-right"></i>
+      </div>
+      <div class="item" class="item-text-wrap">
+        <h3>Social Media</h3>
+        <p>Connect with the Electronic Frontier Foundation.</p>
+        <div class="button-bar bar-assertive" style="margin-top: 10px;">
+          <a class="button icon ion-social-twitter" ng-click="goToUrl('https://twitter.com/eff')"></a>
+          <a class="button icon ion-social-facebook" ng-click="goToUrl('https://www.facebook.com/eff')"></a>
+          <a class="button icon ion-social-googleplus" ng-click="goToUrl('https://plus.google.com/+eff')"></a>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

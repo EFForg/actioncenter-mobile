@@ -9,7 +9,7 @@ var DeviceLanguageCodeService = function (acmUserDefaults) {
 
   return {
 
-    getLanguageCode: function(success) {
+    getLanguageCode: function (success) {
 
       var language = acmUserDefaults.getUserDefault(acmUserDefaults.keys.DEVICE_LANGUAGE_CODE);
       var lastChecked = acmUserDefaults.getUserDefault(

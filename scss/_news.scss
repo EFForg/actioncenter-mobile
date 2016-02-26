@@ -1,0 +1,81 @@
+[name="news-tab"] {
+
+
+	div.field-item {
+
+		p, h1, h2, h3, h4, h5, h6 {
+
+			font-size: 1.45em;
+			line-height: 1.45em;
+
+			@include breakpoint($medium) {
+				font-size: 1.15em;
+				line-height: 1.15em;
+			}
+		}
+
+	}
+
+	.item {
+		h3 + p {
+			text-transform: capitalize;
+		}
+	}
+
+
+	img {
+		width: 100%;
+		height: auto;
+		max-width: 640px !important;
+		clear: both;
+		display: block !important;
+		margin-bottom: 1em;
+
+		&::after {
+			content: "\A" !important; //  newline
+			white-space: pre;
+		}
+	}
+
+	.share-links a {
+		position: relative;
+		display: inline-block !important;
+		top: 25px !important;
+	}
+
+	.share-links a:last-of-type { // join eff
+		display: inline-block;
+		color: #fff;
+		font-size: 12px;
+		background-color: $non-eye-burning-eff-red;
+		width: 80px;
+		padding: 5px 5px 5px 5px;
+		border-radius: 5px;
+		text-align: center;
+		text-decoration: none;
+		top: 0px !important;
+		position: relative;
+
+	}
+
+
+	.share-links img {
+		height: 32px;
+		width: 32px;
+		&::after {
+			content: '' !important; // no newline
+			white-space: normal !important;
+		}
+	}
+
+	img.anon-stats {
+		width: 0;
+		height: 0;
+	}
+
+	blockquote * {
+		font-family: $font-family-base !important;
+	}
+
+
+}

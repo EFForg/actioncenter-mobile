@@ -4,18 +4,44 @@
 
 $ionicons-font-path: "../assets/fonts" !default;
 
-@import "../bower_components/ionic/scss/ionic";
-@import "./fonts";
+// Overriding Ionic's assertive color to be EFF Red
+$eff-red: #f90000;
+
+// Let's talk about this... the above red is really unnecessarily harsh IMO -jeremy
+$non-eye-burning-eff-red: #c50800;
+$eff-red: $non-eye-burning-eff-red;
+$tab-item-inactive: #aa0700;
+
+$assertive: $eff-red;
+
+
+// font variables need to be defined before importing ionic
+
+$font-family-base: "Source Sans" !default;
+$font-family-sans-serif: "Source Sans" !default;
+$font-family-light-sans-serif: "Source Sans" !default;
+
 
 $red: #cc0000;
 $blue: #2979ff;
 $green: #689f38;
 
-// SCSS variables
-$font-family-sans-serif: "Open Sans";
-$font-family-light-sans-serif: "Open Sans";
+
+$medium: 640px;
+$large: 1024px;
+
+@import "../bower_components/ionic/scss/ionic";
+@import "../bower_components/breakpoint-sass/stylesheets/breakpoint";
+@import "fonts";
+@import "tabs";
+@import "action";
+@import "news";
+@import "header";
+
+
 
 // Universal styles for reuse
+
 
 .welcome-carousel .slider {
 	position: absolute;
@@ -159,7 +185,7 @@ button.transparent {
 
 
 .home, .post-intro {
-	background-color: $red;
+	background-color: $eff-red;
 
 	.buttons {
 		text-align: center;
@@ -277,7 +303,6 @@ button.transparent {
         .share-button {
             max-height: 15%;
             min-height: 15%;
-
             display: flex;
             align-items: center;
             justify-content: center;
@@ -288,6 +313,7 @@ button.transparent {
 
             button {
               margin: 0;
+              border: 2px #fff solid;
             }
         }
 
@@ -325,4 +351,99 @@ button.transparent {
 .home .button.transparent {
 		width: auto;
 		padding-right:15px;
+}
+
+.list .item.item-accordion {
+    line-height: 1em;
+    padding-top: 0;
+    padding-bottom: 0;
+    //transition: 0.09s all linear;
+}
+
+/**
+ * News item styling.
+ */
+[name="news-tab"] .list {
+  img {
+    max-width: 100%;
+  }
+  .item {
+    border-width: 1px 1px 0;
+  }
+  .item h3 {
+    white-space: normal;
+  }
+  .item.ion-accordion.item-body {
+    border-width: 0;
+  }
+}
+
+.list .item.item-accordion.ng-hide {
+    line-height: 0px;
+}
+
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+    display: block !important;
+}
+
+.resize-images {
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.title-image {
+    float: left;
+    max-height: 100%;
+}
+
+// .tab-item.noIcon {
+//     padding-top: 15px;
+//     .tab-title {
+//         font-size: 150%;
+//     }
+// }
+
+// .bar-header {
+//   height: 65px;
+// }
+
+// .bar-header > * {
+//   margin-top: 10px !important;
+// }
+
+// .tab-nav {
+//   margin-top: 20px;
+//   background-color: $tab-item-inactive !important;
+//   border-bottom: 1px solid $tab-item-inactive !important;
+// }
+
+
+// .list .item:first-of-type {
+// 	margin-top: 19px;
+// }
+
+.item-icon-right .ion-close {
+	font-size: 18px !important;
+}
+
+// .tab-item {
+// 	border-bottom: 0 !important;
+// }
+// .tab-item-active {
+// 	background-color: $non-eye-burning-eff-red !important;
+	
+// }
+
+// .tab-item:not(.tab-item-active) span {
+// 	color: #fff;
+// 	opacity: 1;
+// }
+
+// change to android share
+
+.ion-ios-upload-outline::before {
+    content: "\f3ac" !important
 }

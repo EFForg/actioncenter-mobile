@@ -1,0 +1,94 @@
+/* Open Sans @font-face kit */
+
+// @font-face {
+//   font-family: 'Open Sans';
+//   src: url('#{$ionicons-font-path}/OpenSans-Light.woff') format('woff');
+//   font-weight: 300;
+//   font-style: normal;
+// }
+
+// @font-face {
+//   font-family: 'Open Sans';
+//   src: url('#{$ionicons-font-path}/OpenSans-Regular.woff') format('woff');
+//   font-weight: 400;
+//   font-style: normal;
+// }
+
+// @font-face {
+//   font-family: 'Open Sans';
+//   src: url('#{$ionicons-font-path}/OpenSans-Bold.woff') format('woff');
+//   font-weight: bold;
+//   font-style: normal;
+// }
+
+
+// @font-face {
+//   font-family: 'Cooper Hewitt';
+//   src: url('#{$ionicons-font-path}/CooperHewitt-Light.woff') format('woff');
+//   font-weight: 300;
+//   font-style: normal;
+// }
+
+
+// @font-face {
+//   font-family: 'Cooper Hewitt';
+//   src: url('#{$ionicons-font-path}/CooperHewitt-Book.woff') format('woff');
+//   font-weight: normal;
+//   font-style: normal;
+// }
+
+
+// @font-face {
+//   font-family: 'Cooper Hewitt';
+//   src: url('#{$ionicons-font-path}/CooperHewitt-Semibold.woff') format('woff');
+//   font-weight: 500;
+//   font-style: normal;
+// }
+
+// @font-face {
+//   font-family: 'Cooper Hewitt';
+//   src: url('#{$ionicons-font-path}/CooperHewitt-Heavy.woff') format('woff');
+//   font-weight: bold;
+//   font-style: normal;
+// }
+
+
+
+@font-face {
+  font-family: 'Source Sans';
+  src: url('#{$ionicons-font-path}/SourceSansPro-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Source Sans';
+  src: url('#{$ionicons-font-path}/SourceSansPro-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Source Sans';
+  src: url('#{$ionicons-font-path}/SourceSansPro-Semibold.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Sans';
+  src: url('#{$ionicons-font-path}/SourceSansPro-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Attempt to override Ionicons font rule (doesn't fully work). */
+
+@font-face {
+  font-family: $ionicons-font-family;
+  src: url("#{$ionicons-font-path}/ionicons.woff?v=#{$ionicons-version}") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}

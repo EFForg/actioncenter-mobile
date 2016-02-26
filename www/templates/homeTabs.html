@@ -1,0 +1,19 @@
+<ion-tabs class="tabs-stable tabs-icon-top">
+
+    <ion-tab title="ACTION" icon="ion-speakerphone" href="#/acm/homeTabs/action">
+        <ion-nav-view name="action-tab"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab title="NEWS" icon="ion-ios-paper" href="#/acm/homeTabs/news">
+        <ion-nav-view name="news-tab"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab title="MORE" icon="ion-information-circled" href="#/acm/homeTabs/more">
+        <ion-nav-view name="more-tab"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab title="DONATE" icon="ion-ios-heart" ng-click="goToUrl('https://supporters.eff.org/donate/online-activism')">
+        <ion-nav-view name="donate-tab"></ion-nav-view>
+    </ion-tab>
+
+</ion-tabs>

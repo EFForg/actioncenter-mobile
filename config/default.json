@@ -23,7 +23,9 @@
       "FACEBOOK": "Download EFF's mobile app and get instant alerts when they need your help: %s",
       "TWITTER": "Help out @EFF by downloading their Android App and get instant action alerts:",
       "OTHER": "Download EFF's mobile app and get instant alerts when they need your help:"
-    }
+    },
+    "TITLE": "Share This App",
+    "TEXT": "Help us spread the word about this app."
   },
 
   "CREDENTIALS": {

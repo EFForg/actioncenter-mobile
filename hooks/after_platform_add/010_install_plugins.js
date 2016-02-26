@@ -15,7 +15,8 @@ var plugins = {
   'nl.x-services.plugins.socialsharing': 'https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git',
   'org.apache.cordova.console': 'org.apache.cordova.console',
   'org.apache.cordova.device': 'org.apache.cordova.device',
-  'org.apache.cordova.statusbar': 'org.apache.cordova.statusbar'
+  'org.apache.cordova.statusbar': 'org.apache.cordova.statusbar',
+  'org.apache.cordova.whitelist' : 'org.apache.cordova.whitelist',
 };
 
 var installPlugins = function(installedPlugins) {

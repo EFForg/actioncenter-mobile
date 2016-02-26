@@ -7,17 +7,13 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
 
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+
     <link href="css/eff.min.css" rel="stylesheet">
   </head>
 
   <body ng-app="acm" animation="slide-left-right-ios7" class="app-body">
-
-    <ion-nav-bar class="bar-stable nav-title-slide-ios7">
-      <!--TODO(leah): Figure out how this looks / works on Android-->
-      <ion-nav-back-button class="button-icon icon ion-ios7-arrow-back">
-        Back
-      </ion-nav-back-button>
-    </ion-nav-bar>
 
     <ion-nav-view animation="slide-left-right"></ion-nav-view>
 
