@@ -68,6 +68,20 @@ var APIService = function ($http, acmDeviceLanguage) {
     },
 
     /**
+     * Unregisters a device id from the backend.
+     *
+     * @param {string} deviceId The id of the device to register (registration_id for GCM etc.)
+     * @param success
+     * @param error
+     */
+    unregisterDeviceForNotifications: function (deviceId, success, error) {
+      var url = sprintf(
+        '%s/%s/subscriptions/%s', appSettings['API']['ENDPOINT'], appSettings['API']['VERSION'], deviceId);
+      var wrappedCall = retryWrapper($http.delete, [url], success, error);
+      wrappedCall();
+    },
+
+    /**
      * Sends a stack trace to the backend,
      */
     reportError: function (err) {

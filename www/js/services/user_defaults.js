@@ -17,6 +17,7 @@ var UserDefaultsService = function () {
       ACTION: 'mostRecentAction',
       ACTION_URL: 'mostRecentActionURL',
       REGISTERED_FOR_PUSH: 'registeredForPush',
+      REGISTERED_DEVICE_ID: 'registeredDeviceId',
       PUSH_ENABLED: 'pushEnabled',
       DELETED_ACTIONS: 'deletedActions'
     }),

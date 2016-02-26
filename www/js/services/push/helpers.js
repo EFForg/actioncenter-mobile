@@ -30,7 +30,8 @@ var PushHelpersService = function (acmUserDefaults, acmAPI) {
 
     registerDeviceId: function (deviceId) {
       var success = function () {
-        acmUserDefaults.setUserDefault(acmUserDefaults.REGISTERED_FOR_PUSH, true);
+        acmUserDefaults.setUserDefault(acmUserDefaults.keys.REGISTERED_FOR_PUSH, true);
+        acmUserDefaults.setUserDefault(acmUserDefaults.keys.REGISTERED_DEVICE_ID, deviceId);
       };
 
       var error = function (err) {
@@ -41,6 +42,18 @@ var PushHelpersService = function (acmUserDefaults, acmAPI) {
       // returned on registration. However, due to privacy concerns, the app is intended to record
       // as little information as possible, so just ping the server each time.
       acmAPI.registerDeviceForNotifications(deviceId, success, error);
+    },
+
+    unregisterDeviceId: function (deviceId) {
+      var success = function () {
+        acmUserDefaults.setUserDefault(acmUserDefaults.keys.REGISTERED_FOR_PUSH, false);
+        acmUserDefaults.setUserDefault(acmUserDefaults.keys.REGISTERED_DEVICE_ID, false);
+      };
+
+      var error = function (err) {
+        console.error('Unable to unregister device from push server: ' + err);
+      };
+      acmAPI.unregisterDeviceForNotifications(deviceId, success, error);
     },
 
     truncateString: function (string, length) {

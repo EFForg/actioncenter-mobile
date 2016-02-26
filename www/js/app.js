@@ -203,7 +203,7 @@ actionCenterMobile.run(function (
         });
       }
 
-      if (!acmUserDefaults.getUserDefault(acmUserDefaults.REGISTERED_FOR_PUSH)) {
+      if (!acmUserDefaults.getUserDefault(acmUserDefaults.keys.REGISTERED_FOR_PUSH)) {
         registerForPush();
       }
 
