@@ -2,7 +2,7 @@
  * Parent controller.
  */
 
-var ActionCenterCtrl = function ($scope, $ionicPopover, acmUserDefaults) {
+var ActionCenterCtrl = function ($scope, $ionicPopover, acmPushNotification, acmPushNotificationHelpers, acmUserDefaults) {
   $scope.preferences = {};
   $scope.preferences.pushNotificationsEnabled = acmUserDefaults.getUserDefault(acmUserDefaults.keys.PUSH_ENABLED) !== false;
 
@@ -22,6 +22,13 @@ var ActionCenterCtrl = function ($scope, $ionicPopover, acmUserDefaults) {
 
   $scope.togglePushNotifications = function () {
     acmUserDefaults.setUserDefault(acmUserDefaults.keys.PUSH_ENABLED, $scope.preferences.pushNotificationsEnabled);
+    var deviceId = acmUserDefaults.getUserDefault(acmUserDefaults.keys.REGISTERED_DEVICE_ID);
+    if (!$scope.preferences.pushNotificationsEnabled && deviceId) {
+      acmPushNotificationHelpers.unregisterDeviceId(deviceId);
+    }
+    else {
+      acmPushNotification.register();
+    }
   };
 
 };

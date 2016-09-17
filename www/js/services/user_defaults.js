@@ -16,7 +16,9 @@ var UserDefaultsService = function () {
       ACTION_TITLE: 'mostRecentActionTitle',
       ACTION: 'mostRecentAction',
       ACTION_URL: 'mostRecentActionURL',
+      ACTION_READ: 'mostRecentActionRead',
       REGISTERED_FOR_PUSH: 'registeredForPush',
+      REGISTERED_DEVICE_ID: 'registeredDeviceId',
       PUSH_ENABLED: 'pushEnabled',
       DELETED_ACTIONS: 'deletedActions'
     }),
@@ -46,6 +48,14 @@ var UserDefaultsService = function () {
 
     hasReceivedAction: function () {
       return this.getUserDefault(this.keys.ACTION) !== null;
+    },
+
+    hasUnreadAction: function () {
+      return this.hasReceivedAction() && this.getUserDefault(this.keys.ACTION) !== this.getUserDefault(this.keys.ACTION_READ);
+    },
+
+    hasReadAction: function () {
+      this.setUserDefault(this.keys.ACTION_READ, this.getUserDefault(this.keys.ACTION));
     }
 
   };

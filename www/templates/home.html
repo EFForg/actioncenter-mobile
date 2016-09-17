@@ -21,7 +21,7 @@
     </div>
 
     <div class="col share-button">
-      <div class="buttons share-button-wrapper">
+      <div class="buttons share-button-wrapper" ng-if="!actionInfo.url">
         <button class="button transparent" ng-click="openShareIntent()">
           <i class="ion-ios-upload-outline"></i> Share this app
         </button>
