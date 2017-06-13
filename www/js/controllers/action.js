@@ -16,6 +16,7 @@ var ActionCtrl = function ($scope, $http, x2js, $ionicModal, $ionicLoading, $ion
     var xmlDoc = x2js.parseXmlString(response.data);
     var json = x2js.xml2json(xmlDoc);
     $scope.data.actionItems = json.feed.entry;
+    $scope.extractEntryImages();
     $scope.addExtraShareAction();
   }, function (response) {
     // Action feed failed to load.
@@ -26,6 +27,15 @@ var ActionCtrl = function ($scope, $http, x2js, $ionicModal, $ionicLoading, $ion
     // We add an extra action into those we get from RSS, that encourages the users
     // to tell their contacts about the app.
     $scope.data.actionItems.splice(0, 0, acmSharing.shareAppAsAction());
+  };
+
+  $scope.extractEntryImages = function () {
+    $scope.data.actionItems.forEach(function(action) {
+      if (action.link.forEach) {
+        var link = action.link.find(function(link) { return link._rel == 'enclosure' });
+        action.image = link ? link._href : null;
+      }
+    });
   };
 
   $scope.showActionModal = function (actionItem) {
