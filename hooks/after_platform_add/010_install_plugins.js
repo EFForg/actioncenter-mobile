@@ -9,7 +9,6 @@ var exec = require('child_process').exec;
 var plugins = {
   'com.ohh2ahh.plugins.appavailability': 'https://github.com/ohh2ahh/AppAvailability.git',
   'com.ionic.keyboard': 'com.ionic.keyboard',
-  'org.apache.cordova.globalization': 'org.apache.cordova.globalization',
   'com.phonegap.plugins.PushPlugin': 'https://github.com/phonegap-build/PushPlugin.git',
   'de.appplant.cordova.plugin.local-notification': 'de.appplant.cordova.plugin.local-notification',
   'nl.x-services.plugins.socialsharing': 'https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git',
