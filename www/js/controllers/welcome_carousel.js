@@ -11,12 +11,8 @@ var WelcomeCarouselCtrl = function ($scope, $state, acmUserDefaults) {
   ];
 
   // Tweak the second slide for non-US users.
-  if ('globalization' in navigator) {
-    navigator.globalization.getPreferredLanguage(function (language) {
-      if (language.value.slice(-2) !== 'US') {
-        $scope.slides[1] = 'ng_partials/welcome/international.html';
-      }
-    });
+  if ((navigator.language || '').slice(-2).toUpperCase() !== 'US') {
+    $scope.slides[1] = 'ng_partials/welcome/international.html';
   }
 
   $scope.openShareAppPage = function () {
