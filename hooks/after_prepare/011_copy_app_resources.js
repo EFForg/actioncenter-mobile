@@ -73,11 +73,17 @@ var copyAndroidResources = function(imgDir, projectRoot) {
   var androidIconDir = path.join(imgDir, 'app_icons/android');
   var androidIconDirs = fetchDirectories(androidIconDir);
 
-  for (var i = 0, dirToCopy, destDir, srcDir; i < androidIconDirs.length; i++) {
+  for (var i = 0, dirToCopy, destDir, srcDir, density; i < androidIconDirs.length; i++) {
     dirToCopy = androidIconDirs[i];
     srcDir = path.join(androidIconDir, dirToCopy);
     destDir = path.join(androidResDir, dirToCopy);
     copyResources(srcDir, destDir);
+    density = dirToCopy.split('-').pop();
+    // Copy icon to mipmap directories.
+    copyResources(srcDir, path.join(androidResDir, 'mipmap-' + density));
+    // Remove Cordova default splashscreen.
+    fs.unlink(path.join(androidResDir, 'drawable-land-' + density, 'screen.png'), (err) => {});
+    fs.unlink(path.join(androidResDir, 'drawable-port-' + density, 'screen.png'), (err) => {});
   }
 };
 
