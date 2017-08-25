@@ -1,9 +1,9 @@
 language: node_js
 node_js:
-  - "4.3"
+  - "4"
+  - "6"
 before_script:
-  - npm install -g bower
-  - npm install -g gulp
+  - npm install -g bower gulp-cli
   - bower install
   - gulp build
 script: gulp test
