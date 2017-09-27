@@ -1,5 +1,22 @@
 {
 
-  "MODE": "development"
+  "MODE": "development",
+
+  "API": {
+    "VERSION": 1,
+    "ENDPOINT": "https://push.dev.eff.org/api"
+  },
+
+  "CREDENTIALS": {
+
+    "ANDROID": {
+      "senderID": "574432739704"
+    },
+
+    "IOS": {
+
+    }
+
+  }
 
 }
