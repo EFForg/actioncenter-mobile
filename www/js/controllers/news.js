@@ -25,7 +25,11 @@ var NewsCtrl = function ($scope, $http, x2js, $ionicLoading) {
   });
 
   $scope.getSubheader = function (newsItem) {
-    return newsItem.creator.__text;
+    var creators = Array.isArray(newsItem.creator) ? newsItem.creator
+                                                   : [newsItem.creator];
+    return creators.map(function(creator) {
+      return creator.__text;
+    }).join(', ');
   };
 
   $scope.toggleItem = function (item) {
