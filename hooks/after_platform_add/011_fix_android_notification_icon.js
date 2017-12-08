@@ -9,9 +9,9 @@
  *
  */
 
-var lodash = require('lodash');
+
 var path = require('path');
-var replace = require('replace');
+var exec = require('child_process').exec;
 
 var projectRoot = path.join(__dirname, '../..');
 
@@ -19,14 +19,5 @@ var projectRoot = path.join(__dirname, '../..');
 var gcmIntentServicePath = path.join(
   projectRoot, 'platforms/android/src/com/plugin/gcm/GCMIntentService.java');
 
-replace({
-  regex: /context.getApplicationInfo\(\).icon/,
-  replacement: 'R.drawable.notification_icon',
-  paths: [gcmIntentServicePath]
-});
-
-replace({
-  regex: /package com.plugin.gcm;/,
-  replacement: '// NOTE: THIS FILE HAS BEEN MODIFIED BY THE hooks/011_fix_android_notification_icon.js SCRIPT\n\npackage com.plugin.gcm;\n\nimport org.eff.actioncenter.R;',
-  paths: [gcmIntentServicePath]
-});
+exec('sed -i "s@context.getApplicationInfo().icon@R.drawable.notification_icon@" "' + gcmIntentServicePath + '"');
+exec('sed -i "s@package com.plugin.gcm;@\\n// NOTE: THIS FILE HAS BEEN MODIFIED BY THE hooks/011_fix_android_notification_icon.js SCRIPT\\npackage com.plugin.gcm;\\n\import org.eff.actioncenter.R;\\n@" "' + gcmIntentServicePath + '"');
