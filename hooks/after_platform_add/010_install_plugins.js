@@ -15,7 +15,7 @@ var plugins = {
   'org.apache.cordova.console': 'org.apache.cordova.console',
   'org.apache.cordova.device': 'org.apache.cordova.device',
   'org.apache.cordova.statusbar': 'org.apache.cordova.statusbar',
-  'org.apache.cordova.whitelist' : 'org.apache.cordova.whitelist',
+  'org.apache.cordova.whitelist' : 'cordova-plugin-whitelist',
 };
 
 var installPlugins = function(installedPlugins) {
