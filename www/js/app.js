@@ -27,7 +27,9 @@ var appSettings = require('../build/app_settings');
 var Raven = require('./raven-client');
 window.Raven = Raven;
 
-var acmRequires = ['ionic', 'ngCordova', 'xml'];
+require('ionic-native');
+
+var acmRequires = ['ionic', 'ionic.native', 'xml'];
 
 if (Raven) {
   acmRequires.unshift('ngRaven');

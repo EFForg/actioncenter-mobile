@@ -5,7 +5,7 @@
     "angular": "~1.4.3",
     "angular-mocks": "~1.4.8",
     "ionic": "v1.2.1",
-    "ngCordova": "v0.1.7-alpha",
+    "ionic-native": "~2.0.3",
     "open-sans-fontface": "1.1.0",
     "sprintf": "~1.0.0",
     "breakpoint-sass": "~2.6.1"
@@ -13,7 +13,7 @@
   "dependencies": {
     "angular": "~1.4.3",
     "ionic": "v1.1.0",
-    "ngCordova": "v0.1.7-alpha",
+    "ionic-native": "~2.0.3",
     "open-sans-fontface": "1.1.0",
     "sprintf": "~1.0.0",
     "angular-xml": "~2.2.1"

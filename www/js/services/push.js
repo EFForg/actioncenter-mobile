@@ -47,8 +47,13 @@ var PushNotificationService = function (
           };
         }
 
-        $cordovaPush.register(pushConfig).then(
-            devicePushHandler.registrationSuccess, devicePushHandler.registrationError);
+        var pushObject = $cordovaPush.init(pushConfig);
+        pushObject.on('registration', function(registrationid, registrationType) {
+          devicePushHandler.registrationSuccess();
+        });
+        pushObject.on('error', function(error) {
+          devicePushHandler.registrationError(error);
+        });
       }
     },
 

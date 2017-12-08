@@ -3,13 +3,18 @@
   "version": "0.0.1",
   "description": "EFF Action Center mobile app",
   "dependencies": {
+    "@ionic-native/push": "^4.4.2",
     "browserify": "^14.4.0",
     "cordova-android": "^6.2.3",
+    "cordova-plugin-app-event": "^1.2.1",
     "cordova-plugin-appavailability": "git+https://github.com/ohh2ahh/AppAvailability.git",
+    "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-x-socialsharing": "git+https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git",
-    "de.appplant.cordova.plugin.local-notification": "~0.8.5",
+    "de.appplant.cordova.plugin.local-notification": "^0.8.5",
     "es6-promise-plugin": "^4.1.0",
     "express": "4.8.1",
+    "ionic-native": "^2.9.0",
+    "phonegap-plugin-push": "^1.9.0",
     "raven": "^2.2.1",
     "raven-js": "^3.20.1"
   },
@@ -73,6 +78,9 @@
       "cordova-plugin-x-socialsharing": {},
       "cordova-plugin-appavailability": {},
       "de.appplant.cordova.plugin.local-notification": {}
+      "phonegap-plugin-push": {
+        "SENDER_ID": "715228522171"
+      }
     }
   }
 }
