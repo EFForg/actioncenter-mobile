@@ -76,7 +76,7 @@
     "plugins": {
       "cordova-plugin-x-socialsharing": {},
       "cordova-plugin-appavailability": {},
-      "de.appplant.cordova.plugin.local-notification": {}
+      "de.appplant.cordova.plugin.local-notification": {},
       "phonegap-plugin-push": {
         "SENDER_ID": "715228522171"
       }
