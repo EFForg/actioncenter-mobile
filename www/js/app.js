@@ -24,8 +24,16 @@ var angular = require('angular');
 
 var appSettings = require('../build/app_settings');
 
+var Raven = require('./raven-client');
+window.Raven = Raven;
 
-var actionCenterMobile = angular.module('acm', ['ionic', 'ngCordova', 'xml']);
+var acmRequires = ['ionic', 'ngCordova', 'xml'];
+
+if (Raven) {
+  acmRequires.unshift('ngRaven');
+}
+
+var actionCenterMobile = angular.module('acm', acmRequires);
 
 /**
  * Captures application errors and pipes them to the server.
