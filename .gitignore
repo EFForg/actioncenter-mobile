@@ -1,4 +1,5 @@
 node_modules
+*.keystore
 
 # Ignore the bower components directories
 bower_components
