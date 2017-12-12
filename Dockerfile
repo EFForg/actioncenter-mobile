@@ -39,7 +39,6 @@ RUN cd /root \
  && curl -Lo gradle.zip https://services.gradle.org/distributions/gradle-4.1-all.zip \
  && unzip gradle.zip \
  && mv gradle-4.1 gradle \
- && rm gradle.zip \
  && mkdir .gradle
 
 
@@ -62,6 +61,12 @@ RUN mkdir ./platforms ./plugins
 RUN cordova platform add android --verbose; true
 RUN cordova plugin add cordova-plugin-whitelist@1.3.3
 RUN cordova plugin add de.appplant.cordova.plugin.local-notification
+
+# Build Gradle wrapper
+ENV CORDOVA_ANDROID_GRADLE_DISTRIBUTION_URL=gradle.zip
+RUN mkdir -p platforms/android/gradle/wrapper \
+ && mv /root/gradle.zip platforms/android/gradle/wrapper \
+ && cordova clean
 
 COPY ./.eslintrc \
      ./build.sh \
