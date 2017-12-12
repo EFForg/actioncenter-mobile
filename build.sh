@@ -33,10 +33,9 @@ if [ $GULP -eq 1 ]; then
     cordova clean
 
     npm install
-    gulp build
+    NODE_ENV=production gulp build
 fi
 
-export NODE_ENV=production
 cordova build --release android
 
 cp platforms/android/build/outputs/apk/release/android-release-unsigned.apk android-release-unsigned.apk
