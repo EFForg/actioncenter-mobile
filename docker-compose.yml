@@ -1,0 +1,14 @@
+version: '2.1'
+
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    command: gulp watch
+    volumes:
+      - ./www/img:/opt/app/www/img
+      - ./www/js:/opt/app/www/js
+      - ./www/templates:/opt/app/www/templates
+      - ./releases:/opt/app/releases
+    ports:
+      - '4001:4001'
