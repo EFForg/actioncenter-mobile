@@ -35,7 +35,7 @@ The app is written using Cordova / Ionic, deploying an Angular webapp inside a U
 ```
 npm install
 bower install
-gulp build
+gulp build # may get an error about missing module '../build/acmTemplates', just build again
 ```
 
 ## Setting up Cordova
