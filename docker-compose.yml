@@ -10,6 +10,8 @@ services:
       - ./www/img:/opt/app/www/img
       - ./www/js:/opt/app/www/js
       - ./www/templates:/opt/app/www/templates
+      - ./www/dist:/opt/app/www/dist
+      - ./gulp:/opt/app/gulp
       - ./releases:/opt/app/releases
 
       - ./google-services.json:/opt/app/platforms/android/google-services.json
