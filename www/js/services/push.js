@@ -8,6 +8,7 @@
 var appSettings = require('../../build/app_settings');
 var pushConstants = require('./push/constants');
 
+import { Push } from '@ionic-native/push';
 
 var PushNotificationService = function (
   $rootScope, $state, $cordovaPush, acmGCMPushNotification, acmAPNSPushNotification) {
