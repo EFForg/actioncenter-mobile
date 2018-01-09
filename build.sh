@@ -2,15 +2,15 @@
 
 set -e
 
-GULP=0
+GULP=1
 SIGN=0
 KEYSTORE_FILE=eff-alerts.keystore
 KEYSTORE_ALIAS=
 
 while [ $# -ne 0 ]; do
     case $1 in
-        --gulp)
-            GULP=1
+        --no-gulp)
+            GULP=0
             shift
             ;;
 
@@ -21,7 +21,7 @@ while [ $# -ne 0 ]; do
             ;;
 
         *)
-            echo "Usage: $0 [--gulp] [--sign alias]"
+            echo "Usage: $0 [--no-gulp] [--sign alias]"
             exit 1
             ;;
 
