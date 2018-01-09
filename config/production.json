@@ -5,18 +5,5 @@
   "API": {
     "VERSION": 1,
     "ENDPOINT": "https://push.eff.org/api"
-  },
-
-  "CREDENTIALS": {
-
-    "ANDROID": {
-      "senderID": "715228522171"
-    },
-
-    "IOS": {
-
-    }
-
   }
-
 }

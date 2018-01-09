@@ -4,11 +4,15 @@ services:
   app:
     build: .
     restart: unless-stopped
+    env_file: .env
     command: gulp watch
     volumes:
       - ./www/img:/opt/app/www/img
       - ./www/js:/opt/app/www/js
       - ./www/templates:/opt/app/www/templates
       - ./releases:/opt/app/releases
+
+      - ./google-services.json:/opt/app/platforms/android/google-services.json
+      - ./eff-alerts.keystore:/opt/app/eff-alerts.keystore
     ports:
       - '4001:4001'

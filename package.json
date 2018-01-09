@@ -3,9 +3,14 @@
   "version": "0.0.1",
   "description": "EFF Action Center mobile app",
   "dependencies": {
+    "@angular/core": "^5.1.1",
+    "@ionic-native/core": "^4.5.2",
     "@ionic-native/push": "^4.4.2",
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^7.3.0",
     "browserify": "^14.4.0",
-    "cordova-android": "^6.2.3",
+    "cordova-android": "^6.4.0",
     "cordova-plugin-app-event": "^1.2.1",
     "cordova-plugin-appavailability": "git+https://github.com/ohh2ahh/AppAvailability.git",
     "cordova-plugin-device": "^1.1.7",
@@ -14,9 +19,11 @@
     "es6-promise-plugin": "^4.1.0",
     "express": "4.8.1",
     "ionic-native": "^2.9.0",
-    "phonegap-plugin-push": "^1.9.0",
+    "phonegap-plugin-push": "^2.1.2",
     "raven": "^2.2.1",
-    "raven-js": "^3.20.1"
+    "raven-js": "^3.20.1",
+    "rxjs": "^5.5.5",
+    "zone.js": "^0.8.18"
   },
   "optionalDependencies": {
     "ios-deploy": "^1.1.0"
@@ -77,9 +84,8 @@
       "cordova-plugin-x-socialsharing": {},
       "cordova-plugin-appavailability": {},
       "de.appplant.cordova.plugin.local-notification": {},
-      "phonegap-plugin-push": {
-        "SENDER_ID": "715228522171"
-      }
+      "phonegap-plugin-push": {},
+      "cordova-plugin-whitelist": {}
     }
   }
 }

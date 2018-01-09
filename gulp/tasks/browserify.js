@@ -6,6 +6,7 @@ var browserify = require('browserify');
 var gulp = require('gulp');
 var source = require('vinyl-source-stream');
 var watchify  = require('watchify');
+var babelify  = require('babelify');
 
 var config = require('../config').browserify;
 var bundleLogger = require('../util/bundle_logger');
@@ -17,7 +18,8 @@ gulp.task('browserify', function() {
     // Required watchify args
     cache: {}, packageCache: {}, fullPaths: true,
     entries: config.entries,
-    debug: config.debug
+    debug: config.debug,
+    transform: [["babelify", { "global": true, "presets": ["es2015"] }]]
   });
 
   var reportFinished = function() {

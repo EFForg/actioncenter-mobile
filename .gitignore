@@ -1,5 +1,7 @@
 node_modules
 *.keystore
+google-services.json
+.env
 releases/*
 
 # Ignore the bower components directories

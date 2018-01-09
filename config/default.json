@@ -29,13 +29,6 @@
   },
 
   "CREDENTIALS": {
-    "ANDROID": {
-      "senderID": ""
-    },
-
-    "IOS": {
-
-    }
+    "SENTRY_DSN": ""
   }
-
 }

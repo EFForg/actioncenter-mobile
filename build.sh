@@ -4,7 +4,7 @@ set -e
 
 GULP=0
 SIGN=0
-KEYSTORE_FILE=
+KEYSTORE_FILE=eff-alerts.keystore
 KEYSTORE_ALIAS=
 
 while [ $# -ne 0 ]; do
@@ -16,8 +16,7 @@ while [ $# -ne 0 ]; do
 
         --sign)
             SIGN=1
-            KEYSTORE_FILE=$(echo "$2" | cut -d : -f 1)
-            KEYSTORE_ALIAS=$(echo "$2" | cut -d : -f 2)
+            KEYSTORE_ALIAS=$2
             shift 2
             ;;
 

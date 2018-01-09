@@ -29,7 +29,7 @@ var PushNotificationService = function (
       var platform = ionic.Platform.platform().toUpperCase();
       var devicePushHandler = this.getPlatformPushService_(platform);
       if (!angular.isUndefined(devicePushHandler)) {
-        var pushConfig = appSettings['CREDENTIALS'][platform];
+        var pushConfig = {};
 
         if (platform === 'IOS') {
           angular.extend(pushConfig, {
@@ -47,6 +47,9 @@ var PushNotificationService = function (
           };
         }
 
+        pushConfig.vibrate = true;
+        pushConfig.forceShow = true;
+
         var pushObject = $cordovaPush.init({ android: pushConfig });
         pushObject.on('registration', function(registrationid, registrationType) {
           devicePushHandler.registrationSuccess(registrationid);
@@ -61,6 +64,17 @@ var PushNotificationService = function (
         });
 
         pushObject.subscribe(null, function() {});
+
+        var ionicPush = new Push();
+        ionicPush.createChannel({
+          id: null,
+          description: "EFF Alerts",
+          importance: 3
+        }).then(function() {
+          console.log("Notification channel created.");
+        }, function(e) {
+          console.error("Error creating notification channel: " + JSON.stringify(e));
+        });
       }
     },
 
