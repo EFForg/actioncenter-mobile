@@ -120,11 +120,18 @@ module.exports = {
       port: 9876,
 
       browsers: [
-        'PhantomJS'
+        'GoogleChromeHeadless'
       ],
 
+      customLaunchers: {
+        GoogleChromeHeadless: {
+          base: 'ChromeHeadless',
+          flags: ['--no-sandbox']
+        }
+      },
+
       plugins: [
-        'karma-phantomjs-launcher',
+        'karma-chrome-launcher',
         'karma-mocha',
         'karma-chai',
         'karma-sinon'
