@@ -37,25 +37,6 @@ if (Raven) {
 
 var actionCenterMobile = angular.module('acm', acmRequires);
 
-/**
- * Captures application errors and pipes them to the server.
- *
- * EFF has a strict privacy policy that precludes using standard err reporting. To give us a shot
- * at acting on application errors, this handler captures any that bubble all the way up to window
- * and passes them to an error bus function to pipe them to the backend.
- */
-actionCenterMobile.factory('$exceptionHandler', function ($injector, $log) {
-
-  var acmAPI;
-
-  return function (exception, cause) {
-    acmAPI = acmAPI || $injector.get('acmAPI');
-    acmAPI.reportError(exception);
-    $log.error(exception, cause);
-  };
-
-});
-
 actionCenterMobile.config(function ($ionicConfigProvider) {
   $ionicConfigProvider
     .tabs.position('bottom')
