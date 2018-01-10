@@ -7,11 +7,10 @@ Deploying the app
 
 ## Update config settings
 
-Check that you've updated [your configuration settings](/config/production.json) file to reflect the correct values:
+Check that you've updated [your configuration settings](/config/production.json) file (or the corresponding variables in `.env`) to reflect the correct values:
 
 * Delete or remove the local.json file in the config directory. Otherwise this will overwrite the values in production.json
 * <code>API.ENDPOINT</code>: update to point this at the remote API server
-* <code>CREDENTIALS.ANDROID.SENDER_ID</code>: update this to the id of the [Google Developers Console project](https://cloud.google.com/console) project you created to run this app
 * <code>SHARING.URL</code>: update this to the URL to use when the user uses a share action from within the app
 * <code>SHARING.MESSAGES</code>: update these to reflect the custom sharing messages your organization wants to use
 
@@ -31,10 +30,9 @@ Please see the Ionic - [Publishing your app page for full details](http://ionicf
 
 ## Creating a release build
 
-```
-export NODE_ENV=production
-gulp build
-cordova build --release android
-```
+Ensure you have `google-services.json` and `eff-alerts.keystore` in the root of the project, then run:
 
-Please refer to the "Android Publishing" section of the [Ionic publishing guide](http://ionicframework.com/docs/guide/publishing.html) for details of how to sign the generated APK and prepare it for the app store.
+    sudo docker-compose run --rm app ./build --sign [keystore alias]
+
+This will build a signed APK and place it in the `releases/` directory.
+
