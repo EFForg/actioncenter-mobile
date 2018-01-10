@@ -7,6 +7,7 @@ services:
     env_file: .env
     command: gulp watch
     volumes:
+      - ./config:/opt/app/config
       - ./www/img:/opt/app/www/img
       - ./www/js:/opt/app/www/js
       - ./www/templates:/opt/app/www/templates
