@@ -53,7 +53,6 @@ actionCenterMobile.controller('DonateCtrl', require('./controllers/donate'));
 actionCenterMobile.controller('SettingsCtrl', require('./controllers/settings'));
 
 actionCenterMobile.factory('acmUserDefaults', require('./services/user_defaults'));
-actionCenterMobile.factory('acmAPI', require('./services/api'));
 actionCenterMobile.factory('acmDeviceLanguage', require('./services/language'));
 actionCenterMobile.factory('acmSharing', require('./services/sharing'));
 

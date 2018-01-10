@@ -1,15 +1,14 @@
 {
 
-  "API": {
-    "VERSION": 1,
-    "ENDPOINT": "http://127.0.0.1:5000/api"
-  },
-
   "APP": {
     "PUSH_CAPABLE_PLATFORMS": [
       "ANDROID",
       "IOS"
     ]
+  },
+
+  "NOTIFICATIONS": {
+    "TOPIC": ""
   },
 
   "SHARING": {

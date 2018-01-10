@@ -20,7 +20,7 @@ module.exports = {
     dest: BUILD_DIR,
     fileName: 'app_settings.js',
     settingsKeys: [
-      'API',
+      'NOTIFICATIONS',
       'APP',
       'CREDENTIALS',
       'SHARING'

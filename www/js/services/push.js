@@ -50,8 +50,10 @@ var PushNotificationService = function (
 
         pushConfig.vibrate = true;
         pushConfig.forceShow = true;
+        pushConfig.topics = [appSettings.NOTIFICATIONS.TOPIC];
 
         var pushObject = $cordovaPush.init({ android: pushConfig });
+
         pushObject.on('registration', function(registrationid, registrationType) {
           devicePushHandler.registrationSuccess(registrationid);
         });

@@ -8,7 +8,7 @@ var constants = require('./constants');
 
 
 var GCMNotificationService = function (
-  $state, $cordovaLocalNotifications, acmUserDefaults, acmAPI, acmPushNotificationHelpers) {
+  $state, $cordovaLocalNotifications, acmUserDefaults, acmPushNotificationHelpers) {
 
   var handleMessage = function (notification) {
     var isForeground = notification.foreground;

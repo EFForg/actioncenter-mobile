@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 
-var PushHelpersService = function (acmUserDefaults, acmAPI) {
+var PushHelpersService = function (acmUserDefaults) {
 
   var defaultsPayloadArr = [
     ['title', acmUserDefaults.keys.ACTION_TITLE],
@@ -38,11 +38,6 @@ var PushHelpersService = function (acmUserDefaults, acmAPI) {
       var error = function (err) {
         console.error('Unable to register device with push server: ' + JSON.stringify(err));
       };
-
-      // This could be skipped by checking whether or not a locally held copy of the id matches that
-      // returned on registration. However, due to privacy concerns, the app is intended to record
-      // as little information as possible, so just ping the server each time.
-      acmAPI.registerDeviceForNotifications(deviceId, success, error);
     },
 
     unregisterDeviceId: function (deviceId) {
@@ -54,7 +49,8 @@ var PushHelpersService = function (acmUserDefaults, acmAPI) {
       var error = function (err) {
         console.error('Unable to unregister device from push server: ' + err);
       };
-      acmAPI.unregisterDeviceForNotifications(deviceId, success, error);
+
+      // hmmmm
     },
 
     truncateString: function (string, length) {
