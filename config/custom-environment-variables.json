@@ -1,0 +1,9 @@
+{
+  "CREDENTIALS": {
+    "SENTRY_DSN": "SENTRY_DSN"
+  },
+
+  "API": {
+    "ENDPOINT": "PUSH_SERVER"
+  }
+}

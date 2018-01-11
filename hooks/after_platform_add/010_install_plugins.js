@@ -9,13 +9,12 @@ var exec = require('child_process').exec;
 var plugins = {
   'com.ohh2ahh.plugins.appavailability': 'https://github.com/ohh2ahh/AppAvailability.git',
   'com.ionic.keyboard': 'com.ionic.keyboard',
-  'com.phonegap.plugins.PushPlugin': 'https://github.com/phonegap-build/PushPlugin.git',
+  'com.phonegap.plugins.PushPlugin': 'phonegap-plugin-push@2.0.0',
   'de.appplant.cordova.plugin.local-notification': 'de.appplant.cordova.plugin.local-notification',
   'nl.x-services.plugins.socialsharing': 'https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git',
-  'org.apache.cordova.console': 'org.apache.cordova.console',
   'org.apache.cordova.device': 'org.apache.cordova.device',
   'org.apache.cordova.statusbar': 'org.apache.cordova.statusbar',
-  'org.apache.cordova.whitelist' : 'org.apache.cordova.whitelist',
+  'org.apache.cordova.whitelist' : 'cordova-plugin-whitelist',
 };
 
 var installPlugins = function(installedPlugins) {

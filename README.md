@@ -18,8 +18,6 @@ You should have received a copy of the GNU Affero General Public License along w
 * [Setting up Cordova](#setting-up-cordova)
 * [App Configuration](#app-configuration)
 * [Run tests](#run-tests)
-* [Running the server](#running-the-server)
-* [Running on device](#running-on-device)
 * [Angular App](#angular-app)
 
 ## Background Info
@@ -32,61 +30,23 @@ The app is written using Cordova / Ionic, deploying an Angular webapp inside a U
 
 ## Getting started
 
-```
-npm install
-bower install
-gulp build
-```
+Follow these instructions to develop EFF Alerts using Docker (recommended):
 
-## Setting up Cordova
+1. Install Docker ([instructions](https://docs.docker.com/engine/installation/)) and Docker Compose ([instructions](https://docs.docker.com/compose/install/)).
+2. `git clone https://github.com/EFForg/actioncenter-mobile.git`
+3. Copy `.env.example` to `.env`.
+4. Copy `google-services.json` into the project root (if it's not available, just create it as an empty file).
+5. Copy your Android Keystore into the project root at `eff-alerts.keystore` (only required if you are building a signed APK).
+6. Build the docker image: `sudo docker-compose build`
+7. Run the application: `sudo docker-compose up`
+8. Access the app in a web browser at http://localhost:4001/.
 
-Install the Cordova CLI tools
-
-```
-sudo npm install -g cordova
-```
-
-Set cordova dependencies up for the app
-
-```
-cordova platform add android
-// Required as the localnotification plugin doesn't install correctly via the install_plugins hook
-cordova plugin add de.appplant.cordova.plugin.local-notification && cordova prepare
-```
-
-## App Configuration
-
-App config is controlled via the [node-config](https://github.com/lorenwest/node-config) module.
-
-To set push credentials, create a local.json file under the [config dir](https://github.com/EFForg/actioncenter-mobile/tree/master/config) and override the CREDENTIALS setting.
-
-Alternately, you can use:
-* [Environment variables](https://github.com/lorenwest/node-config/wiki/Environment-Variables)
-* [Command line options](https://github.com/lorenwest/node-config/wiki/Command-Line-Overrides)
+NOTE: the app assumes the presence of various plugins that a browser doesn't have, so some actions, e.g. share buttons etc. will not work and will throw errors
 
 ## Run tests
 
 ```
-gulp test
-```
-
-## Running the server
-
-Spins up a local server to serve the app.
-
-NOTE: the app assumes the presence of various plugins that a browser doesn't have, so some actions, e.g. share buttons etc. will not work and will throw errors
-
-```
-gulp watch
-```
-
-## Running on device
-
-Gulp exposes two helper methods for running on device, these just wrap the respective ionic commands
-
-```
-gulp runAndroid
-gulp runIos
+sudo docker-compose exec app gulp test
 ```
 
 ## Angular app

@@ -2,7 +2,6 @@
 
 var exec = require('child_process').exec;
 var fs = require('fs');
-var lodash = require('lodash');
 var path = require('path');
 var sys = require('sys');
 
@@ -34,8 +33,8 @@ var copyResources = function(srcPath, destPath) {
 
 
 var copyFilesFromMapping = function(fileMap) {
-  lodash.forEach(fileMap, function(sourceFile, targetFile) {
-    copyResources(sourceFile, targetFile);
+  Object.keys(fileMap).forEach(function(sourceFile) {
+    copyResources(sourceFile, fileMap[sourceFile]);
   });
 };
 
@@ -48,19 +47,17 @@ var copyIosResources = function(imgDir, projectRoot) {
   var imgIconsDir = path.join(imgDir, 'app_icons/ios/square');
   var imgSplashDir = path.join(imgDir, 'splash/ios');
 
-  var defaultIconMapping = lodash.zipObject([
-    [path.join(iconsDir, 'icon-small.png'), path.join(imgIconsDir, 'icon-29.png')],
-    [path.join(iconsDir, 'icon-small@2x.png'), path.join(imgIconsDir, 'icon-29@2x.png')],
-    [path.join(iconsDir, 'icon.png'), path.join(imgIconsDir, 'icon-57.png')],
-    [path.join(iconsDir, 'icon@2x.png'), path.join(imgIconsDir, 'icon-57@2x.png')]
-  ]);
+  var defaultIconMapping = {};
+  defaultIconMapping[path.join(iconsDir, 'icon-small.png')] = path.join(imgIconsDir, 'icon-29.png');
+  defaultIconMapping[path.join(iconsDir, 'icon-small@2x.png')] =path.join(imgIconsDir, 'icon-29@2x.png');
+  defaultIconMapping[path.join(iconsDir, 'icon.png')] =path.join(imgIconsDir, 'icon-57.png');
+  defaultIconMapping[path.join(iconsDir, 'icon@2x.png')] =path.join(imgIconsDir, 'icon-57@2x.png');
   copyFilesFromMapping(defaultIconMapping);
 
-  var defaultSplashMapping = lodash.zipObject([
-    [path.join(splashDir, 'Default~iphone.png'), path.join(imgSplashDir, 'Default-portrait~iphone.png')],
-    [path.join(splashDir, 'Default@2x~iphone.png'), path.join(imgSplashDir, 'Default-portrait@2x~iphone4.png')],
-    [path.join(splashDir, 'Default-568h@2x~iphone.png'), path.join(imgSplashDir, 'Default-portrait@2x~iphone5.png')]
-  ]);
+  var defaultSplashMapping = {};
+  defaultSplashMapping[path.join(splashDir, 'Default~iphone.png')] = path.join(imgSplashDir, 'Default-portrait~iphone.png');
+  defaultSplashMapping[path.join(splashDir, 'Default@2x~iphone.png')] = path.join(imgSplashDir, 'Default-portrait@2x~iphone4.png');
+  defaultSplashMapping[path.join(splashDir, 'Default-568h@2x~iphone.png')] = path.join(imgSplashDir, 'Default-portrait@2x~iphone5.png');
   copyFilesFromMapping(defaultSplashMapping);
 
   copyResources(path.join(imgIconsDir, '*'), path.join(resourcesDir, 'icons'));

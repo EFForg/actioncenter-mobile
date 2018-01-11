@@ -8,12 +8,16 @@ var constants = require('./constants');
 
 
 var GCMNotificationService = function (
-  $state, $cordovaLocalNotification, acmUserDefaults, acmAPI, acmPushNotificationHelpers) {
+  $state, $cordovaLocalNotifications, acmUserDefaults, acmAPI, acmPushNotificationHelpers) {
 
-  var handleMessage = function (e) {
-    var isForeground = e.foreground;
+  var handleMessage = function (notification) {
+    var isForeground = notification.foreground;
 
-    acmPushNotificationHelpers.updateUserDefaults(e.payload);
+    acmPushNotificationHelpers.updateUserDefaults({
+      title: notification.title,
+      message: notification.message,
+      url: notification.additionalData.url
+    });
 
     var currentState = $state.current.name;
     if (isForeground) {
@@ -41,26 +45,11 @@ var GCMNotificationService = function (
     }
   };
 
-  var handlerLookup = {
-    'registered': function (e) {
-      acmPushNotificationHelpers.registerDeviceId(e.regid);
-    },
-    'message': handleMessage
-  };
-
   return {
-    handleNotification: function (e) {
-
-      var error = function (err) {
-        console.error('GCM error received: ' + err.msg);
-        // Not a lot that can be done here
-      };
-
-      // Default to firing the error handler if it's an unrecognized event type.
-      (handlerLookup[e.event] || error)(e);
-    },
+    handleNotification: handleMessage,
 
     registrationSuccess: function (event) {
+      acmPushNotificationHelpers.registerDeviceId(event.registrationId);
       // No-op, as the registration is handled via the event interface
       // NOTE: this doesn't actually indicate that the device registered remotely, it will fire even
       //       if the device is in airplane mode etc.
