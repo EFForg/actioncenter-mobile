@@ -166,15 +166,17 @@ actionCenterMobile.run(function (
   $rootScope, $state, $ionicHistory, $ionicPlatform, acmPushNotification, acmUserDefaults) {
 
   var registerForPush = function () {
-    // Do not register if user has disabled push notifications.
-    if (acmUserDefaults.getUserDefault(acmUserDefaults.keys.PUSH_ENABLED) === false) {
-      return;
-    }
     var platform = ionic.Platform.platform().toUpperCase();
 
     if (window.plugins !== undefined &&
         appSettings['APP']['PUSH_CAPABLE_PLATFORMS'].indexOf(platform) !== -1) {
       acmPushNotification.register();
+
+      if (acmUserDefaults.getUserDefault(acmUserDefaults.keys.PUSH_ENABLED) !== false) {
+        acmPushNotification.subscribe(function() {}, function(err) {
+          console.log("Couldn't subscribe to FCM topic: " + JSON.stringify(err));
+        });
+      }
     }
   };
 
