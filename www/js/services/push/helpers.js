@@ -29,28 +29,9 @@ var PushHelpersService = function (acmUserDefaults) {
     },
 
     registerDeviceId: function (deviceId) {
-      var success = function () {
-        console.log("successfully registered, saving device id: " + JSON.stringify(deviceId));
-        acmUserDefaults.setUserDefault(acmUserDefaults.keys.REGISTERED_FOR_PUSH, true);
-        acmUserDefaults.setUserDefault(acmUserDefaults.keys.REGISTERED_DEVICE_ID, deviceId);
-      };
-
-      var error = function (err) {
-        console.error('Unable to register device with push server: ' + JSON.stringify(err));
-      };
-    },
-
-    unregisterDeviceId: function (deviceId) {
-      var success = function () {
-        acmUserDefaults.setUserDefault(acmUserDefaults.keys.REGISTERED_FOR_PUSH, false);
-        acmUserDefaults.setUserDefault(acmUserDefaults.keys.REGISTERED_DEVICE_ID, false);
-      };
-
-      var error = function (err) {
-        console.error('Unable to unregister device from push server: ' + err);
-      };
-
-      // hmmmm
+      console.log("successfully registered, saving device id: " + JSON.stringify(deviceId));
+      acmUserDefaults.setUserDefault(acmUserDefaults.keys.REGISTERED_FOR_PUSH, true);
+      acmUserDefaults.setUserDefault(acmUserDefaults.keys.REGISTERED_DEVICE_ID, deviceId);
     },
 
     truncateString: function (string, length) {

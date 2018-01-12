@@ -12,7 +12,6 @@ var plugins = {
   'com.phonegap.plugins.PushPlugin': 'phonegap-plugin-push@2.0.0',
   'de.appplant.cordova.plugin.local-notification': 'de.appplant.cordova.plugin.local-notification',
   'nl.x-services.plugins.socialsharing': 'https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git',
-  'org.apache.cordova.console': 'org.apache.cordova.console',
   'org.apache.cordova.device': 'org.apache.cordova.device',
   'org.apache.cordova.statusbar': 'org.apache.cordova.statusbar',
   'org.apache.cordova.whitelist' : 'cordova-plugin-whitelist',
