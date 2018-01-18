@@ -53,7 +53,6 @@ actionCenterMobile.controller('DonateCtrl', require('./controllers/donate'));
 actionCenterMobile.controller('SettingsCtrl', require('./controllers/settings'));
 
 actionCenterMobile.factory('acmUserDefaults', require('./services/user_defaults'));
-actionCenterMobile.factory('acmAPI', require('./services/api'));
 actionCenterMobile.factory('acmDeviceLanguage', require('./services/language'));
 actionCenterMobile.factory('acmSharing', require('./services/sharing'));
 
@@ -167,15 +166,17 @@ actionCenterMobile.run(function (
   $rootScope, $state, $ionicHistory, $ionicPlatform, acmPushNotification, acmUserDefaults) {
 
   var registerForPush = function () {
-    // Do not register if user has disabled push notifications.
-    if (acmUserDefaults.getUserDefault(acmUserDefaults.keys.PUSH_ENABLED) === false) {
-      return;
-    }
     var platform = ionic.Platform.platform().toUpperCase();
 
     if (window.plugins !== undefined &&
         appSettings['APP']['PUSH_CAPABLE_PLATFORMS'].indexOf(platform) !== -1) {
       acmPushNotification.register();
+
+      if (acmUserDefaults.getUserDefault(acmUserDefaults.keys.PUSH_ENABLED) !== false) {
+        acmPushNotification.subscribe(function() {}, function(err) {
+          console.log("Couldn't subscribe to FCM topic: " + JSON.stringify(err));
+        });
+      }
     }
   };
 

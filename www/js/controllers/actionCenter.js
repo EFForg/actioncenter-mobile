@@ -22,12 +22,19 @@ var ActionCenterCtrl = function ($scope, $ionicPopover, acmPushNotification, acm
 
   $scope.togglePushNotifications = function () {
     acmUserDefaults.setUserDefault(acmUserDefaults.keys.PUSH_ENABLED, $scope.preferences.pushNotificationsEnabled);
-    var deviceId = acmUserDefaults.getUserDefault(acmUserDefaults.keys.REGISTERED_DEVICE_ID);
-    if (!$scope.preferences.pushNotificationsEnabled && deviceId) {
-      acmPushNotificationHelpers.unregisterDeviceId(deviceId);
+    if (!$scope.preferences.pushNotificationsEnabled) {
+      acmPushNotification.unsubscribe(function() {
+        acmUserDefaults.setUserDefault(acmUserDefaults.keys.REGISTERED_FOR_PUSH, false);
+      }, function(err) {
+        console.error('Unable to unsubscribe from push channel: ' + JSON.stringify(err));
+      });
     }
     else {
-      acmPushNotification.register();
+      acmPushNotification.subscribe(function() {
+        acmUserDefaults.setUserDefault(acmUserDefaults.keys.REGISTERED_FOR_PUSH, true);
+      }, function(err) {
+        console.error('Unable to subscribe to push channel: ' + JSON.stringify(err));
+      });
     }
   };
 

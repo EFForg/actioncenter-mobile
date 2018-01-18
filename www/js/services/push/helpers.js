@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 
-var PushHelpersService = function (acmUserDefaults, acmAPI) {
+var PushHelpersService = function (acmUserDefaults) {
 
   var defaultsPayloadArr = [
     ['title', acmUserDefaults.keys.ACTION_TITLE],
@@ -29,32 +29,9 @@ var PushHelpersService = function (acmUserDefaults, acmAPI) {
     },
 
     registerDeviceId: function (deviceId) {
-      var success = function () {
-        console.log("successfully registered, saving device id: " + JSON.stringify(deviceId));
-        acmUserDefaults.setUserDefault(acmUserDefaults.keys.REGISTERED_FOR_PUSH, true);
-        acmUserDefaults.setUserDefault(acmUserDefaults.keys.REGISTERED_DEVICE_ID, deviceId);
-      };
-
-      var error = function (err) {
-        console.error('Unable to register device with push server: ' + JSON.stringify(err));
-      };
-
-      // This could be skipped by checking whether or not a locally held copy of the id matches that
-      // returned on registration. However, due to privacy concerns, the app is intended to record
-      // as little information as possible, so just ping the server each time.
-      acmAPI.registerDeviceForNotifications(deviceId, success, error);
-    },
-
-    unregisterDeviceId: function (deviceId) {
-      var success = function () {
-        acmUserDefaults.setUserDefault(acmUserDefaults.keys.REGISTERED_FOR_PUSH, false);
-        acmUserDefaults.setUserDefault(acmUserDefaults.keys.REGISTERED_DEVICE_ID, false);
-      };
-
-      var error = function (err) {
-        console.error('Unable to unregister device from push server: ' + err);
-      };
-      acmAPI.unregisterDeviceForNotifications(deviceId, success, error);
+      console.log("successfully registered, saving device id: " + JSON.stringify(deviceId));
+      acmUserDefaults.setUserDefault(acmUserDefaults.keys.REGISTERED_FOR_PUSH, true);
+      acmUserDefaults.setUserDefault(acmUserDefaults.keys.REGISTERED_DEVICE_ID, deviceId);
     },
 
     truncateString: function (string, length) {

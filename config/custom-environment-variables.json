@@ -3,7 +3,7 @@
     "SENTRY_DSN": "SENTRY_DSN"
   },
 
-  "API": {
-    "ENDPOINT": "PUSH_SERVER"
+  "NOTIFICATIONS": {
+    "TOPIC": "FCM_TOPIC"
   }
 }

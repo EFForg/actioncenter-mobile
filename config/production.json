@@ -2,8 +2,7 @@
 
   "MODE": "production",
 
-  "API": {
-    "VERSION": 1,
-    "ENDPOINT": "https://push.eff.org/api"
+  "NOTIFICATIONS": {
+    "TOPIC": "eff-alerts"
   }
 }
