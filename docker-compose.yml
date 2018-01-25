@@ -3,7 +3,6 @@ version: '2.1'
 services:
   app:
     build: .
-    restart: unless-stopped
     env_file: .env
     command: gulp watch
     volumes:
