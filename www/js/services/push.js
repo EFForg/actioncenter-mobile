@@ -40,14 +40,6 @@ var PushNotificationService = function (
             'sound': 'true',
             'alert': 'true'
           });
-        } else if (platform === 'ANDROID') {
-          // Android uses the local notification interface to pop up notifications, so register the click
-          // handler here.
-          window.plugin.notification.local.onclick = function (id, state, json) {
-            if (id === pushConstants.PUSH_RECEIVED_FOREGROUND_NOTIFICATION_ID) {
-              $state.go('acm.homeTabs.home', {}, {reload: true});
-            }
-          };
         }
 
         pushConfig.vibrate = true;
