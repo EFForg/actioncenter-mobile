@@ -32,18 +32,13 @@ var PushNotificationService = function (
       var platform = ionic.Platform.platform().toUpperCase();
       var devicePushHandler = this.getPlatformPushService_(platform);
       if (!angular.isUndefined(devicePushHandler)) {
-        var pushConfig = {};
+        // Support for iOS isn't ready so it is assumed that platform=android
 
-        if (platform === 'IOS') {
-          angular.extend(pushConfig, {
-            'badge': 'true',
-            'sound': 'true',
-            'alert': 'true'
-          });
-        }
-
-        pushConfig.vibrate = true;
-        pushConfig.forceShow = true;
+        var pushConfig = {
+          icon: 'notification_icon',
+          vibrate: true,
+          forceShow: true
+        };
 
         pushObject = $cordovaPush.init({ android: pushConfig });
 
