@@ -34,6 +34,9 @@ var ActionCtrl = function ($scope, $http, x2js, $ionicModal, $ionicLoading, $ion
       if (action.link.forEach) {
         var link = action.link.find(function(link) { return link._rel == 'enclosure' });
         action.image = link ? link._href : null;
+
+        link = action.link.find(function(link) { return link._rel == 'alternate' });
+        action.url = link ? link._href : '';
       }
     });
   };
