@@ -20,6 +20,14 @@ while [ $# -ne 0 ]; do
             shift 2
             ;;
 
+        --version)
+            code=$(echo "$2" | cut -d : -f 1)
+            version=$(echo "$2" | cut -d : -f 2)
+            sed -ri "s@versionCode=\"[^\"]+\"@versionCode=\"$code\"@" config.xml
+            sed -ri "s@org.eff.actioncenter..version=\"[^\"]+\"@org.eff.actioncenter\" version=\"$version\"@" config.xml
+            shift 2
+            ;;
+
         *)
             echo "Usage: $0 [--no-gulp] [--sign alias]"
             exit 1
