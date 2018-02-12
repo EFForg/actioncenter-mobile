@@ -62,7 +62,7 @@ var SharingService = function () {
     },
 
     shareAction: function (action, service) {
-      var shareURL = action.link._href;
+      var shareURL = action.url;
       var shareMessage = angular.element(action.summary.__text).text();
       var title = action.title;
 
