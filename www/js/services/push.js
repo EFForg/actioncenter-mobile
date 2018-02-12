@@ -32,26 +32,13 @@ var PushNotificationService = function (
       var platform = ionic.Platform.platform().toUpperCase();
       var devicePushHandler = this.getPlatformPushService_(platform);
       if (!angular.isUndefined(devicePushHandler)) {
-        var pushConfig = {};
+        // Support for iOS isn't ready so it is assumed that platform=android
 
-        if (platform === 'IOS') {
-          angular.extend(pushConfig, {
-            'badge': 'true',
-            'sound': 'true',
-            'alert': 'true'
-          });
-        } else if (platform === 'ANDROID') {
-          // Android uses the local notification interface to pop up notifications, so register the click
-          // handler here.
-          window.plugin.notification.local.onclick = function (id, state, json) {
-            if (id === pushConstants.PUSH_RECEIVED_FOREGROUND_NOTIFICATION_ID) {
-              $state.go('acm.homeTabs.home', {}, {reload: true});
-            }
-          };
-        }
-
-        pushConfig.vibrate = true;
-        pushConfig.forceShow = true;
+        var pushConfig = {
+          icon: 'notification_icon',
+          vibrate: true,
+          forceShow: true
+        };
 
         pushObject = $cordovaPush.init({ android: pushConfig });
 
